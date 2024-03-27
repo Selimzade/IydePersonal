@@ -12,7 +12,7 @@ namespace IydePersonal.Infrastructure.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Punkt",
+                name: "Punkts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -22,7 +22,7 @@ namespace IydePersonal.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Punkt", x => x.Id);
+                    table.PrimaryKey("PK_Punkts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,9 +114,9 @@ namespace IydePersonal.Infrastructure.Data.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeePunkt_Punkt_PunktId",
+                        name: "FK_EmployeePunkt_Punkts_PunktId",
                         column: x => x.PunktId,
-                        principalTable: "Punkt",
+                        principalTable: "Punkts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -152,7 +152,7 @@ namespace IydePersonal.Infrastructure.Data.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Punkt");
+                name: "Punkts");
 
             migrationBuilder.DropTable(
                 name: "Salary");

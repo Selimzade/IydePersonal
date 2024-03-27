@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IydePersonal.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240326235950_InitialCreate")]
+    [Migration("20240327144059_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -127,7 +127,7 @@ namespace IydePersonal.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Punkt");
+                    b.ToTable("Punkts");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Salary", b =>

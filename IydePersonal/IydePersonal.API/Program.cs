@@ -1,5 +1,7 @@
 
+using IydePersonal.Core.Interfaces;
 using IydePersonal.Infrastructure.Data;
+using IydePersonal.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace IydePersonal.API
@@ -19,8 +21,15 @@ namespace IydePersonal.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<IRepository, Repository>();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

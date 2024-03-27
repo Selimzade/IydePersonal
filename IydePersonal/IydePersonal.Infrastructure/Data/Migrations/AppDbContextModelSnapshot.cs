@@ -124,7 +124,7 @@ namespace IydePersonal.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Punkt");
+                    b.ToTable("Punkts");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Salary", b =>
