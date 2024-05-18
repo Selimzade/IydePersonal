@@ -1,7 +1,7 @@
 ﻿using IydePersonal.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace IydePersonal.Infrastructure.Data
+namespace IydePersonal.API.Data
 {
     public class AppDbContext : DbContext
     {
