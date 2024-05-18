@@ -1,8 +1,7 @@
 
-using IydePersonal.Core.Interfaces;
-using IydePersonal.Infrastructure.Data;
-using IydePersonal.Infrastructure.Repositories;
+using IydePersonal.API.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace IydePersonal.API
 {
@@ -21,7 +20,9 @@ namespace IydePersonal.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
-            builder.Services.AddScoped<IRepository, Repository>();
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            
+          
 
             var app = builder.Build();
 
