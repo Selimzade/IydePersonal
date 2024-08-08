@@ -30,8 +30,27 @@ namespace IydePersonal.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePunkt(CreatePunktDto createPunktDto)
         {
-            var punkt=_mapper.Map<Punkt>(createPunktDto);
+            var punkt = _mapper.Map<Punkt>(createPunktDto);
             await _context.Punkts.AddAsync(punkt);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> DeletePunkts(int id) 
+        {
+            var punkt = await _context.Punkts.FindAsync(id);
+            _context.Punkts.Remove(punkt);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+        [HttpPut]
+        public async Task<IActionResult> UptadePunks(int id, [FromBody] CreatePunktDto punkt) 
+        {
+            var punk =await _context.Punkts.FindAsync(id);
+            punk.Name=punkt.Name;
+            punk.Point = punkt.Point;
+            _context.Punkts.Update(punk);
             await _context.SaveChangesAsync();
             return Ok();
         }

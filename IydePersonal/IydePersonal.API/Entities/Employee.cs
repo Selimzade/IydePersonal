@@ -1,4 +1,6 @@
-﻿namespace IydePersonal.Core.Entities
+﻿using IydePersonal.API.Entities;
+
+namespace IydePersonal.Core.Entities
 {
     public class Employee
     {
@@ -20,6 +22,7 @@
 
         public User Users { get; set; }
 
+        public List<EmployeeLog> employeeLogs { get; set; }
 
 
     }

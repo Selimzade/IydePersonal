@@ -4,6 +4,7 @@ using IydePersonal.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IydePersonal.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240806065736_SAlary")]
+    partial class SAlary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,50 +24,6 @@ namespace IydePersonal.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("IydePersonal.API.Entities.EmployeeLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("EmployeeLog", (string)null);
-                });
-
-            modelBuilder.Entity("IydePersonal.API.Entities.Store", b =>
-                {
-                    b.Property<int>("StoreId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StoreId"));
-
-                    b.Property<string>("StoreName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("StoreId");
-
-                    b.ToTable("Store", (string)null);
-                });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Employee", b =>
                 {
@@ -122,7 +81,7 @@ namespace IydePersonal.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Employee", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.EmployeePunkt", b =>
@@ -168,7 +127,7 @@ namespace IydePersonal.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Punkt", (string)null);
+                    b.ToTable("Punkts");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Salary", b =>
@@ -214,7 +173,7 @@ namespace IydePersonal.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Salary", (string)null);
+                    b.ToTable("Salaries");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.User", b =>
@@ -232,25 +191,6 @@ namespace IydePersonal.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("IydePersonal.API.Entities.EmployeeLog", b =>
-                {
-                    b.HasOne("IydePersonal.Core.Entities.Employee", "employee")
-                        .WithMany("employeeLogs")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IydePersonal.API.Entities.Store", "store")
-                        .WithMany("employeeLogs")
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("employee");
-
-                    b.Navigation("store");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Employee", b =>
@@ -291,15 +231,8 @@ namespace IydePersonal.API.Migrations
                     b.Navigation("punkts");
                 });
 
-            modelBuilder.Entity("IydePersonal.API.Entities.Store", b =>
-                {
-                    b.Navigation("employeeLogs");
-                });
-
             modelBuilder.Entity("IydePersonal.Core.Entities.Employee", b =>
                 {
-                    b.Navigation("employeeLogs");
-
                     b.Navigation("employeePunkts");
                 });
 
