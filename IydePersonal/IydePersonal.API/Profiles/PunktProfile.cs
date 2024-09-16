@@ -11,6 +11,7 @@ namespace IydePersonal.API.Profiles
         {
             CreateMap<CreatePunktDto, Punkt>();
             CreateMap<StoreDto, Store>();
+            CreateMap<EmplyeeDto, Employee>();
         }
     }
 }

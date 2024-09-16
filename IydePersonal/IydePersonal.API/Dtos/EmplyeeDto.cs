@@ -1,10 +1,8 @@
-﻿using IydePersonal.API.Entities;
-
-namespace IydePersonal.Core.Entities
+﻿namespace IydePersonal.API.Dtos
 {
-    public class Employee
+    public class EmplyeeDto
     {
-        public int id { get; set; }
+       
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
@@ -17,13 +15,5 @@ namespace IydePersonal.Core.Entities
         public DateTime StartWork { get; set; }
         public DateTime FinishWork { get; set; }
         public int UserId { get; set; }
-        public List<EmployeePunkt> employeePunkts { get; set; }
-        public Salary Salary { get; set; }
-
-        public User Users { get; set; }
-
-        public List<EmployeeLog> employeeLogs { get; set; }
-
-
     }
 }
