@@ -16,6 +16,8 @@ namespace IydePersonal.API.Data
         public DbSet<Salary> Salaries { get; set; }
         public DbSet<Store> stores { get; set; }
         public DbSet<EmployeeLog> employeeLogs { get; set; }
+        public DbSet<User>  users{ get; set; }
+        public DbSet<EmployeePunkt> employeePunkts { get; set; }
 
 
 
@@ -27,7 +29,8 @@ namespace IydePersonal.API.Data
             modelBuilder.Entity<Punkt>().ToTable(nameof(Punkt));
             modelBuilder.Entity<Store>().ToTable(nameof(Store));
             modelBuilder.Entity<EmployeeLog>().ToTable(nameof(EmployeeLog));
-
+            modelBuilder.Entity<User>().ToTable(nameof(User));
+            modelBuilder.Entity<EmployeePunkt>().ToTable(nameof(EmployeePunkt));
         }
     }
 

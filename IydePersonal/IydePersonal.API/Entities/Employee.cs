@@ -13,12 +13,12 @@ namespace IydePersonal.Core.Entities
         public string WorkPosition { get; set; }
         public string Store { get; set; }
         public bool Active { get; set; }
-        public int SalaryId { get; set; }
+        public int FixSlary { get; set; }
         public DateTime StartWork { get; set; }
         public DateTime FinishWork { get; set; }
         public int UserId { get; set; }
         public List<EmployeePunkt> employeePunkts { get; set; }
-        public Salary Salary { get; set; }
+        public List<Salary> salaries { get; set; }
 
         public User Users { get; set; }
 

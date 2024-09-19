@@ -87,6 +87,9 @@ namespace IydePersonal.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FixSlary")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -99,11 +102,12 @@ namespace IydePersonal.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SalaryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartWork")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Store")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -112,13 +116,7 @@ namespace IydePersonal.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("shop")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("id");
-
-                    b.HasIndex("SalaryId");
 
                     b.HasIndex("UserId");
 
@@ -148,7 +146,7 @@ namespace IydePersonal.API.Migrations
 
                     b.HasIndex("PunktId");
 
-                    b.ToTable("EmployeePunkt");
+                    b.ToTable("EmployeePunkt", (string)null);
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Punkt", b =>
@@ -197,13 +195,13 @@ namespace IydePersonal.API.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("FixSalary")
+                        .HasColumnType("int");
+
                     b.Property<int>("Payment")
                         .HasColumnType("int");
 
                     b.Property<int>("Penalty")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SalaryId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Sales")
@@ -213,6 +211,8 @@ namespace IydePersonal.API.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Salary", (string)null);
                 });
@@ -225,13 +225,17 @@ namespace IydePersonal.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("PassWord")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("IydePersonal.API.Entities.EmployeeLog", b =>
@@ -255,19 +259,11 @@ namespace IydePersonal.API.Migrations
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Employee", b =>
                 {
-                    b.HasOne("IydePersonal.Core.Entities.Salary", "Salary")
-                        .WithMany("employees")
-                        .HasForeignKey("SalaryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("IydePersonal.Core.Entities.User", "Users")
                         .WithMany("employees")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Salary");
 
                     b.Navigation("Users");
                 });
@@ -291,6 +287,17 @@ namespace IydePersonal.API.Migrations
                     b.Navigation("punkts");
                 });
 
+            modelBuilder.Entity("IydePersonal.Core.Entities.Salary", b =>
+                {
+                    b.HasOne("IydePersonal.Core.Entities.Employee", "employees")
+                        .WithMany("salaries")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("employees");
+                });
+
             modelBuilder.Entity("IydePersonal.API.Entities.Store", b =>
                 {
                     b.Navigation("employeeLogs");
@@ -301,16 +308,13 @@ namespace IydePersonal.API.Migrations
                     b.Navigation("employeeLogs");
 
                     b.Navigation("employeePunkts");
+
+                    b.Navigation("salaries");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Punkt", b =>
                 {
                     b.Navigation("employeePunkts");
-                });
-
-            modelBuilder.Entity("IydePersonal.Core.Entities.Salary", b =>
-                {
-                    b.Navigation("employees");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.User", b =>

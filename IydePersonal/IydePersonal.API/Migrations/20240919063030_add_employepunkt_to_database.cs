@@ -5,7 +5,7 @@
 namespace IydePersonal.API.Migrations
 {
     /// <inheritdoc />
-    public partial class SAlary : Migration
+    public partial class add_employepunkt_to_database : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

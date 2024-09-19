@@ -46,7 +46,7 @@ namespace IydePersonal.API.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
-        [HttpPut("api/Delete")]
+        [HttpPut]
         public async Task<IActionResult> updateemplyee(int id, [FromBody] EmplyeeDto emplyeeDto)
         {
             var emp = await _context.Employees.FindAsync(id);
@@ -62,7 +62,7 @@ namespace IydePersonal.API.Controllers
             emp.WorkPosition = emplyeeDto.WorkPosition;
             emp.Store = emplyeeDto.Store;
             emp.Active = emplyeeDto.Active;
-            emp.SalaryId = emplyeeDto.SalaryId;
+            emp.FixSlary = emplyeeDto.FixSalary;
             emp.StartWork = emplyeeDto.StartWork;
             emp.FinishWork = emplyeeDto.FinishWork;
             _context.Employees.Update(emp);

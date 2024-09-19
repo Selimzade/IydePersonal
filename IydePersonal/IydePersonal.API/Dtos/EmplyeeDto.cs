@@ -11,7 +11,7 @@
         public string WorkPosition { get; set; }
         public string Store { get; set; }
         public bool Active { get; set; }
-        public int SalaryId { get; set; }
+        public int FixSalary { get; set; }
         public DateTime StartWork { get; set; }
         public DateTime FinishWork { get; set; }
         public int UserId { get; set; }

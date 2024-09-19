@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IydePersonal.API.Migrations
 {
     /// <inheritdoc />
-    public partial class add_newdata : Migration
+    public partial class delete_then_add : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Punkts",
+                name: "Punkt",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -22,27 +22,20 @@ namespace IydePersonal.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Punkts", x => x.Id);
+                    table.PrimaryKey("PK_Punkt", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Salary",
+                name: "Store",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    StoreId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    SalaryId = table.Column<int>(type: "int", nullable: false),
-                    StorePercent = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Generalcheck = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Award = table.Column<int>(type: "int", nullable: false),
-                    Penalty = table.Column<int>(type: "int", nullable: false),
-                    Countingdown = table.Column<int>(type: "int", nullable: false),
-                    Conclusion = table.Column<int>(type: "int", nullable: false)
+                    StoreName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Salary", x => x.Id);
+                    table.PrimaryKey("PK_Store", x => x.StoreId);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,7 +52,7 @@ namespace IydePersonal.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employees",
+                name: "Employee",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -72,25 +65,46 @@ namespace IydePersonal.API.Migrations
                     WorkPosition = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     shop = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
-                    SalaryId = table.Column<int>(type: "int", nullable: false),
+                    FixSlary = table.Column<int>(type: "int", nullable: false),
                     StartWork = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinishWork = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => x.id);
+                    table.PrimaryKey("PK_Employee", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Employees_Salary_SalaryId",
-                        column: x => x.SalaryId,
-                        principalTable: "Salary",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Employees_User_UserId",
+                        name: "FK_Employee_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EmployeeLog",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StoreId = table.Column<int>(type: "int", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeLog", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployeeLog_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeLog_Store_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Store",
+                        principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -108,18 +122,62 @@ namespace IydePersonal.API.Migrations
                 {
                     table.PrimaryKey("PK_EmployeePunkt", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeePunkt_Employees_EmployeeId",
+                        name: "FK_EmployeePunkt_Employee_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employees",
+                        principalTable: "Employee",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeePunkt_Punkts_PunktId",
+                        name: "FK_EmployeePunkt_Punkt_PunktId",
                         column: x => x.PunktId,
-                        principalTable: "Punkts",
+                        principalTable: "Punkt",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Salary",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    FixSalary = table.Column<int>(type: "int", nullable: false),
+                    Payment = table.Column<int>(type: "int", nullable: false),
+                    Sales = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalCheck = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Award = table.Column<int>(type: "int", nullable: false),
+                    Penalty = table.Column<int>(type: "int", nullable: false),
+                    Countingdown = table.Column<int>(type: "int", nullable: false),
+                    AdditionalBonus = table.Column<int>(type: "int", nullable: false),
+                    Conclusion = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Salary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Salary_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employee_UserId",
+                table: "Employee",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeLog_EmployeeId",
+                table: "EmployeeLog",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeLog_StoreId",
+                table: "EmployeeLog",
+                column: "StoreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeePunkt_EmployeeId",
@@ -132,30 +190,31 @@ namespace IydePersonal.API.Migrations
                 column: "PunktId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_SalaryId",
-                table: "Employees",
-                column: "SalaryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_UserId",
-                table: "Employees",
-                column: "UserId");
+                name: "IX_Salary_EmployeeId",
+                table: "Salary",
+                column: "EmployeeId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EmployeeLog");
+
+            migrationBuilder.DropTable(
                 name: "EmployeePunkt");
 
             migrationBuilder.DropTable(
-                name: "Employees");
-
-            migrationBuilder.DropTable(
-                name: "Punkts");
-
-            migrationBuilder.DropTable(
                 name: "Salary");
+
+            migrationBuilder.DropTable(
+                name: "Store");
+
+            migrationBuilder.DropTable(
+                name: "Punkt");
+
+            migrationBuilder.DropTable(
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "User");

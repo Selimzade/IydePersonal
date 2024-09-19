@@ -11,7 +11,10 @@ namespace IydePersonal.API.Profiles
         {
             CreateMap<CreatePunktDto, Punkt>();
             CreateMap<StoreDto, Store>();
-            CreateMap<EmplyeeDto, Employee>();
+            CreateMap<EmplyeeDto, Employee>().ReverseMap();
+            CreateMap<User,UserDto>().ReverseMap();
+            CreateMap<EmployeePunktDto, EmployeePunkt>().ReverseMap();
+           
         }
     }
 }
