@@ -24,8 +24,8 @@ namespace IydePersonal.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllEmplyeePunkt()
         {
-            var emppunkt = (from e in _context.employeePunkts
-                            join d in _context.Employees on e.EmployeeId equals d.id
+            var emppunkt = (from e in _context.EmployeePunkts
+                            join d in _context.Employees on e.EmployeeId equals d.Id
                             join x in _context.Punkts on e.PunktId equals x.Id
                             select new
                             {
@@ -41,7 +41,7 @@ namespace IydePersonal.API.Controllers
         public async Task<IActionResult> CreateEmplyeePunkt([FromBody] EmployeePunktDto employeePunktDto) 
         {
             var emppunktDto =  _mapper.Map<EmployeePunkt>(employeePunktDto);
-            var emppunkt=await _context.employeePunkts.AddAsync(emppunktDto);
+            var emppunkt=await _context.EmployeePunkts.AddAsync(emppunktDto);
             await _context.SaveChangesAsync();
             return Ok(emppunkt);
         }
@@ -49,21 +49,21 @@ namespace IydePersonal.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateEmpployeePunkt(int id, [FromBody] EmployeePunktDto employeePunktDto)
         {
-            var emppunkt=await _context.employeePunkts.FindAsync(id);
+            var emppunkt=await _context.EmployeePunkts.FindAsync(id);
             emppunkt.EmployeeId=employeePunktDto.EmployeeId;
             emppunkt.PunktId=employeePunktDto.PunktId;
             emppunkt.CreateDate=employeePunktDto.CreateDate;
-            _context.employeePunkts.Update(emppunkt);
+            _context.EmployeePunkts.Update(emppunkt);
             await _context.SaveChangesAsync();
             return Ok(emppunkt);
         }
         [HttpDelete]
         public async Task<IActionResult> DeleteEmployeePunkt(int id) 
         {
-            var deleteempounkt= await _context.employeePunkts.FindAsync(id);
+            var deleteempounkt= await _context.EmployeePunkts.FindAsync(id);
             if (deleteempounkt != null)
             {
-                _context.employeePunkts.Remove(deleteempounkt);
+                _context.EmployeePunkts.Remove(deleteempounkt);
             }
             await _context.SaveChangesAsync();
              return Ok(deleteempounkt);

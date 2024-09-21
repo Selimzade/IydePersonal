@@ -60,9 +60,9 @@ namespace IydePersonal.API.Controllers
             emp.Gender = emplyeeDto.Gender;
             emp.DateOfBirth = emplyeeDto.DateOfBirth;
             emp.WorkPosition = emplyeeDto.WorkPosition;
-            emp.Store = emplyeeDto.Store;
-            emp.Active = emplyeeDto.Active;
-            emp.FixSlary = emplyeeDto.FixSalary;
+            emp.StoreId = emplyeeDto.StoreId;
+            emp.IsActive = emplyeeDto.Active;
+            emp.FixSalary = emplyeeDto.FixSalary;
             emp.StartWork = emplyeeDto.StartWork;
             emp.FinishWork = emplyeeDto.FinishWork;
             _context.Employees.Update(emp);

@@ -1,7 +1,7 @@
-﻿using IydePersonal.API.Entities;
+﻿using IydePersonal.API.Data.Configurations;
+using IydePersonal.API.Entities;
 using IydePersonal.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace IydePersonal.API.Data
 {
@@ -14,23 +14,24 @@ namespace IydePersonal.API.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Punkt> Punkts { get; set; }
         public DbSet<Salary> Salaries { get; set; }
-        public DbSet<Store> stores { get; set; }
-        public DbSet<EmployeeLog> employeeLogs { get; set; }
-        public DbSet<User>  users{ get; set; }
-        public DbSet<EmployeePunkt> employeePunkts { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<EmployeeLog> EmployeeLogs { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<EmployeePunkt> EmployeePunkts { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder); 
-            modelBuilder.Entity<Salary>().ToTable(nameof(Salary));
-            modelBuilder.Entity<Employee>().ToTable(nameof(Employee));
-            modelBuilder.Entity<Punkt>().ToTable(nameof(Punkt));
-            modelBuilder.Entity<Store>().ToTable(nameof(Store));
-            modelBuilder.Entity<EmployeeLog>().ToTable(nameof(EmployeeLog));
-            modelBuilder.Entity<User>().ToTable(nameof(User));
-            modelBuilder.Entity<EmployeePunkt>().ToTable(nameof(EmployeePunkt));
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+            modelBuilder.ApplyConfiguration(new PunktConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeePunktConfiguration());
+            modelBuilder.ApplyConfiguration(new StoreConfiguration());
+            modelBuilder.ApplyConfiguration(new SalaryConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeLogConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 

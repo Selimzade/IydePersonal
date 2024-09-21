@@ -4,26 +4,23 @@ namespace IydePersonal.Core.Entities
 {
     public class Employee
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
-        public string WorkPosition { get; set; }
-        public string Store { get; set; }
-        public bool Active { get; set; }
-        public int FixSlary { get; set; }
+        public WorkPosition WorkPosition { get; set; }
+        public bool IsActive { get; set; }
+        public int FixSalary { get; set; }
         public DateTime StartWork { get; set; }
-        public DateTime FinishWork { get; set; }
-        public int UserId { get; set; }
-        public List<EmployeePunkt> employeePunkts { get; set; }
-        public List<Salary> salaries { get; set; }
+        public DateTime? FinishWork { get; set; }
 
-        public User Users { get; set; }
+        public int StoreId { get; set; }
+        public Store Store { get; set; }
 
-        public List<EmployeeLog> employeeLogs { get; set; }
-
-
+        public List<EmployeePunkt> EmployeePunkts { get; set; }
+        public List<Salary> Salaries { get; set; }
+        public List<EmployeeLog> EmployeeLogs { get; set; }
     }
 }

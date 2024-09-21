@@ -24,23 +24,23 @@ namespace IydePersonal.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetallUsers()
         {
-            var user=await _context.users.ToListAsync();
+            var user=await _context.Users.ToListAsync();
             return Ok(user);
         }
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            var user = await _context.users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
             return Ok(user);
         }
 
         [HttpGet("GetUserEmployees")]
         public async Task<IActionResult> GetUserEmployees() 
         {
-            var user = await _context.users.Include(u => u.employees).Select(u => new
+            var user = await _context.Users.Include(u => u.Store.Employees).Select(u => new
             {
                 u.UserName,
-                employees = u.employees.Select(s => new
+                employees = u.Store.Employees.Select(s => new
                 {
                     s.FirstName,
                     s.LastName
@@ -49,7 +49,6 @@ namespace IydePersonal.API.Controllers
 
             }).ToListAsync();
 
-            //  var userdto = _mapper.Map<UserDto>(user);
             return Ok(user);
 
         }
@@ -57,7 +56,7 @@ namespace IydePersonal.API.Controllers
         public async Task<IActionResult> CreateUser([FromBody]UserDto userDto) 
         {
             var user = _mapper.Map<User>(userDto);
-            await _context.users.AddAsync(user);
+            await _context.Users.AddAsync(user);
             _context.SaveChanges();
             return Ok();
         }
@@ -65,10 +64,10 @@ namespace IydePersonal.API.Controllers
         public async Task<IActionResult> UpdateUsers(int id, [FromBody] UserDto userDto) 
         {
 
-            var user = await _context.users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
             user.UserName=userDto.UserName;
-            user.PassWord=userDto.PassWord;
-            _context.users.Update(user);
+            user.Password=userDto.PassWord;
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -76,8 +75,8 @@ namespace IydePersonal.API.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteUsersP(int id) 
         {
-            var user= await _context.users.FindAsync(id, false);
-            _context.users.Remove(user);
+            var user= await _context.Users.FindAsync(id, false);
+            _context.Users.Remove(user);
             _context.SaveChanges();
             return Ok();
         }
