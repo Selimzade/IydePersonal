@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using IydePersonal.API.Data;
-using IydePersonal.API.Dtos;
+using IydePersonal.API.Dtos.Store;
 using IydePersonal.API.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace IydePersonal.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class StoreController : ControllerBase
     {
@@ -21,16 +20,16 @@ namespace IydePersonal.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("api/GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAllStores()
         {
             var store = await _context.Stores.ToListAsync();
             return Ok(store);
         }
-        [HttpPost("api/Create")]
-        public async Task<IActionResult> CreateStore([FromBody] StoreDto storeDto)
+        [HttpPost]
+        public async Task<IActionResult> CreateStore(StoreCreateDto dto)
         {
-            var store = _mapper.Map<Store>(storeDto);
+            var store = _mapper.Map<Store>(dto);
             await _context.Stores.AddAsync(store);
             await _context.SaveChangesAsync();
             return StatusCode(StatusCodes.Status201Created);
@@ -40,7 +39,7 @@ namespace IydePersonal.API.Controllers
         public async Task<IActionResult> updateStores(int id, [FromBody] StoreDto storeDto) 
         {
             var store= await _context.Stores.FindAsync(id);
-            store.Name = storeDto.StoreName;
+            store.Name = storeDto.Name;
             _context.Update(store);
             await _context.SaveChangesAsync();
             return Ok();

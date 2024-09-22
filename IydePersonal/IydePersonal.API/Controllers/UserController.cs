@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using IydePersonal.API.Data;
-using IydePersonal.API.Dtos;
+using IydePersonal.API.Dtos.User;
 using IydePersonal.Core.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace IydePersonal.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -24,49 +23,57 @@ namespace IydePersonal.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetallUsers()
         {
-            var user=await _context.Users.ToListAsync();
-            return Ok(user);
+            var user = await _context.Users
+                .Include(x => x.Store)
+                .ToListAsync();
+
+            var userDto = _mapper.Map<List<UserListDto>>(user);
+
+            return Ok(userDto);
         }
+
         [HttpGet("{Id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(int Id)
         {
-            var user = await _context.Users.FindAsync(id);
-            return Ok(user);
+            var user = await _context.Users
+                .Include(x => x.Store)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+
+            var userDto = _mapper.Map<UserListDto>(user);
+
+            return Ok(userDto);
         }
 
         [HttpGet("GetUserEmployees")]
         public async Task<IActionResult> GetUserEmployees() 
         {
-            var user = await _context.Users.Include(u => u.Store.Employees).Select(u => new
-            {
-                u.UserName,
-                employees = u.Store.Employees.Select(s => new
-                {
-                    s.FirstName,
-                    s.LastName
-                })
+            var user = await _context.Users
+                .Include(u => u.Store)
+                .ThenInclude(s => s.Employees)
+                .ToListAsync();
 
+            var userDto = _mapper.Map<List<UserWithEmployeeDetailDto>>(user);
 
-            }).ToListAsync();
-
-            return Ok(user);
+            return Ok(userDto);
 
         }
+
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody]UserDto userDto) 
+        public async Task<IActionResult> CreateUser(UserCreateDto dto) 
         {
-            var user = _mapper.Map<User>(userDto);
+            var user = _mapper.Map<User>(dto);
             await _context.Users.AddAsync(user);
             _context.SaveChanges();
             return Ok();
         }
+
         [HttpPut]
-        public async Task<IActionResult> UpdateUsers(int id, [FromBody] UserDto userDto) 
+        public async Task<IActionResult> UpdateUsers(int id, UserEditDto dto) 
         {
 
             var user = await _context.Users.FindAsync(id);
-            user.UserName=userDto.UserName;
-            user.Password=userDto.PassWord;
+            user.UserName= dto.UserName;
+            user.Password= dto.Password;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return Ok();

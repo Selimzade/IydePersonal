@@ -61,11 +61,6 @@ namespace IydePersonal.API.Data.Configurations
             builder.Property(x => x.StoreId)
                 .IsRequired()
                 .HasColumnName("StoreId");
-
-            builder.HasOne<Store>()
-               .WithMany()
-               .HasForeignKey(x => x.StoreId)
-               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -4,11 +4,11 @@ using IydePersonal.Core.Entities;
 
 namespace IydePersonal.API.Profiles
 {
-    public class PunktProfile : Profile
+    public class EmployeeProfile : Profile
     {
-        public PunktProfile()
+        public EmployeeProfile()
         {
-            CreateMap<Punkt, CreatePunktDto>().ReverseMap();
+            CreateMap<Employee, EmplyeeDto>().ReverseMap();
         }
     }
 }

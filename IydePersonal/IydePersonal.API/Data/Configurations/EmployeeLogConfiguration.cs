@@ -1,5 +1,4 @@
 ﻿using IydePersonal.API.Entities;
-using IydePersonal.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -25,19 +24,13 @@ namespace IydePersonal.API.Data.Configurations
                .IsRequired()
                .HasColumnName("StoreId");
 
-            builder.HasOne<Store>()
-               .WithMany()
-               .HasForeignKey(x => x.StoreId)
-               .OnDelete(DeleteBehavior.NoAction);
-
             builder.Property(x => x.EmployeeId)
              .IsRequired()
              .HasColumnName("EmployeeId");
 
-            builder.HasOne<Employee>()
-              .WithMany()
-              .HasForeignKey(x => x.EmployeeId)
-              .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Store)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

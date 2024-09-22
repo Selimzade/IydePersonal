@@ -75,8 +75,7 @@ namespace IydePersonal.API.Migrations
                     FixSalary = table.Column<int>(type: "int", nullable: false),
                     StartWork = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinishWork = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    StoreId = table.Column<int>(type: "int", nullable: false),
-                    StoreId1 = table.Column<int>(type: "int", nullable: false)
+                    StoreId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,12 +83,6 @@ namespace IydePersonal.API.Migrations
                     table.ForeignKey(
                         name: "FK_Employees_Stores_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Stores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Employees_Stores_StoreId1",
-                        column: x => x.StoreId1,
                         principalTable: "Stores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -103,9 +96,7 @@ namespace IydePersonal.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StoreId = table.Column<int>(type: "int", nullable: false),
-                    StoreId1 = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId1 = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,22 +108,10 @@ namespace IydePersonal.API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeeLogs_Employees_EmployeeId1",
-                        column: x => x.EmployeeId1,
-                        principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_EmployeeLogs_Stores_StoreId",
                         column: x => x.StoreId,
                         principalTable: "Stores",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_EmployeeLogs_Stores_StoreId1",
-                        column: x => x.StoreId1,
-                        principalTable: "Stores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,8 +156,7 @@ namespace IydePersonal.API.Migrations
                     AdditionalBonus = table.Column<int>(type: "int", nullable: false),
                     Conclusion = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId1 = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -186,12 +164,6 @@ namespace IydePersonal.API.Migrations
                     table.ForeignKey(
                         name: "FK_Salaries_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Salaries_Employees_EmployeeId1",
-                        column: x => x.EmployeeId1,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -203,19 +175,9 @@ namespace IydePersonal.API.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeLogs_EmployeeId1",
-                table: "EmployeeLogs",
-                column: "EmployeeId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EmployeeLogs_StoreId",
                 table: "EmployeeLogs",
                 column: "StoreId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EmployeeLogs_StoreId1",
-                table: "EmployeeLogs",
-                column: "StoreId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeePunkts_PunktId",
@@ -228,19 +190,9 @@ namespace IydePersonal.API.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_StoreId1",
-                table: "Employees",
-                column: "StoreId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Salaries_EmployeeId",
                 table: "Salaries",
                 column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Salaries_EmployeeId1",
-                table: "Salaries",
-                column: "EmployeeId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_UserId",
