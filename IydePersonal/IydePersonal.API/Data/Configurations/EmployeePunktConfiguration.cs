@@ -12,6 +12,8 @@ namespace IydePersonal.API.Data.Configurations
 
             builder.HasKey(x => new { x.EmployeeId, x.PunktId });
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Id)
              .HasColumnName("Id");
 

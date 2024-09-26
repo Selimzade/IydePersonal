@@ -30,6 +30,7 @@ namespace IydePersonal.API.Data
             modelBuilder.ApplyConfiguration(new StoreConfiguration());
             modelBuilder.ApplyConfiguration(new SalaryConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeLogConfiguration());
+            
 
             base.OnModelCreating(modelBuilder);
         }

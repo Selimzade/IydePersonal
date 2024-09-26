@@ -24,7 +24,7 @@ namespace IydePersonal.API.Controllers
         public async Task<IActionResult> GetallUsers()
         {
             var user = await _context.Users
-                .Include(x => x.Store)
+               .Include(x => x.Store)
                 .ToListAsync();
 
             var userDto = _mapper.Map<List<UserListDto>>(user);
@@ -47,14 +47,17 @@ namespace IydePersonal.API.Controllers
         [HttpGet("GetUserEmployees")]
         public async Task<IActionResult> GetUserEmployees() 
         {
-            var user = await _context.Users
-                .Include(u => u.Store)
-                .ThenInclude(s => s.Employees)
+            var user = await _context.Users.Select(u => new { u.UserName, Store = u.Store.Name,Employee=u.Store.Employees,Punk=u.Store.Employees.Select(x=>x.EmployeePunkts.Select(x=>new { x.EmployeeId}))})
+
+
+
+                //.Include(u => u.)//.Select(x=> new {emp=x.Employee})
+                ////.ThenInclude(s => s.Employees).Select(x => x)
                 .ToListAsync();
 
-            var userDto = _mapper.Map<List<UserWithEmployeeDetailDto>>(user);
+            //var userDto = _mapper.Map<List<UserWithEmployeeDetailDto>>(user);
 
-            return Ok(userDto);
+            return Ok(user);
 
         }
 

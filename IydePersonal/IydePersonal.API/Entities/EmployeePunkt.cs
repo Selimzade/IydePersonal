@@ -1,4 +1,6 @@
-﻿namespace IydePersonal.Core.Entities
+﻿using IydePersonal.API.Entities;
+
+namespace IydePersonal.Core.Entities
 {
     public class EmployeePunkt
     {
@@ -8,6 +10,6 @@
         public Employee Employee { get; set; }
         public int PunktId { get; set; }
         public Punkt Punkt { get; set; }
-
+      
     }
 }
