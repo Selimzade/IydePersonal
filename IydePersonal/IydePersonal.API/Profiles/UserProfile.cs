@@ -18,7 +18,7 @@ namespace IydePersonal.API.Profiles
 
             CreateMap<User, UserWithEmployeeDetailDto>()
                 
-               .ForMember(x => x.Employees, opt => opt.MapFrom(x => x.Store.Employees))
+               //.ForMember(x => x.Employees, opt => opt.MapFrom(x => x.Store.Employees))
               //.ForMember(x=>x.EmployeePunkts,opt=>opt.MapFrom(x=>x.EmployeePunkts))
                .ReverseMap();
         }

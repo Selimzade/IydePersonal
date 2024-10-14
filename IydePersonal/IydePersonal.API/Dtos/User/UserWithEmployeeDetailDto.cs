@@ -6,9 +6,9 @@ namespace IydePersonal.API.Dtos.User
 {
     public class UserWithEmployeeDetailDto
     {
-        public string Name { get; set; }
+        public string UserName { get; set; }
         public List<EmplyeeDto> Employees { get; set; }
-        public List<EmployeePunktDto> EmployeePunkts { get; set; }
+        //public List<EmployeePunktDto> EmployeePunkts { get; set; }
 
     }
 }
