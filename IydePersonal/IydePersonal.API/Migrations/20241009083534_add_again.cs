@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IydePersonal.API.Migrations
 {
     /// <inheritdoc />
-    public partial class initial_migration : Migration
+    public partial class add_again : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +26,19 @@ namespace IydePersonal.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Stores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -37,26 +50,6 @@ namespace IydePersonal.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Stores",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stores", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Stores_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,15 +68,23 @@ namespace IydePersonal.API.Migrations
                     FixSalary = table.Column<int>(type: "int", nullable: false),
                     StartWork = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinishWork = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    StoreId = table.Column<int>(type: "int", nullable: false)
+                    Store = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    storeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employees_Stores_StoreId",
-                        column: x => x.StoreId,
+                        name: "FK_Employees_Stores_storeId",
+                        column: x => x.storeId,
                         principalTable: "Stores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Employees_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -118,14 +119,15 @@ namespace IydePersonal.API.Migrations
                 name: "EmployeePunkts",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    PunktId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    PunktId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeePunkts", x => new { x.EmployeeId, x.PunktId });
+                    table.PrimaryKey("PK_EmployeePunkts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_EmployeePunkts_Employees_EmployeeId",
                         column: x => x.EmployeeId,
@@ -180,25 +182,29 @@ namespace IydePersonal.API.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmployeePunkts_EmployeeId",
+                table: "EmployeePunkts",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EmployeePunkts_PunktId",
                 table: "EmployeePunkts",
                 column: "PunktId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_StoreId",
+                name: "IX_Employees_storeId",
                 table: "Employees",
-                column: "StoreId");
+                column: "storeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_UserId",
+                table: "Employees",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Salaries_EmployeeId",
                 table: "Salaries",
                 column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stores_UserId",
-                table: "Stores",
-                column: "UserId",
-                unique: true);
         }
 
         /// <inheritdoc />

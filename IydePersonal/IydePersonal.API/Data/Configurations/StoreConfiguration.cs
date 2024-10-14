@@ -21,14 +21,14 @@ namespace IydePersonal.API.Data.Configurations
                .HasMaxLength(20)
                .HasColumnName("Name");
 
-            builder.Property(x => x.UserId)
-               .IsRequired()
-               .HasColumnName("UserId");
+            //builder.Property(x => x.UserId)
+            //   .IsRequired()
+            //   .HasColumnName("UserId");
 
-            builder.HasOne(e => e.User)
-               .WithOne(e => e.Store)
-               .HasForeignKey<Store>(e => e.UserId)
-               .IsRequired();
+            //builder.HasOne(e => e.User)
+            //   .WithOne(e => e.Store)
+            //   .HasForeignKey<Store>(e => e.UserId)
+            //   .IsRequired();
         }
     }
 }

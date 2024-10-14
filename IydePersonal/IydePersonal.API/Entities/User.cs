@@ -7,8 +7,9 @@ namespace IydePersonal.Core.Entities
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public Store Store { get; set; }
-       // public List<EmployeePunkt> employeePunkts { get; set; }  
+      
+        public List<Employee> employees { get; set; }
+
 
     }
 }

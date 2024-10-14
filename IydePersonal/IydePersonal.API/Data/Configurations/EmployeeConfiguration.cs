@@ -58,9 +58,13 @@ namespace IydePersonal.API.Data.Configurations
             builder.Property(x => x.FinishWork)
                .HasColumnName("FinishWork");
 
-            builder.Property(x => x.StoreId)
+            builder.Property(x => x.UserId)
                 .IsRequired()
-                .HasColumnName("StoreId");
+                .HasColumnName("UserId");
+                
+            builder.Property(x=>x.StoreId)
+                .IsRequired()
+                .HasColumnName ("StoreId");
         }
     }
 }

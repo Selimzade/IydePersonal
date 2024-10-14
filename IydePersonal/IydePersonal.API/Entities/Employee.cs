@@ -15,12 +15,17 @@ namespace IydePersonal.Core.Entities
         public int FixSalary { get; set; }
         public DateTime StartWork { get; set; }
         public DateTime? FinishWork { get; set; }
-
+        public Store store { get; set; }
         public int StoreId { get; set; }
-        public Store Store { get; set; }
+        // public string Store { get; set; }
 
+        public User User { get; set; }
+
+        public int UserId { get; set; }
         public List<EmployeePunkt> EmployeePunkts { get; set; }
         public List<Salary> Salaries { get; set; }
         public List<EmployeeLog> EmployeeLogs { get; set; }
+
+        
     }
 }
