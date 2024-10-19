@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IydePersonal.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241009083534_add_again")]
-    partial class add_again
+    [Migration("20241019153317_initial_migration")]
+    partial class initial_migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,26 +126,23 @@ namespace IydePersonal.API.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("StartWork");
 
-                    b.Property<string>("Store")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Store");
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int")
+                        .HasColumnName("StoreId");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("UserId");
 
                     b.Property<byte>("WorkPosition")
                         .HasColumnType("tinyint")
                         .HasColumnName("WorkPosition");
 
-                    b.Property<int>("storeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("StoreId");
 
-                    b.HasIndex("storeId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Employees", (string)null);
                 });
@@ -313,21 +310,21 @@ namespace IydePersonal.API.Migrations
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Employee", b =>
                 {
+                    b.HasOne("IydePersonal.API.Entities.Store", "Store")
+                        .WithMany("Employees")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("IydePersonal.Core.Entities.User", "User")
-                        .WithMany("employees")
+                        .WithMany("Employees")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IydePersonal.API.Entities.Store", "store")
-                        .WithMany("employees")
-                        .HasForeignKey("storeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Store");
 
                     b.Navigation("User");
-
-                    b.Navigation("store");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.EmployeePunkt", b =>
@@ -362,7 +359,7 @@ namespace IydePersonal.API.Migrations
 
             modelBuilder.Entity("IydePersonal.API.Entities.Store", b =>
                 {
-                    b.Navigation("employees");
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Employee", b =>
@@ -381,7 +378,7 @@ namespace IydePersonal.API.Migrations
 
             modelBuilder.Entity("IydePersonal.Core.Entities.User", b =>
                 {
-                    b.Navigation("employees");
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

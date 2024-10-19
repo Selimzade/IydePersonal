@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IydePersonal.API.Dtos;
+using IydePersonal.API.Dtos.Employee;
 using IydePersonal.Core.Entities;
 
 namespace IydePersonal.API.Profiles
@@ -9,6 +10,8 @@ namespace IydePersonal.API.Profiles
         public EmployeeProfile()
         {
             CreateMap<Employee, EmplyeeDto>().ReverseMap();
+            CreateMap<Employee, EmployeeDetailDto>()
+                .ForMember(x => x.Punkts, opts => opts.MapFrom(x => x.EmployeePunkts.Select(y => y.Punkt)));
         }
     }
 }

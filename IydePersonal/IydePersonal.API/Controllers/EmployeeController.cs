@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IydePersonal.API.Data;
 using IydePersonal.API.Dtos;
+using IydePersonal.API.Dtos.Employee;
 using IydePersonal.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,23 +30,48 @@ namespace IydePersonal.API.Controllers
         }
 
         [HttpGet("{Id}")]
-        public async Task<IActionResult> GetEmplyee(int id) 
+        public async Task<IActionResult> GetEmplyee(int Id) 
         {
-            var user=await _context.Employees.FindAsync(id);
-            if (user==null)
+            var employeeFromDb = await _context.Employees
+                .Include(x => x.EmployeePunkts)
+                .ThenInclude(x => x.Punkt)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (employeeFromDb == null)
             {
                 return NotFound();
             }
-            return Ok(user);
+
+            var employee = _mapper.Map<EmployeeDetailDto>(employeeFromDb);
+
+            return Ok(employee);
         }
         [HttpPost]
         public async Task<IActionResult> Createemployee([FromBody] EmplyeeDto emplyeeDto) 
         {
-            var emp=_mapper.Map<Employee>(emplyeeDto);
+            var emp = _mapper.Map<Employee>(emplyeeDto);
             await _context.Employees.AddAsync(emp);
             await _context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpPost("{Id}/punkt")]
+        public async Task<IActionResult> AddPunkt(int Id ,int punktId)
+        {
+            var employee = await _context.Employees.FindAsync(Id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            employee.EmployeePunkts.Add(new EmployeePunkt { PunktId = punktId });
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpPut]
         public async Task<IActionResult> updateemplyee(int id, [FromBody] EmplyeeDto emplyeeDto)
         {
@@ -68,6 +94,7 @@ namespace IydePersonal.API.Controllers
             _context.Employees.Update(emp);
             return Ok();
         }
+
         [HttpDelete]
         public async Task<IActionResult> deleteemplyee(int id)
         {

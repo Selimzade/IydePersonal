@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IydePersonal.API.Migrations
 {
     /// <inheritdoc />
-    public partial class add_again : Migration
+    public partial class initial_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,16 +68,15 @@ namespace IydePersonal.API.Migrations
                     FixSalary = table.Column<int>(type: "int", nullable: false),
                     StartWork = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinishWork = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Store = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    storeId = table.Column<int>(type: "int", nullable: false)
+                    StoreId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employees_Stores_storeId",
-                        column: x => x.storeId,
+                        name: "FK_Employees_Stores_StoreId",
+                        column: x => x.StoreId,
                         principalTable: "Stores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -192,9 +191,9 @@ namespace IydePersonal.API.Migrations
                 column: "PunktId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_storeId",
+                name: "IX_Employees_StoreId",
                 table: "Employees",
-                column: "storeId");
+                column: "StoreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_UserId",
