@@ -23,6 +23,13 @@ namespace IydePersonal.API.Data.Configurations
             builder.Property(x => x.Point)
                .IsRequired()
                .HasColumnName("Point");
+
+            builder.HasData(new Punkt 
+            {
+                Id=1,
+                Name="Nizami intizam pozmaq",
+                Point=20
+            });
         }
     }
 }

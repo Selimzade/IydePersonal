@@ -70,6 +70,13 @@ namespace IydePersonal.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Stores", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Azadliq"
+                        });
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Employee", b =>
@@ -142,6 +149,24 @@ namespace IydePersonal.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Employees", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTime(1987, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FinishWork = new DateTime(2024, 10, 23, 13, 50, 1, 488, DateTimeKind.Local).AddTicks(741),
+                            FirstName = "Ehmed",
+                            FixSalary = 1000,
+                            Gender = (byte)1,
+                            IsActive = true,
+                            LastName = "Mustafa",
+                            PhoneNumber = "502330644",
+                            StartWork = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoreId = 1,
+                            UserId = 1,
+                            WorkPosition = (byte)2
+                        });
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.EmployeePunkt", b =>
@@ -172,6 +197,15 @@ namespace IydePersonal.API.Migrations
                     b.HasIndex("PunktId");
 
                     b.ToTable("EmployeePunkts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateDate = new DateTime(2024, 10, 23, 13, 50, 1, 488, DateTimeKind.Local).AddTicks(6058),
+                            EmployeeId = 1,
+                            PunktId = 1
+                        });
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Punkt", b =>
@@ -196,6 +230,14 @@ namespace IydePersonal.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Punkts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Nizami intizam pozmaq",
+                            Point = 20
+                        });
                 });
 
             modelBuilder.Entity("IydePersonal.Core.Entities.Salary", b =>
@@ -284,6 +326,14 @@ namespace IydePersonal.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "123456",
+                            UserName = "Azadliq"
+                        });
                 });
 
             modelBuilder.Entity("IydePersonal.API.Entities.EmployeeLog", b =>

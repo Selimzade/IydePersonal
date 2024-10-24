@@ -29,6 +29,12 @@ namespace IydePersonal.API.Data.Configurations
             //   .WithOne(e => e.Store)
             //   .HasForeignKey<Store>(e => e.UserId)
             //   .IsRequired();
+
+            builder.HasData(new Store
+            {
+                Id = 1,
+                Name="Azadliq"
+            });
         }
     }
 }

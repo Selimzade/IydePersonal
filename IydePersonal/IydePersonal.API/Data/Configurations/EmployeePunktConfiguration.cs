@@ -28,6 +28,14 @@ namespace IydePersonal.API.Data.Configurations
             builder.Property(x => x.PunktId)
                .IsRequired()
                .HasColumnName("PunktId");
+
+            builder.HasData(new EmployeePunkt
+            {
+                Id=1,
+                EmployeeId=1,
+                PunktId=1,
+                CreateDate=DateTime.Now,
+            });
         }
     }
 }

@@ -24,6 +24,13 @@ namespace IydePersonal.API.Data.Configurations
                .IsRequired()
                .HasMaxLength(100)
                .HasColumnName("Password");
+
+            builder.HasData( new User
+                {
+                    Id = 1,
+                    UserName="Azadliq",
+                    Password="123456"
+                });
         }
     }
 }
