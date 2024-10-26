@@ -1,22 +1,21 @@
-﻿using IydePersonal.API.Data;
+﻿using IydePersonal.Application.Services.Interfaces;
 using IydePersonal.WEB.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace IydePersonal.WEB.Controllers
 {
     public class PunktsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IPunktService _punktService;
 
-        public PunktsController(AppDbContext context)
+        public PunktsController(IPunktService punktService)
         {
-            _context = context;
+            _punktService = punktService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var punkts = await _context.Punkts.ToListAsync();
+            var punkts = await _punktService.GetPunktListAsync();
             var punktsVm = punkts.Select(p => new PunktListViewModel
             {
                 Id = p.Id,

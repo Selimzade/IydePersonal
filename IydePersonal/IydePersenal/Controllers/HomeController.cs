@@ -1,9 +1,7 @@
-using AutoMapper;
 using IydePersenal.Models;
-using IydePersonal.API.Controllers;
-using IydePersonal.API.Data;
+using IydePersonal.Application.Services.Interfaces;
+using IydePersonal.WEB.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace IydePersenal.Controllers
@@ -11,25 +9,29 @@ namespace IydePersenal.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-       
-      
-        private readonly IMapper _mapper;
-        private readonly AppDbContext _context;
+        private readonly IEmployeeService _employeeService;
 
-        public HomeController(ILogger<HomeController> logger,IMapper mapper, AppDbContext context)
+        public HomeController(IEmployeeService employeeService)
         {
-            _logger = logger;
-           
-            
-            _mapper = mapper;
-            _context = context;
+            _employeeService = employeeService;
         }
 
         [HttpGet]
         public async Task< IActionResult> Index()
         {
-            var emp = await _context.Employees.ToListAsync();
-            return View(emp);
+            var employees = await _employeeService.GetEmployeeList();
+            var employeesVM = employees.Select(e => new EmployeeDetailViewModel
+            {
+                DateOfBirth = e.DateOfBirth,
+                FirstName = e.FirstName,
+                LastName = e.LastName,
+                FixSalary = e.FixSalary,
+                Gender = e.Gender,
+                PhoneNumber = e.PhoneNumber,
+                StartWork = e.StartWork,
+                WorkPosition = e.WorkPosition,
+            }).ToList();
+            return View(employeesVM);
         }
 
         public IActionResult Privacy()
