@@ -13,23 +13,7 @@
 </div>
 
 
-@foreach (var employees in Model)
-{
-    <h1>@employees.FirstName</h1> <br />
-    <h1>@employees.LastName</h1> <br />
-    <h1>@employees.DateOfBirth</h1> <br />
-    <h1>@employees.Gender</h1>
-    <h1>@employees.PhoneNumber</h1>
-    <h1>@employees.FixSalary</h1>
-    <h1>@employees.WorkPosition</h1>
-    <h3>@employees.StartWork</h3>
     
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
     
 
     <br />
@@ -37,7 +21,6 @@
 
 }
 
-@Html.ValidationSummary()
 
 @using (Html.BeginForm())
 {
