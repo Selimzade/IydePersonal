@@ -95,20 +95,20 @@
 //            return Ok();
 //        }
 
-//        [HttpDelete]
-//        public async Task<IActionResult> deleteemplyee(int id)
-//        {
-//            var emp = await _context.Employees.FindAsync(id);
-//            if (emp == null)
-//            {
-//                return NotFound();
-//            }
+//[HttpDelete]
+//public async Task<IActionResult> deleteemplyee(int id)
+//{
+//    var emp = await _context.Employees.FindAsync(id);
+//    if (emp == null)
+//    {
+//        return NotFound();
+//    }
 
-//            _context.Employees.Remove(emp);
-//            await _context.SaveChangesAsync();
-//            return Ok();
+//    _context.Employees.Remove(emp);
+//    await _context.SaveChangesAsync();
+//    return Ok();
 
-//        }
+//}
 
 //    }
 //}

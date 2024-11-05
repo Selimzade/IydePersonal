@@ -1,4 +1,4 @@
-﻿namespace IydePersonal.Application.Dtos
+﻿namespace IydePersonal.Application.Dtos.Employee
 {
     public class EmployeePunktDto
     {

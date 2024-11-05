@@ -1,10 +1,13 @@
 ﻿using IydePersonal.API.Data.Configurations;
 using IydePersonal.Domain.Entities;
+using IydePersonal.Domain.Entities.Edentity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace IydePersonal.Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser,AppRole,int,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
@@ -29,6 +32,7 @@ namespace IydePersonal.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new StoreConfiguration());
             modelBuilder.ApplyConfiguration(new SalaryConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeLogConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             
 
             base.OnModelCreating(modelBuilder);

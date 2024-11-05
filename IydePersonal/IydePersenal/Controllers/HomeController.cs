@@ -20,18 +20,18 @@ namespace IydePersenal.Controllers
         public async Task< IActionResult> Index()
         {
             var employees = await _employeeService.GetEmployeeList();
-            var employeesVM = employees.Select(e => new EmployeeDetailViewModel
-            {
-                DateOfBirth = e.DateOfBirth,
-                FirstName = e.FirstName,
-                LastName = e.LastName,
-                FixSalary = e.FixSalary,
-                Gender = e.Gender,
-                PhoneNumber = e.PhoneNumber,
-                StartWork = e.StartWork,
-                WorkPosition = e.WorkPosition,
-            }).ToList();
-            return View(employeesVM);
+            //var employeesVM = employees.Select(e => new EmployeeDetailViewModel
+            //{
+            //    DateOfBirth = e.DateOfBirth,
+            //    FirstName = e.FirstName,
+            //    LastName = e.LastName,
+            //    FixSalary = e.FixSalary,
+            //    Gender = e.Gender,
+            //    PhoneNumber = e.PhoneNumber,
+            //    StartWork = e.StartWork,
+            //    WorkPosition = e.WorkPosition,
+            //}).ToList();
+            return View(employees);
         }
 
         public IActionResult Privacy()
