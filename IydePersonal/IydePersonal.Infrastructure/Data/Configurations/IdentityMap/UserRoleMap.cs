@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace IydePersonal.Infrastructure.Data.Configurations.IdentityMap
 {
-    public class UserClaimMap : IEntityTypeConfiguration<AppUserClaim>
+    internal class UserRolemap : IEntityTypeConfiguration<AppUserRole>
     {
-        public void Configure(EntityTypeBuilder<AppUserClaim> builder)
+        public void Configure(EntityTypeBuilder<AppUserRole> builder)
         {
 
             // Primary key
-            builder.HasKey(uc => uc.Id);
+            builder.HasKey(r => new { r.UserId, r.RoleId });
 
-            // Maps to the AspNetUserClaims table
-            builder.ToTable("AspNetUserClaims");
+            // Maps to the AspNetUserRoles table
+            builder.ToTable("AspNetUserRoles");
         }
     }
 }
