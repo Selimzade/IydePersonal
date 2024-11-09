@@ -25,13 +25,13 @@ namespace IydePersonal.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-            modelBuilder.ApplyConfiguration(new PunktConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeePunktConfiguration());
-            modelBuilder.ApplyConfiguration(new StoreConfiguration());
-            modelBuilder.ApplyConfiguration(new SalaryConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeeLogConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+            //modelBuilder.ApplyConfiguration(new PunktConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmployeePunktConfiguration());
+            //modelBuilder.ApplyConfiguration(new StoreConfiguration());
+            //modelBuilder.ApplyConfiguration(new SalaryConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmployeeLogConfiguration());
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             
 

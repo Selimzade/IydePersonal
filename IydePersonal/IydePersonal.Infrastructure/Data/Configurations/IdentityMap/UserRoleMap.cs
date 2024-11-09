@@ -19,6 +19,24 @@ namespace IydePersonal.Infrastructure.Data.Configurations.IdentityMap
 
             // Maps to the AspNetUserRoles table
             builder.ToTable("AspNetUserRoles");
+
+            builder.HasData(new AppUserRole
+            {
+                UserId = 1,
+                RoleId = 1,
+            },
+            new AppUserRole
+            {
+                UserId = 2,
+                RoleId = 2,
+            },
+
+            new AppUserRole
+            {
+                UserId = 3,
+                RoleId = 3,
+            });
+
         }
     }
 }

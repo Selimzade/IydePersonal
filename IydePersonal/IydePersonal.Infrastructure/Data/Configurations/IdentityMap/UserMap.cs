@@ -47,9 +47,61 @@ namespace IydePersonal.Infrastructure.Data.Configurations.IdentityMap
 
             // Each User can have many entries in the UserRole join table
             builder.HasMany<AppUserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
+            var superadmin = new AppUser
+            {
+                Id = 1,
+                UserName = "Ehmed Mustafa",
+                NormalizedUserName = "EHMED MUSTAFA",
+                Email = "Prince.1987@mail.ru",
+                NormalizedEmail = "PRINCE.1987@MAIL.RU",
+                PhoneNumber = "+994502330644",
+                FisrtName = "Ehmed",
+                LastName = "Mustafa",
+                PhoneNumberConfirmed = false,
+                EmailConfirmed = false,
+                SecurityStamp = 1.ToString(),
+            };
+            superadmin.PasswordHash = CreateHashPassWord(superadmin, "123456");
+
+
+            var admin = new AppUser
+            {
+                Id = 2,
+                UserName = "Omer Mustafa",
+                NormalizedUserName = "OMER MUSTAFA",
+                Email = "Prince.1987@mail.ru",
+                NormalizedEmail = "PRINCE.1987@MAIL.RU",
+                PhoneNumber = "+994502330644",
+                FisrtName = "Omer",
+                LastName = "Mustafa",
+                PhoneNumberConfirmed = false,
+                EmailConfirmed = false,
+                SecurityStamp = 2.ToString(),
+            };
+            admin.PasswordHash = CreateHashPassWord(admin, "123456");
+
+            var user = new AppUser
+            {
+                Id = 3,
+                UserName = "Axmed Mustafa",
+                NormalizedUserName = "AXMED MUSTAFA",
+                Email = "Prince.1987@mail.ru",
+                NormalizedEmail = "PRINCE.1987@MAIL.RU",
+                PhoneNumber = "+994502330644",
+                FisrtName = "Axmed",
+                LastName = "Mustafa",
+                PhoneNumberConfirmed = false,
+                EmailConfirmed = false,
+                SecurityStamp = 3.ToString(),
+            };
+            user.PasswordHash = CreateHashPassWord(user, "123456");
+
+            builder.HasData(superadmin,admin,user);
         }
 
 
+         
         private string CreateHashPassWord(AppUser user,string password)
         {
             var passwordHasher = new PasswordHasher<AppUser>();
