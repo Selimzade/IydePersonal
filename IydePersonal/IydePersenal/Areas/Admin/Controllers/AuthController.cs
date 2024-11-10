@@ -26,14 +26,14 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         [AllowAnonymous]
         [HttpPost]
         
-        public async Task < IActionResult> Login(UserCreateDto userCreateDto)
+        public async Task < IActionResult> Login(UserLoginDto userLoginDto)
         {
             if (ModelState.IsValid) 
             {
-                var user= await _userManager.FindByNameAsync(userCreateDto.UserName);
+                var user= await _userManager.FindByNameAsync(userLoginDto.UserName);
                 if (user != null)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, userCreateDto.Password, userCreateDto.Rememberme, false);
+                    var result = await _signInManager.PasswordSignInAsync(user, userLoginDto.Password, userLoginDto.Rememberme, false);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Home", new { Area = "Admin" });

@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#articlesTable').DataTable({
+    $('#employeeTables').DataTable({
         dom:
             "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
             "<'row'<'col-sm-12'tr>>" +
@@ -9,21 +9,21 @@
         language: {
             "sDecimal": ",",
             "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
-            "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+            "sInfo": "_TOTAL_ From the Record _START_ - _END_ Showing records between",
             "sInfoEmpty": "Kayıt yok",
             "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
             "sInfoPostFix": "",
             "sInfoThousands": ".",
-            "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+            "sLengthMenu": "On The Pages _MENU_ show record",
             "sLoadingRecords": "Yükleniyor...",
             "sProcessing": "İşleniyor...",
-            "sSearch": "Ara:",
-            "sZeroRecords": "Eşleşen kayıt bulunamadı",
+            "sSearch": "Search:",
+            "sZeroRecords": "No matching records found",
             "oPaginate": {
                 "sFirst": "İlk",
                 "sLast": "Son",
-                "sNext": "Sonraki",
-                "sPrevious": "Önceki"
+                "sNext": "Next",
+                "sPrevious": "Previous"
             },
             "oAria": {
                 "sSortAscending": ": artan sütun sıralamasını aktifleştir",

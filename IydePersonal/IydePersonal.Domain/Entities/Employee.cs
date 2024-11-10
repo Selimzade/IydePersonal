@@ -13,8 +13,15 @@
         public int FixSalary { get; set; }
         public DateTime StartWork { get; set; }
         public DateTime? FinishWork { get; set; }
+
+        //public bool Isdeleted { get; set; }
+
+        //public  DateTime? DeletedDate { get; set; }
         public Store Store { get; set; }
         public int StoreId { get; set; }
+
+        
+
 
         public User User { get; set; }
         public int UserId { get; set; }

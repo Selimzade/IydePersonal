@@ -36,7 +36,7 @@ builder.Services.ConfigureApplicationCookie(config =>
         Name = "IydeInfo",
         HttpOnly = true,
         SameSite = SameSiteMode.Strict,
-        SecurePolicy = CookieSecurePolicy.Always
+        SecurePolicy = CookieSecurePolicy.SameAsRequest
     };
     config.SlidingExpiration=true;
     config.ExpireTimeSpan=TimeSpan.FromDays(1);
