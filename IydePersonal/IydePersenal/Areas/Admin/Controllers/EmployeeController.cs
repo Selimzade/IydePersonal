@@ -1,13 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IydePersonal.Application.Repositories;
+using IydePersonal.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IydePersonal.WEB.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class EmployeeController : Controller
     {
-        public IActionResult Index()
+        private readonly IEmployeeService _employeeService;
+
+        public EmployeeController(IEmployeeService employeeService)
         {
-            return View();
+            _employeeService = employeeService;
+        }
+
+        [HttpGet]
+        public async Task <IActionResult> Index()
+        {
+            var emp= await _employeeService.GetEmployeeList();
+            return View(emp);
         }
     }
 }

@@ -10,7 +10,7 @@
             "sDecimal": ",",
             "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
             "sInfo": "_TOTAL_ From the Record _START_ - _END_ Showing records between",
-            "sInfoEmpty": "Kayıt yok",
+            "sInfoEmpty": "No record",
             "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
             "sInfoPostFix": "",
             "sInfoThousands": ".",

@@ -65,22 +65,22 @@ namespace IydePersonal.API.Data.Configurations
                 .IsRequired()
                 .HasColumnName ("StoreId");
 
-            //builder.HasData(new Employee 
-            //{
-            //    Id=1,
-            //    FirstName="Ehmed",
-            //    LastName="Mustafa",
-            //    Gender=Gender.Male,
-            //    DateOfBirth=DateTime.Parse("17.10.1987"),
-            //    PhoneNumber="502330644",
-            //    WorkPosition=WorkPosition.Manager,
-            //    IsActive=true,
-            //    FixSalary=1000,
-            //    StartWork=DateTime.Parse("10.10.2021"),
-            //    FinishWork=DateTime.Now,
-            //    UserId=1,
-            //    StoreId=1,
-            //});
+            builder.HasData(new Employee
+            {
+                Id = 1,
+                FirstName = "Ehmed",
+                LastName = "Mustafa",
+                Gender = Gender.Male,
+                DateOfBirth = DateTime.Parse("17.10.1987"),
+                PhoneNumber = "502330644",
+                WorkPosition = WorkPosition.Accountant,
+                IsActive = true,
+                FixSalary = 1000,
+                StartWork = DateTime.Parse("10.10.2021"),
+                FinishWork = DateTime.Now,
+                UserId = 1,
+                StoreId = 1,
+            });
         }
     }
 }

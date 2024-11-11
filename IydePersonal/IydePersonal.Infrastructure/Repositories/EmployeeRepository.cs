@@ -4,6 +4,10 @@ using IydePersonal.Application.Repositories;
 using IydePersonal.Domain.Entities;
 using IydePersonal.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace IydePersonal.Infrastructure.Repositories
 {
@@ -16,10 +20,21 @@ namespace IydePersonal.Infrastructure.Repositories
             _appDbContext = appDbContext;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<Employee>> GetEmployeesAsync()
+        private DbSet<Employee> Table { get => _appDbContext.Set<Employee>(); }
+        public async Task<IEnumerable<Employee>> GetEmployeesAsync(Expression<Func<Employee, bool>> predicate = null, params Expression<Func<Employee, object>>[] includeProperties)
         {
-            return await _appDbContext.Employees.ToListAsync();
+            IQueryable<Employee> query = Table;
+            if (predicate != null)
+                query = query.Where(predicate);
+
+            if (includeProperties.Any())
+                foreach (var item in includeProperties)
+                    query = query.Include(item);
+
+            return await query.ToListAsync();
+           // return await _appDbContext.Employees.ToListAsync();
         }
+
         public async Task<Employee> GetEmployeeById(int Id)
         {
             var emp = await _appDbContext.Employees.FindAsync(Id);
@@ -44,10 +59,12 @@ namespace IydePersonal.Infrastructure.Repositories
             var emp = _appDbContext.Employees.Find(Id);
             if (emp==null)
             {
-               
+              
             }
             _appDbContext.Employees.Update(emp);
             await _appDbContext.SaveChangesAsync() ;
         }
+
+        
     }
 }
