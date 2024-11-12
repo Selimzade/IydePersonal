@@ -20,5 +20,10 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             var emp= await _employeeService.GetEmployeeList();
             return View(emp);
         }
+
+        public async Task<IActionResult> Add() 
+        {
+            return View();
+        }
     }
 }

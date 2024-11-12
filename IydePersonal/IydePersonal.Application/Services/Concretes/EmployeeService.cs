@@ -21,14 +21,14 @@ namespace IydePersonal.Application.Services.Concretes
         }
         public async Task<IEnumerable<EmployeeDto>> GetEmployeeList()
         {
-            var employees = await _employeeRepository.GetEmployeesAsync(x=>!x.IsActive);
+            var employees = await _employeeRepository.GetEmployeesAsync();
             var dto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
             return dto;
         }
         public async Task <EmployeeDto> GetEmployeeById(int Id)
         {
             var emp = await _employeeRepository.GetEmployeeById(Id);
-            var employees= _mapper.Map<EmployeeDto>(emp);
+            var employees=  _mapper.Map<EmployeeDto>(emp);
             return employees;
         }
         public async Task CreateEmployee(EmployeeDto employeeDto)
@@ -49,5 +49,7 @@ namespace IydePersonal.Application.Services.Concretes
             var emp=_employeeRepository.UpdateEmplyee(id);
             return emp;
         }
+
+       
     }
 }

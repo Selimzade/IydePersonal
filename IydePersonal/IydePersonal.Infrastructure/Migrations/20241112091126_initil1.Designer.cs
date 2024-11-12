@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace IydePersonal.API.Migrations
+namespace IydePersonal.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241107050403_Edentity")]
-    partial class Edentity
+    [Migration("20241112091126_initil1")]
+    partial class initil1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,7 +182,7 @@ namespace IydePersonal.API.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7484a0c5-dd80-491e-89d3-0176ee1bb589",
+                            ConcurrencyStamp = "3b2cf055-eb7b-49d1-8f26-232ee2b69395",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Ehmed",
@@ -190,7 +190,7 @@ namespace IydePersonal.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "EHMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEErRlh5BevRDfuPju+uA/8/8mCq60IzNf5G2uNn7xTTEJLuNkVNJ+V/xLX8JlQZXQQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOW1kn8yWijv8bHX6+XElkpDHkFVV48yc5Gh6xaydk/GpBE6cvbYImmwmucVUgjyqw==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "1",
@@ -201,7 +201,7 @@ namespace IydePersonal.API.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05c71961-956a-4bae-a650-cc2cff8b63bb",
+                            ConcurrencyStamp = "44fefa55-84ee-48f3-8e9f-a35cb3b33791",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Omer",
@@ -209,7 +209,7 @@ namespace IydePersonal.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "OMER MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAjtsxrbq5oP316JtKuiVM0p5aqFCvsgPhQ0q0tp/bmB4mV4tFa0RWZ5HolF/zsJYQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED2GNRl3QifSuoi44vu9vxEZkeTGNUVnSRdTliz3kYOP6EXz2GS965pS1AKDZMvdyw==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "2",
@@ -220,7 +220,7 @@ namespace IydePersonal.API.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b70b0529-b19f-413a-b4e4-7d3c7623a201",
+                            ConcurrencyStamp = "bd418eec-14fa-481d-bfdd-55f211c460bb",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Axmed",
@@ -228,7 +228,7 @@ namespace IydePersonal.API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "AXMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPoFqCD8Iove92iUHsvPRp2nLBYv9Rm0Ky0m02xpRkX79+b/6YpvUQK+SF6WNmp/VA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKBlu8LkPJ/ILVNHa8OwE2uc5ul1+IAfEKhVhIUqTXWPF2UbcHoOI4D+I0sEkGjOTw==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3",
@@ -346,6 +346,10 @@ namespace IydePersonal.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Adress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2")
                         .HasColumnName("DateOfBirth");
@@ -407,6 +411,25 @@ namespace IydePersonal.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Employees", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Adress = "Baki",
+                            DateOfBirth = new DateTime(1987, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FinishWork = new DateTime(2024, 11, 12, 12, 11, 25, 605, DateTimeKind.Local).AddTicks(6372),
+                            FirstName = "Ehmed",
+                            FixSalary = 1000,
+                            Gender = (byte)1,
+                            IsActive = true,
+                            LastName = "Mustafa",
+                            PhoneNumber = "502330644",
+                            StartWork = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoreId = 1,
+                            UserId = 1,
+                            WorkPosition = (byte)2
+                        });
                 });
 
             modelBuilder.Entity("IydePersonal.Domain.Entities.EmployeeLog", b =>
@@ -472,7 +495,7 @@ namespace IydePersonal.API.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 7, 8, 4, 2, 665, DateTimeKind.Local).AddTicks(1655),
+                            CreateDate = new DateTime(2024, 11, 12, 12, 11, 25, 606, DateTimeKind.Local).AddTicks(5599),
                             EmployeeId = 1,
                             PunktId = 1
                         });

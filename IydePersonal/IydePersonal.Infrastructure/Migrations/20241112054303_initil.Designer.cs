@@ -4,6 +4,7 @@ using IydePersonal.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IydePersonal.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241112054303_initil")]
+    partial class initil
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,7 +182,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b2cf055-eb7b-49d1-8f26-232ee2b69395",
+                            ConcurrencyStamp = "147360aa-71ae-4683-81ea-481003f51177",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Ehmed",
@@ -187,7 +190,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "EHMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOW1kn8yWijv8bHX6+XElkpDHkFVV48yc5Gh6xaydk/GpBE6cvbYImmwmucVUgjyqw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENeKqmYXUfm6wZ24krO8u3oxLB29HAaOuGqz1ZV8g2m44qLecwfTYM6C3ZRpD0oqig==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "1",
@@ -198,7 +201,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "44fefa55-84ee-48f3-8e9f-a35cb3b33791",
+                            ConcurrencyStamp = "81c6df06-61ae-48bb-90f2-89d34535440a",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Omer",
@@ -206,7 +209,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "OMER MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAED2GNRl3QifSuoi44vu9vxEZkeTGNUVnSRdTliz3kYOP6EXz2GS965pS1AKDZMvdyw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ3xRIGSA5JKNJ9hPPiQ24sPCoGQAnkJRDUXT8nA8rEXp1Q96Buslh/AH5e4jVjVKg==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "2",
@@ -217,7 +220,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bd418eec-14fa-481d-bfdd-55f211c460bb",
+                            ConcurrencyStamp = "f7c50372-4735-4a76-94eb-15abe24340d1",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Axmed",
@@ -225,7 +228,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "AXMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKBlu8LkPJ/ILVNHa8OwE2uc5ul1+IAfEKhVhIUqTXWPF2UbcHoOI4D+I0sEkGjOTw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDWQ4J14I24R28m2XxN3+tyc5FdBGNpt627exlLN1gTdslRhmeZLzZv/Q/u/9UIOGg==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3",
@@ -343,10 +346,6 @@ namespace IydePersonal.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2")
                         .HasColumnName("DateOfBirth");
@@ -413,9 +412,8 @@ namespace IydePersonal.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Adress = "Baki",
                             DateOfBirth = new DateTime(1987, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishWork = new DateTime(2024, 11, 12, 12, 11, 25, 605, DateTimeKind.Local).AddTicks(6372),
+                            FinishWork = new DateTime(2024, 11, 12, 8, 43, 2, 776, DateTimeKind.Local).AddTicks(1797),
                             FirstName = "Ehmed",
                             FixSalary = 1000,
                             Gender = (byte)1,
@@ -492,7 +490,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 12, 12, 11, 25, 606, DateTimeKind.Local).AddTicks(5599),
+                            CreateDate = new DateTime(2024, 11, 12, 8, 43, 2, 777, DateTimeKind.Local).AddTicks(614),
                             EmployeeId = 1,
                             PunktId = 1
                         });

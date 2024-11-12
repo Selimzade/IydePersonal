@@ -7,14 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Employee\Add.cshtml" />
     <Content Remove="wwwroot\js\JavaScript.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Employee\Add.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\JavaScript.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Employee\Add.cshtml" />
     <None Include="wwwroot\js\JavaScript.js" />
   </ItemGroup>
 
@@ -33,6 +36,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Employee\Add.cshtml" />
   </ItemGroup>
 
 </Project>

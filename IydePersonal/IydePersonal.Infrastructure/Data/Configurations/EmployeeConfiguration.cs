@@ -76,6 +76,7 @@ namespace IydePersonal.API.Data.Configurations
                 WorkPosition = WorkPosition.Accountant,
                 IsActive = true,
                 FixSalary = 1000,
+                Adress="Baki",
                 StartWork = DateTime.Parse("10.10.2021"),
                 FinishWork = DateTime.Now,
                 UserId = 1,
