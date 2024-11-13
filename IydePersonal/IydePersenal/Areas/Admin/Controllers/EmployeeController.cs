@@ -1,4 +1,5 @@
-﻿using IydePersonal.Application.Repositories;
+﻿using IydePersonal.Application.Dtos.Employee;
+using IydePersonal.Application.Repositories;
 using IydePersonal.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +9,12 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
+        private readonly IStoryService _storyService;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService, IStoryService storyService)
         {
             _employeeService = employeeService;
+            _storyService = storyService;
         }
 
         [HttpGet]
@@ -20,10 +23,11 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             var emp= await _employeeService.GetEmployeeList();
             return View(emp);
         }
-
-        public async Task<IActionResult> Add() 
+        [HttpGet]
+        public async Task<IActionResult> Add()
         {
-            return View();
+            var story = await _storyService.AllStoreDtos();
+            return View(new EmployeeAddDto { stores=story });
         }
     }
 }

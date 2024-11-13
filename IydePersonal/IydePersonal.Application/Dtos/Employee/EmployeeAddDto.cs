@@ -10,7 +10,7 @@ namespace IydePersonal.Application.Dtos.Employee
 {
     public class EmployeeAddDto
     {
-        public int Id { get; set; }
+        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
@@ -22,8 +22,10 @@ namespace IydePersonal.Application.Dtos.Employee
         public int FixSalary { get; set; }
         public string Adress { get; set; }
 
-        public IList<StoreDto> stores { get; set; }
+        public int StoryId { get; set; }
         public DateTime StartWork { get; set; } = DateTime.Now;
+        public IList<StoreDto> stores { get; set; }
+        
 
 
     }

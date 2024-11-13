@@ -13,6 +13,7 @@ namespace IydePersonal.Application
         {
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IPunktService, PunktService>();
+            services.AddScoped<IStoryService, StoryService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
