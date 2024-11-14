@@ -8,7 +8,7 @@ namespace IydePersonal.Application.Services.Interfaces
         public Task<IEnumerable<EmployeeDto>> GetEmployeeList();
 
         public Task <EmployeeDto> GetEmployeeById(int Id);
-        public Task CreateEmployee(EmployeeDto employeeDto);
+        public Task CreateEmployee(EmployeeAddDto employeeAddDto);
         public Task DeleteEmployee(int Id);
         public Task UpdateEmployee(int Id);
 

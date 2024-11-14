@@ -11,7 +11,7 @@ namespace IydePersonal.Application.Services.Concretes
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
-       // private readonly AppDbContext _context;
+        //private readonly AppDbContext _context;
 
 
         public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
@@ -31,10 +31,26 @@ namespace IydePersonal.Application.Services.Concretes
             var employees=  _mapper.Map<EmployeeDto>(emp);
             return employees;
         }
-        public async Task CreateEmployee(EmployeeDto employeeDto)
+        public async Task CreateEmployee(EmployeeAddDto employeeAddDto)
         {
-             var employees = _mapper.Map<Employee>(employeeDto);
-             await _employeeRepository.CreateEmployee(employees);
+            var userId = 1;
+            var emp= new Employee
+            {   FirstName=employeeAddDto.FirstName,
+                LastName= employeeAddDto.LastName,
+                Gender= employeeAddDto.Gender,
+                DateOfBirth = employeeAddDto.DateOfBirth,
+                PhoneNumber= employeeAddDto.PhoneNumber,
+                WorkPosition = employeeAddDto.WorkPosition,
+                IsActive = employeeAddDto.IsActive,
+                FixSalary = employeeAddDto.FixSalary,
+                Adress = employeeAddDto.Adress,
+                StoreId= employeeAddDto.StoryId,
+                StartWork = employeeAddDto.StartWork,
+                UserId= userId,
+
+            };
+            await _employeeRepository.CreateEmployee(emp);
+            await _employeeRepository.SaveAsync();
         }
 
         public Task DeleteEmployee(int id)

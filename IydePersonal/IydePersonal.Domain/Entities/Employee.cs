@@ -2,6 +2,28 @@
 {
     public class Employee
     {
+        public Employee()
+        {
+                
+        }
+        public Employee(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string phoneNumber, WorkPosition workPosition, bool isActive, int fixSalary, string adress,int srotyId, DateTime startWork,int userId)
+        {
+         
+            FirstName = firstName;
+            LastName = lastName;
+            Gender = gender;
+            DateOfBirth = dateOfBirth;
+            PhoneNumber = phoneNumber;
+            WorkPosition = workPosition;
+            IsActive = isActive;
+            FixSalary = fixSalary;
+            StoreId = srotyId;
+            Adress = adress;
+            StartWork = startWork;
+            UserId = userId;
+           
+        }
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

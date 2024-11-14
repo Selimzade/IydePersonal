@@ -8,9 +8,11 @@ namespace IydePersonal.Application.Repositories
     {
         public Task<IEnumerable<Employee>> GetEmployeesAsync(Expression<Func<Employee, bool>> predicate = null, params Expression<Func<Employee, object>>[] includeProperties);
         public Task<Employee> GetEmployeeById(int Id);
-        public Task CreateEmployee(Employee employee);
+        public Task  CreateEmployee(Employee employee);
         public Task  DeleteEmployee(int Id);
         public Task  UpdateEmplyee(int Id);
+        Task<int> SaveAsync();
+        int Save();
 
     }
 }

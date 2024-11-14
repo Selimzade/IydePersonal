@@ -42,8 +42,7 @@ namespace IydePersonal.Infrastructure.Repositories
         }
         public async Task CreateEmployee(Employee employee)
         {
-            var emp= await _appDbContext.Employees.AddAsync(employee);
-            await _appDbContext.SaveChangesAsync();
+            await _appDbContext.Employees.AddAsync(employee);
         }
 
         public async Task DeleteEmployee(int Id)
@@ -65,6 +64,14 @@ namespace IydePersonal.Infrastructure.Repositories
             await _appDbContext.SaveChangesAsync() ;
         }
 
-        
+        public Task<int> SaveAsync()
+        {
+           return _appDbContext.SaveChangesAsync();
+        }
+
+        public int Save()
+        {
+            return _appDbContext.SaveChanges();
+        }
     }
 }

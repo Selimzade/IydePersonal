@@ -29,5 +29,13 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             var story = await _storyService.AllStoreDtos();
             return View(new EmployeeAddDto { stores=story });
         }
+        [HttpPost]
+        public async Task<IActionResult> Add(EmployeeAddDto employeeAddDto)
+        {
+            await _employeeService.CreateEmployee(employeeAddDto);
+            RedirectToAction("Index","Employee", new { Area="Admin"});
+            var story = await _storyService.AllStoreDtos();
+            return View(new EmployeeAddDto { stores = story });
+        }
     }
 }

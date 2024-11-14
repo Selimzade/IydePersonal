@@ -17,16 +17,14 @@ namespace IydePersonal.Application.Dtos.Employee
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public WorkPosition WorkPosition { get; set; }
-        
-        public bool IsActive { get; set; }=false;
         public int FixSalary { get; set; }
         public string Adress { get; set; }
-
         public int StoryId { get; set; }
+        public bool IsActive { get; set; } = true;
         public DateTime StartWork { get; set; } = DateTime.Now;
         public IList<StoreDto> stores { get; set; }
-        
 
+      
 
     }
 }
