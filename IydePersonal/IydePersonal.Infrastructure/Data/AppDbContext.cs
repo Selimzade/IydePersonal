@@ -1,10 +1,13 @@
 ﻿using IydePersonal.API.Data.Configurations;
 using IydePersonal.Domain.Entities;
+using IydePersonal.Domain.Entities.Edentity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace IydePersonal.Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser,AppRole,int,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
@@ -22,13 +25,14 @@ namespace IydePersonal.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-            modelBuilder.ApplyConfiguration(new PunktConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeePunktConfiguration());
-            modelBuilder.ApplyConfiguration(new StoreConfiguration());
-            modelBuilder.ApplyConfiguration(new SalaryConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeeLogConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+            //modelBuilder.ApplyConfiguration(new PunktConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmployeePunktConfiguration());
+            //modelBuilder.ApplyConfiguration(new StoreConfiguration());
+            //modelBuilder.ApplyConfiguration(new SalaryConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmployeeLogConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             
 
             base.OnModelCreating(modelBuilder);

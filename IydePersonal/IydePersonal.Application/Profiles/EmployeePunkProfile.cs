@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using IydePersonal.Application.Dtos;
+using IydePersonal.Application.Dtos.Employee;
 using IydePersonal.Domain.Entities;
 
 namespace IydePersonal.API.Profiles

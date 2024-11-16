@@ -2,7 +2,8 @@
 {
     public enum WorkPosition : byte
     {
-        Employee = 1,
-        Manager = 2,
+        Director = 1,
+        Accountant = 2,
+        Sale_manager = 3,
     }
 }

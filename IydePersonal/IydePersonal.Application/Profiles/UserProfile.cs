@@ -13,6 +13,7 @@ namespace IydePersonal.API.Profiles
             CreateMap<User, UserCreateDto>().ReverseMap();
 
             CreateMap<User, UserEditDto>().ReverseMap();
+            CreateMap<User,UserLoginDto>().ReverseMap();
 
             CreateMap<User, UserWithEmployeeDetailDto>().ReverseMap();
         }
