@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IydePersonal.WEB", "IydePersenal\IydePersonal.WEB.csproj", "{3E605ED3-BB2B-4C35-965D-18B3F75BA69F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IydePersonal.WEB", "IydePersenal\IydePersonal.WEB.csproj", "{3E605ED3-BB2B-4C35-965D-18B3F75BA69F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IydePersonal.Domain", "IydePersonal.Domain\IydePersonal.Domain.csproj", "{D5BD1A43-B7B6-436B-B8AA-5CC9D5F6DD67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IydePersonal.Domain", "IydePersonal.Domain\IydePersonal.Domain.csproj", "{D5BD1A43-B7B6-436B-B8AA-5CC9D5F6DD67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IydePersonal.Infrastructure", "IydePersonal.Infrastructure\IydePersonal.Infrastructure.csproj", "{11769488-43DD-4F76-9239-CB4033A5A7CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IydePersonal.Infrastructure", "IydePersonal.Infrastructure\IydePersonal.Infrastructure.csproj", "{11769488-43DD-4F76-9239-CB4033A5A7CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IydePersonal.Application", "IydePersonal.Application\IydePersonal.Application.csproj", "{0B7EE4B4-763F-4FCC-BF7B-B3A761057163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IydePersonal.Application", "IydePersonal.Application\IydePersonal.Application.csproj", "{0B7EE4B4-763F-4FCC-BF7B-B3A761057163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IydePersonal.API", "IydePersonal.API\IydePersonal.API.csproj", "{6AB10B18-1F62-41A2-9353-07455C3C22AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0B7EE4B4-763F-4FCC-BF7B-B3A761057163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B7EE4B4-763F-4FCC-BF7B-B3A761057163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B7EE4B4-763F-4FCC-BF7B-B3A761057163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB10B18-1F62-41A2-9353-07455C3C22AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB10B18-1F62-41A2-9353-07455C3C22AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB10B18-1F62-41A2-9353-07455C3C22AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB10B18-1F62-41A2-9353-07455C3C22AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
