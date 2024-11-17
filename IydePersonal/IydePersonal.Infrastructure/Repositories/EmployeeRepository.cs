@@ -53,15 +53,11 @@ namespace IydePersonal.Infrastructure.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateEmplyee(int Id)
+        public async Task UpdateEmplyee(Employee employee)
         {
-            var emp = _appDbContext.Employees.Find(Id);
-            if (emp==null)
-            {
-              
-            }
+            var emp = _appDbContext.Employees.Find(employee.Id);
             _appDbContext.Employees.Update(emp);
-            await _appDbContext.SaveChangesAsync() ;
+           await _appDbContext.SaveChangesAsync() ;
         }
 
         public Task<int> SaveAsync()
@@ -72,6 +68,18 @@ namespace IydePersonal.Infrastructure.Repositories
         public int Save()
         {
             return _appDbContext.SaveChanges();
+        }
+
+        public async Task<Employee> GetAsync(Expression<Func<Employee, bool>> predicate, params Expression<Func<Employee, object>>[] includeProperties)
+        {
+            IQueryable<Employee> query = Table;
+            query = query.Where(predicate);
+
+            if (includeProperties.Any())
+                foreach (var item in includeProperties)
+                    query = query.Include(item);
+
+            return await query.SingleAsync();
         }
     }
 }

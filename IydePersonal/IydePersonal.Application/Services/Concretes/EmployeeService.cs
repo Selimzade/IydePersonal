@@ -60,10 +60,23 @@ namespace IydePersonal.Application.Services.Concretes
         }
 
 
-        public Task UpdateEmployee(int id)
+        public async Task UpdateEmployee(EmployeeUpdateDto employeeUpdateDto)
         {
-            var emp=_employeeRepository.UpdateEmplyee(id);
-            return emp;
+            var updateemp = _mapper.Map<Employee>(employeeUpdateDto);
+            var emp=_employeeRepository.UpdateEmplyee(updateemp);
+            updateemp.FirstName = employeeUpdateDto.FirstName;
+            updateemp.LastName = employeeUpdateDto.LastName;
+            updateemp.Gender = employeeUpdateDto.Gender;
+            updateemp.DateOfBirth = employeeUpdateDto.DateOfBirth;
+            updateemp.PhoneNumber = employeeUpdateDto.PhoneNumber;
+            updateemp.WorkPosition = employeeUpdateDto.WorkPosition;
+            updateemp.IsActive = employeeUpdateDto.IsActive;
+            updateemp.FixSalary = employeeUpdateDto.FixSalary;
+            updateemp.Adress = employeeUpdateDto.Adress;
+            updateemp.StoreId = employeeUpdateDto.StoryId;
+            updateemp.StartWork= employeeUpdateDto.StartWork;
+
+            //await _employeeRepository.SaveAsync();
         }
 
        

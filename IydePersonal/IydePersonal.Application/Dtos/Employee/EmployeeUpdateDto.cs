@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace IydePersonal.Application.Dtos.Employee
 {
-    public class EmployeeAddDto
+    public class EmployeeUpdateDto
     {
-       
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
@@ -23,8 +23,6 @@ namespace IydePersonal.Application.Dtos.Employee
         public bool IsActive { get; set; } = true;
         public DateTime StartWork { get; set; } = DateTime.Now;
         public IList<StoreDto> stores { get; set; }
-
-      
 
     }
 }
