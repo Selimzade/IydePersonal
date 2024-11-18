@@ -9,7 +9,7 @@ namespace IydePersonal.Application.Services.Interfaces
         public Task <EmployeeDto> GetEmployeeById(int Id);
         public Task CreateEmployee(EmployeeAddDto employeeAddDto);
         public Task DeleteEmployee(int Id);
-        public Task UpdateEmployee(EmployeeUpdateDto employeeUpdateDto);
+        public Task  UpdateEmployee(EmployeeUpdateDto employeeUpdateDto);
 
     }
 }

@@ -46,17 +46,21 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         public async Task<IActionResult> Update(int UpdateId)
         {
             var empupdate = await _employeeService.GetEmployeeById(UpdateId);
-            var empstory = await _storyService.AllStoreDtos();
             var empUpdatedto = _mapper.Map<EmployeeUpdateDto>(empupdate);
+
+            var empstory = await _storyService.AllStoreDtos();
             empUpdatedto.stores = empstory;
             return View(empUpdatedto);
         }
         [HttpPost]
         public async Task<IActionResult> Update(EmployeeUpdateDto employeeUpdateDto)
+            
         {
-            await _employeeService.UpdateEmployee(employeeUpdateDto);
+            await  _employeeService.UpdateEmployee(employeeUpdateDto);
+
             var empstory = await _storyService.AllStoreDtos();
             employeeUpdateDto.stores = empstory;
+            
             return View(employeeUpdateDto);
         }
     }

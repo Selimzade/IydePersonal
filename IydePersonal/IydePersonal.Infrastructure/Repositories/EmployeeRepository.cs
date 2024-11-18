@@ -53,11 +53,10 @@ namespace IydePersonal.Infrastructure.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateEmplyee(Employee employee)
+        public async Task <Employee> UpdateEmplyee(Employee employee)
         {
-            var emp = _appDbContext.Employees.Find(employee.Id);
-            _appDbContext.Employees.Update(emp);
-           await _appDbContext.SaveChangesAsync() ;
+            await Task.Run(() => Table.Update(employee));
+            return employee;
         }
 
         public Task<int> SaveAsync()

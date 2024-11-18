@@ -11,7 +11,7 @@ namespace IydePersonal.Application.Repositories
         public Task<Employee> GetEmployeeById(int Id);
         public Task  CreateEmployee(Employee employee);
         public Task  DeleteEmployee(int Id);
-        public Task  UpdateEmplyee(Employee employee);
+        public Task <Employee> UpdateEmplyee(Employee employee);
         Task<int> SaveAsync();
         int Save();
 
