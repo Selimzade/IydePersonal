@@ -4,6 +4,7 @@ using IydePersonal.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IydePersonal.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241119090806_addtableemploe_again")]
+    partial class addtableemploe_again
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,7 +182,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "53da27da-dcdc-4eaa-83a0-4d883e327a00",
+                            ConcurrencyStamp = "b042f06a-63cb-443a-a074-8107b30d3f8b",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Ehmed",
@@ -187,7 +190,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "EHMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAn/3Jd423K/S7U1AEra8CiTRMaEtAZOcbGUI4HYZMO34ti3bGFMpvLsf/Fe1qCO1g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK2y7AL4wWyc+hxBDvxaidYpNRTPClrG/524t525sNwmXq/L6drjGnEhOFS2wBsqBA==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "1",
@@ -198,7 +201,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ceecc650-bb21-437d-9c50-2433861707b7",
+                            ConcurrencyStamp = "521d84b4-0a62-4f59-8136-894603d99542",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Omer",
@@ -206,7 +209,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "OMER MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJqSubftrdbvvS/0eG/FCIxNcAEof1AfdUbnDj7HeplLz0xih+im7RuElRvSvsFSZA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH705dyyeZD+HkEBilldSf8t1j2IC23EtdnouSNjsLeZ5Sr9bVA3yM9qolzBtBsEig==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "2",
@@ -217,7 +220,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d849de46-c930-44d9-be13-eb5d97863536",
+                            ConcurrencyStamp = "75d379e7-a085-4558-a2bf-98b040399b1b",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FisrtName = "Axmed",
@@ -225,7 +228,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "AXMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOvCjHMnRJrMlYCzfSCaI4EnTm4iikYcAGgI0wS44Q/X1+aHrxX9L3TBaV3IR+36qw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK1D7w6LO+YzE7QQ660icg0xI3Gy3Hv705JjKYce5bQf2l6KRi3Foh3dAEv9GL1ucg==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3",
@@ -473,7 +476,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 11, 19, 13, 7, 10, 782, DateTimeKind.Local).AddTicks(3439),
+                            CreateDate = new DateTime(2024, 11, 19, 12, 8, 5, 528, DateTimeKind.Local).AddTicks(7463),
                             EmployeeId = 1,
                             PunktId = 1
                         });

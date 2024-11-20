@@ -37,20 +37,17 @@ namespace IydePersonal.Infrastructure.Repositories
 
         public async Task<Employee> GetEmployeeById(int Id)
         {
-            var emp = await _appDbContext.Employees.FindAsync(Id);
-            return emp;
+            return await _appDbContext.Employees.FindAsync(Id);
+          
         }
         public async Task CreateEmployee(Employee employee)
         {
             await _appDbContext.Employees.AddAsync(employee);
         }
 
-        public async Task DeleteEmployee(int Id)
+        public async Task DeleteEmployee(Employee employee)
         {
-            var emp=_appDbContext.Employees.Find(Id);
-
-            _appDbContext.Employees.Remove(emp);
-            await _appDbContext.SaveChangesAsync();
+            await Task.Run(() => Table.Remove(employee));
         }
 
         public async Task <Employee> UpdateEmplyee(Employee employee)

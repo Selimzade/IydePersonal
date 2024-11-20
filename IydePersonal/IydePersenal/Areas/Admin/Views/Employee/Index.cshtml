@@ -11,13 +11,13 @@
 
     <div class="card mb-4">
   
-  <div class="table-responsive text-nowrap m-3 ">
+  <div class="table-responsive text-nowrap m-1 ">
 
-      <a class="btn btn-success mb-3" asp-area="Admin" asp-controller="Employee" asp-action="Add">
-          Add New Employee <i class="bx bx-plus"></i>
+      <a class="btn btn-success btn-md mb-3" asp-area="Admin" asp-controller="Employee" asp-action="Add">
+          New <i class="bx bx-plus"></i>
       </a>
 
-    <table class="table table-dark"id="employeeTables" width="100%" cellspacing="0">
+    <table class="table table-dark table-hover"id="employeeTables" width="100%" cellspacing="0">
       <thead>
         <tr>
                       <th>FirstName</th>
@@ -30,8 +30,8 @@
                       <th>Adress</th>
                       <th>FixSalary</th>
                       <th>StarWork</th>
-                      <th>IsActive</th>
-                      <th>  </th>
+                      
+                      <th>Edit&Delete</th>
     
         </tr>
       </thead>
@@ -47,8 +47,8 @@
                         <th>Adress</th>
                         <th>FixSalary</th>
                         <th>StarWork</th>
-                        <th>IsActive</th>
-                        <th>  </th>
+                       
+                        <th>Edit&Delete</th>
                       </tr>
       </tfoot>
       <tbody class="table-border-bottom-0">
@@ -66,15 +66,12 @@
                             <td>@Employee.Adress</td>
                             <td>@Employee.FixSalary</td>
                             <td>@Employee.StartWork.ToShortDateString()</td>
-                            <td>@(Employee.IsActive? "Active":"OnActive")</td>
+                            @* <td>@(Employee.IsActive? "Active":"OnActive") *@
                             <td>
-
-                                <a class="btn btn-primary btn-sm " data-Id="@Employee.Id"
-                                   asp-area="Admin" asp-controller="Employee" asp-action="Update"asp-route-UpdateId="@Employee.Id"> Edit
-                                   
-                                </a>
+                                <a class="btn btn-primary btn-xs" data-Id="@Employee.Id" asp-area="Admin" asp-controller="Employee" asp-action="Update" asp-route-UpdateId="@Employee.Id"><i class="bx bxs-edit"></i></a>
+                                <a class="btn btn-danger btn-xs" data-Id="@Employee.Id" asp-area="Admin" asp-controller="Employee" asp-action="Delete" asp-route-UpdateId="@Employee.Id"><i class="bx bx-minus-circle"></i></a>
                             </td>
-                         </tr>
+                        </tr>
                     }
       </tbody>
     </table>

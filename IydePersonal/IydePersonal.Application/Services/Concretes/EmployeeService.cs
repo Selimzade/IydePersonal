@@ -21,13 +21,13 @@ namespace IydePersonal.Application.Services.Concretes
         }
         public async Task<IEnumerable<EmployeeDto>> GetEmployeeList()
         {
-            var employees = await _employeeRepository.GetEmployeesAsync();
+            var employees = await _employeeRepository.GetEmployeesAsync(x=>x.IsActive);
             var dto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
             return dto;
         }
-        public async Task<EmployeeDto> GetEmployeeById(int Id)
+        public async Task<EmployeeDto> GetEmployeeById(int UpdateId)
         {
-            var emp = await _employeeRepository.GetEmployeeById(Id);
+            var emp = await _employeeRepository.GetAsync(x=>x.IsActive&&x.Id==UpdateId);
             var employees = _mapper.Map<EmployeeDto>(emp);
             return employees;
         }
@@ -42,7 +42,7 @@ namespace IydePersonal.Application.Services.Concretes
                 DateOfBirth = employeeAddDto.DateOfBirth,
                 PhoneNumber = employeeAddDto.PhoneNumber,
                 WorkPosition = employeeAddDto.WorkPosition,
-                IsActive = employeeAddDto.IsActive,
+              //  IsActive = employeeAddDto.IsActive,
                 FixSalary = employeeAddDto.FixSalary,
                 Adress = employeeAddDto.Adress,
                 StoreId = employeeAddDto.StoryId,
@@ -54,18 +54,21 @@ namespace IydePersonal.Application.Services.Concretes
             await _employeeRepository.SaveAsync();
         }
 
-        public Task DeleteEmployee(int id)
+        public async Task SoftDeleteEmployee(int UpdateId)
         {
-            var emp = _employeeRepository.DeleteEmployee(id);
-            return emp;
-        }
+            var emp = await _employeeRepository.GetEmployeeById(UpdateId);
+            emp.IsActive = false;
+            emp.FinishWork=DateTime.Now;
+            await _employeeRepository.UpdateEmplyee(emp);
+            await _employeeRepository.SaveAsync();
+         }
 
 
 
         public async Task UpdateEmployee(EmployeeUpdateDto employeeUpdateDto)
         {
 
-            var updateemp = await _employeeRepository.GetAsync(x => x.Id == employeeUpdateDto.Id);
+            var updateemp = await _employeeRepository.GetAsync(x=>x.IsActive && x.Id == employeeUpdateDto.Id);
             //_mapper.Map<EmployeeUpdateDto>(updateemp);
 
             updateemp.FirstName = employeeUpdateDto.FirstName;
@@ -76,7 +79,7 @@ namespace IydePersonal.Application.Services.Concretes
             updateemp.WorkPosition = employeeUpdateDto.WorkPosition;
             updateemp.FixSalary = employeeUpdateDto.FixSalary;
             updateemp.Adress = employeeUpdateDto.Adress;
-            updateemp.IsActive = employeeUpdateDto.IsActive;
+          //  updateemp.IsActive = employeeUpdateDto.IsActive;
             updateemp.StoreId = employeeUpdateDto.StoryId;
             updateemp.StartWork = employeeUpdateDto.StartWork;
             await _employeeRepository.UpdateEmplyee(updateemp);

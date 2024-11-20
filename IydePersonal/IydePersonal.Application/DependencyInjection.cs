@@ -1,4 +1,6 @@
-﻿using IydePersonal.Application.Repositories;
+﻿using FluentValidation;
+using IydePersonal.Application.FluentValidations;
+using IydePersonal.Application.Repositories;
 using IydePersonal.Application.Services.Concretes;
 using IydePersonal.Application.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,9 @@ namespace IydePersonal.Application
             services.AddScoped<IPunktService, PunktService>();
             services.AddScoped<IStoryService, StoryService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssemblyContaining<EmployeeValidator>();
             return services;
         }
     }
+
 }

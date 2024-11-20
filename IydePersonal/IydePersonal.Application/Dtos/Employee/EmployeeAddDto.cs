@@ -20,7 +20,7 @@ namespace IydePersonal.Application.Dtos.Employee
         public int FixSalary { get; set; }
         public string Adress { get; set; }
         public int StoryId { get; set; }
-        public bool IsActive { get; set; } = true;
+       // public bool IsActive { get; set; } = true;
         public DateTime StartWork { get; set; } = DateTime.Now;
         public IList<StoreDto> stores { get; set; }
 

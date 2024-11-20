@@ -15,7 +15,6 @@ namespace IydePersonal.Application.Dtos.Employee
         public int FixSalary { get; set; }
         public string Adress { get; set; }
         public DateTime StartWork { get; set; }
-        public DateTime? FinishWork { get; set; }
         public int StoreId { get; set; }
 
     }
