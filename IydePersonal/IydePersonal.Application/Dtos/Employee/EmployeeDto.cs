@@ -1,4 +1,5 @@
-﻿using IydePersonal.Domain.Entities;
+﻿using IydePersonal.Application.Dtos.Store;
+using IydePersonal.Domain.Entities;
 
 namespace IydePersonal.Application.Dtos.Employee
 {
@@ -15,7 +16,7 @@ namespace IydePersonal.Application.Dtos.Employee
         public int FixSalary { get; set; }
         public string Adress { get; set; }
         public DateTime StartWork { get; set; }
-        public int StoreId { get; set; }
+        public StoreDto Store { get; set; }
 
     }
 }

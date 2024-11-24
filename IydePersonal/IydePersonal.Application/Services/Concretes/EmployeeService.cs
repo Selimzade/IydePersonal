@@ -21,7 +21,7 @@ namespace IydePersonal.Application.Services.Concretes
         }
         public async Task<IEnumerable<EmployeeDto>> GetEmployeeList()
         {
-            var employees = await _employeeRepository.GetEmployeesAsync(x=>x.IsActive);
+            var employees = await _employeeRepository.GetEmployeesAsync(x=>x.IsActive,x=>x.Store);
             var dto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
             return dto;
         }

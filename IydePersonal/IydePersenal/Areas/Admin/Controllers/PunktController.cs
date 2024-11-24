@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IydePersonal.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IydePersonal.WEB.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class PunktController : Controller
     {
-        public IActionResult Index()
+       private readonly IPunktService _unktService;
+
+        public PunktController(IPunktService unktService)
         {
-            return View();
+            _unktService = unktService;
+        }
+        [HttpGet]
+        public async Task <IActionResult> Index()
+        {
+            var punkt= await _unktService.GetPunktListAsync();
+            return View(punkt);
         }
     }
 }
