@@ -2,6 +2,7 @@
 using IydePersonal.Application.Dtos.Punkt;
 using IydePersonal.Application.Repositories;
 using IydePersonal.Application.Services.Interfaces;
+using IydePersonal.Domain.Entities;
 
 namespace IydePersonal.Application.Services.Concretes
 {
@@ -14,6 +15,19 @@ namespace IydePersonal.Application.Services.Concretes
         {
             _punktRepository = punktRepository;
             _mapper = mapper;
+        }
+
+        public async Task CreatePunkt(PunktAddDto punktAddDto)
+        {
+            //var userId = 1;
+            var punkt = new Punkt
+            {
+                Name = punktAddDto.Name,
+                Point = punktAddDto.Point,
+
+            };
+            await _punktRepository.CreatePunkt(punkt);
+            await _punktRepository.SaveAsync();
         }
 
         public async Task<IEnumerable<PunktDetailDto>> GetPunktListAsync()

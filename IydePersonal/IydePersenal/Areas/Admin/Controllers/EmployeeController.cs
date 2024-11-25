@@ -53,6 +53,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             await _employeeService.CreateEmployee(employeeAddDto);
             _toastNotification.AddSuccessToastMessage("Add Sucseccfully");
             RedirectToAction("Index", "Employee", new { Area = "Admin" });
+
             var story = await _storyService.AllStoreDtos();
             return View(new EmployeeAddDto { stores = story });
         }
