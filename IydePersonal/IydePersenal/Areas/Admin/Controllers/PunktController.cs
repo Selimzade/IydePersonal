@@ -36,5 +36,13 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             await _unktService.CreatePunkt(punktAddDto);
             return RedirectToAction("Index", "Punkt", new { Area = "Admin" });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(int PunktId) 
+        {
+            var punk=await _unktService.GetPunktById(PunktId);
+            var map = _mapper.Map<Punkt, PunktUpdateDto>(punk);
+            return View(map);
+        }
     }
 }

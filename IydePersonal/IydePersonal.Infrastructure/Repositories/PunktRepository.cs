@@ -17,14 +17,28 @@ namespace IydePersonal.Infrastructure.Repositories
             _mapper = mapper;
         }
 
+        public async Task<IEnumerable<Punkt>> GetPunktsAsync()
+        {
+            return await _appDbContext.Punkts.ToListAsync();
+        }
+
+        public async Task<Punkt> GetPunkByIdAsync(int Id)
+        {
+            return await _appDbContext.Punkts.FindAsync(Id);
+        }
+
         public async Task CreatePunkt(Punkt punkt)
         {
             await _appDbContext.Punkts.AddAsync(punkt);
         }
-
-        public async Task<IEnumerable<Punkt>> GetPunktsAsync()
+        public async Task <Punkt> UpdatePunktAsync(Punkt punkt)
         {
-            return await _appDbContext.Punkts.ToListAsync();
+             var punk=  _appDbContext.Punkts.Update(punkt);
+             return punkt;
+        }
+        public async Task DeletePunktAsync(Punkt punkt)
+        {
+             _appDbContext.Remove(punkt);
         }
 
         public int Save()
@@ -36,5 +50,7 @@ namespace IydePersonal.Infrastructure.Repositories
         {
            return _appDbContext.SaveChangesAsync();
         }
+
+       
     }
 }

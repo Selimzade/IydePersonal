@@ -17,6 +17,12 @@ namespace IydePersonal.Application.Services.Concretes
             _mapper = mapper;
         }
 
+        public async Task<IEnumerable<PunktDetailDto>> GetPunktListAsync()
+        {
+            var punkts = await _punktRepository.GetPunktsAsync();
+            var dto = _mapper.Map<IEnumerable<PunktDetailDto>>(punkts);
+            return dto;
+        }
         public async Task CreatePunkt(PunktAddDto punktAddDto)
         {
             //var userId = 1;
@@ -30,11 +36,25 @@ namespace IydePersonal.Application.Services.Concretes
             await _punktRepository.SaveAsync();
         }
 
-        public async Task<IEnumerable<PunktDetailDto>> GetPunktListAsync()
+        public Task<Punkt> GetPunktById(int id)
         {
-            var punkts = await _punktRepository.GetPunktsAsync();
-            var dto = _mapper.Map<IEnumerable<PunktDetailDto>>(punkts);
-            return dto;
+           var punkt= _punktRepository.GetPunkByIdAsync(id);
+           return punkt;
         }
+
+
+        public Task UpdatePunkt(PunktUpdateDto punktUpdateDto)
+        {
+            throw new NotImplementedException();
+        }
+
+       
+
+        public Task SafeDeletePunkt(int PunktId)
+        {
+            throw new NotImplementedException();
+        }
+
+       
     }
 }

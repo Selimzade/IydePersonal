@@ -89,5 +89,6 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             await  _employeeService.SoftDeleteEmployee(UpdateId);
             return  RedirectToAction("Index", "Employee", new { Area = "Admin" });
         }
+
     }
 }
