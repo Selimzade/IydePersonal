@@ -43,16 +43,25 @@ namespace IydePersonal.Application.Services.Concretes
         }
 
 
-        public Task UpdatePunkt(PunktUpdateDto punktUpdateDto)
+        public async Task UpdatePunkt(PunktUpdateDto punktUpdateDto)
         {
-            throw new NotImplementedException();
+           // var punkt =  await _punktRepository.GetPunktsAsync(x=>x.);
+            var punkt = new Punkt
+            {
+                Name = punktUpdateDto.Name,
+                Point = punktUpdateDto.Point,
+            };
+            await _punktRepository.UpdatePunktAsync(punkt);
+            await _punktRepository.SaveAsync();
         }
 
        
 
-        public Task SafeDeletePunkt(int PunktId)
+        public async Task SafeDeletePunkt(int PunktId)
         {
-            throw new NotImplementedException();
+            var punkt = await _punktRepository.GetPunkByIdAsync(PunktId);
+            await _punktRepository.DeletePunktAsync(punkt);
+            await _punktRepository.SaveAsync();
         }
 
        

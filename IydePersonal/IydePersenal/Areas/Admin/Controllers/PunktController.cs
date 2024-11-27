@@ -44,5 +44,18 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             var map = _mapper.Map<Punkt, PunktUpdateDto>(punk);
             return View(map);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Uptade(PunktUpdateDto punktUpdateDto) 
+        {
+            await _unktService.UpdatePunkt(punktUpdateDto);
+            return RedirectToAction("Index", "Punkt", new { Area = "Admin" });
+        }
+
+        public async Task <IActionResult> Delete (int PunktId) 
+        {
+            await _unktService.SafeDeletePunkt(PunktId);
+            return RedirectToAction("Index", "Punkt", new { Area = "Admin" });
+        }
     }
 }
