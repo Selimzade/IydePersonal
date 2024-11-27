@@ -45,9 +45,9 @@ namespace IydePersonal.Application.Services.Concretes
 
         public async Task UpdatePunkt(PunktUpdateDto punktUpdateDto)
         {
-           // var punkt =  await _punktRepository.GetPunktsAsync(x=>x.);
             var punkt = new Punkt
             {
+                Id = punktUpdateDto.Id,
                 Name = punktUpdateDto.Name,
                 Point = punktUpdateDto.Point,
             };

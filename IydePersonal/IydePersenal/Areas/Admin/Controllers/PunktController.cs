@@ -46,10 +46,12 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Uptade(PunktUpdateDto punktUpdateDto) 
+        public async Task<IActionResult> Update(PunktUpdateDto punktUpdateDto) 
         {
             await _unktService.UpdatePunkt(punktUpdateDto);
             return RedirectToAction("Index", "Punkt", new { Area = "Admin" });
+
+
         }
 
         public async Task <IActionResult> Delete (int PunktId) 

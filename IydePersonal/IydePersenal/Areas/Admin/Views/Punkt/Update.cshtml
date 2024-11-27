@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label asp-for="Name" style="color:blue" class="form-label">PunktName</label> <br />
                             <textarea asp-for="Name" type="text" class="form-control mb-3" id="defaultFormControlInput" rows="1.5" cols="30" placeholder="Plaese write punkts" aria-describedby="defaultFormControlHelp"></textarea>
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                         @*    <span asp-validation-for="Name" class="text-danger"></span> *@
                         </div>
 
 
@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label asp-for="Point" style="color:blue" class="form-label">Point</label>
                             <input asp-for="Point" type="number" class="form-control mb-3" id="defaultFormControlInput" placeholder="Number" aria-describedby="defaultFormControlHelp" />
-                            <span asp-validation-for="Point" class="text-danger"></span>
+                            @* <span asp-validation-for="Point" class="text-danger"></span> *@
                         </div>
 
                     </div>

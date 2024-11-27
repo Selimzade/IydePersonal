@@ -2,6 +2,11 @@
 @model EmployeeAddDto
 
 
+@* <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head> *@
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><b>Employee</b> /</span> Add Employees</h4>
     <form asp-controller="Employee" asp-action="Add" method="post" enctype="multipart/form-data">
@@ -11,9 +16,7 @@
             <div class="col-md-6">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <a  class="btn text-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            Add <i class="bx bx-plus"></i>
-                        </a>
+                       
                         <div class="form-group">
                             <label asp-for="FirstName" style="color:blue" class="form-label">FirstName</label>
                             <input asp-for="FirstName" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Please write Name" aria-label="default input example" />
@@ -39,6 +42,10 @@
                             <input asp-for="PhoneNumber" type="tel" class="form-control mb-3" id="defaultFormControlInput" placeholder="Please Write number" aria-describedby="defaultFormControlHelp" />
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
+
+                        <a class="btn text-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                            Add <i class="bx bx-plus"></i>
+                        </a>
                         <div class="form-group">
                             <label asp-for="WorkPosition" class="form-label">WorkPosition</label>
                             <input asp-for="WorkPosition" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Text" aria-describedby="defaultFormControlHelp" />
@@ -63,7 +70,9 @@
                             <input asp-for="Adress" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Write your adress" aria-describedby="defaultFormControlHelp" />
                             <span asp-validation-for="Adress" class="text-danger"></span>
                         </div>
-
+                        <a class="btn text-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                            Add <i class="bx bx-plus"></i>
+                        </a>
                         <div class="form-group">
                             <label asp-for="StoryId">Story</label>
                             <select id="Storylist" class="form-select mb-3" asp-for="StoryId" asp-items="@(new SelectList(Model.stores,"Id","Name"))"> <option selected></option> </select>
@@ -95,17 +104,23 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLongTitle">New+</h5>
+                <button type="button" class="Close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
+            <div class="container">
+                <form>
+                    <div class="form-group">
+                        <label for ="usr">Work Position</label>
+                        <input type="text"id="Name" class="form-control">
+                    </div>
+                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" data-keyboord="false" class="btn btn-primary"id="btnSave" >Save changes</button>
             </div>
         </div>
     </div>

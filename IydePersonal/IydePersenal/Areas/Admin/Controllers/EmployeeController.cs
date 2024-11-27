@@ -46,16 +46,18 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             var map = _mapper.Map<Employee>(employeeAddDto);
             var result = await _validator.ValidateAsync(map);
 
-            if (!result.IsValid)
+            if (result.IsValid)
             {
-                result.AddToModelState(this.ModelState);
+                await _employeeService.CreateEmployee(employeeAddDto);
+                _toastNotification.AddSuccessToastMessage("Add Sucseccfully");
+                return RedirectToAction("Index", "Employee", new { Area = "Admin" });
             }
-            await _employeeService.CreateEmployee(employeeAddDto);
-            _toastNotification.AddSuccessToastMessage("Add Sucseccfully");
-            RedirectToAction("Index", "Employee", new { Area = "Admin" });
+
+            result.AddToModelState(this.ModelState);
 
             var story = await _storyService.AllStoreDtos();
             return View(new EmployeeAddDto { stores = story });
+           
         }
            
             
