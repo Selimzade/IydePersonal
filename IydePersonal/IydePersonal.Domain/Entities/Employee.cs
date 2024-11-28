@@ -1,4 +1,6 @@
-﻿namespace IydePersonal.Domain.Entities
+﻿using IydePersonal.Domain.Entities.Edentity;
+
+namespace IydePersonal.Domain.Entities
 {
     public class Employee
     {
@@ -36,10 +38,12 @@
         public bool IsActive { get; set; } = true;
         public DateTime? FinishWork { get; set; }
 
+        public DateTime? ModifiedDate { get; set; }
+
         public Store Store { get; set; }
         public int StoreId { get; set; }
 
-        public User User { get; set; }
+        public AppUser User { get; set; }
         public int UserId { get; set; }
 
         public List<EmployeePunkt> EmployeePunkts { get; set; } = new List<EmployeePunkt>();

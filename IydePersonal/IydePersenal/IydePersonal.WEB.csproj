@@ -9,6 +9,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\js\JavaScript.js" />
     <Content Remove="wwwroot\js\JavaScript1.js" />
+    <Content Remove="wwwroot\js\JavaScript2.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\JavaScript2.js" />
     <None Include="wwwroot\js\JavaScript1.js" />
     <None Include="wwwroot\js\JavaScript.js" />
   </ItemGroup>

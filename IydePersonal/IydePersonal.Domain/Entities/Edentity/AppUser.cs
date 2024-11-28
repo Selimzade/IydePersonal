@@ -9,7 +9,8 @@ namespace IydePersonal.Domain.Entities.Edentity
 {
     public class AppUser:IdentityUser<int>
     {
-        public string FisrtName { get; set; }
-        public string LastName { get; set; } = string.Empty;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 }

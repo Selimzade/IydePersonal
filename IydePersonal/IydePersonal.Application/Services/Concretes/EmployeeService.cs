@@ -69,19 +69,20 @@ namespace IydePersonal.Application.Services.Concretes
         {
 
             var updateemp = await _employeeRepository.GetAsync(x=>x.IsActive && x.Id == employeeUpdateDto.Id);
+            _mapper.Map(employeeUpdateDto, updateemp);
+            updateemp.ModifiedDate = DateTime.Now;
             //_mapper.Map<EmployeeUpdateDto>(updateemp);
-
-            updateemp.FirstName = employeeUpdateDto.FirstName;
-            updateemp.LastName = employeeUpdateDto.LastName;
-            updateemp.Gender = employeeUpdateDto.Gender;
-            updateemp.DateOfBirth = employeeUpdateDto.DateOfBirth;
-            updateemp.PhoneNumber = employeeUpdateDto.PhoneNumber;
-            updateemp.WorkPosition = employeeUpdateDto.WorkPosition;
-            updateemp.FixSalary = employeeUpdateDto.FixSalary;
-            updateemp.Adress = employeeUpdateDto.Adress;
-          //  updateemp.IsActive = employeeUpdateDto.IsActive;
-            updateemp.StoreId = employeeUpdateDto.StoryId;
-            updateemp.StartWork = employeeUpdateDto.StartWork;
+          //  updateemp.FirstName = employeeUpdateDto.FirstName;
+          //  updateemp.LastName = employeeUpdateDto.LastName;
+          //  updateemp.Gender = employeeUpdateDto.Gender;
+          //  updateemp.DateOfBirth = employeeUpdateDto.DateOfBirth;
+          //  updateemp.PhoneNumber = employeeUpdateDto.PhoneNumber;
+          //  updateemp.WorkPosition = employeeUpdateDto.WorkPosition;
+          //  updateemp.FixSalary = employeeUpdateDto.FixSalary;
+          //  updateemp.Adress = employeeUpdateDto.Adress;
+          ////  updateemp.IsActive = employeeUpdateDto.IsActive;
+          //  updateemp.StoreId = employeeUpdateDto.StoryId;
+          //  updateemp.StartWork = employeeUpdateDto.StartWork;
             await _employeeRepository.UpdateEmplyee(updateemp);
             await _employeeRepository.SaveAsync();
 
