@@ -29,13 +29,13 @@ namespace IydePersonal.API.Data.Configurations
                .IsRequired()
                .HasColumnName("PunktId");
 
-            builder.HasData(new EmployeePunkt
-            {
-                Id=1,
-                EmployeeId=1,
-                PunktId=1,
-                CreateDate=DateTime.Now,
-            });
+            //builder.HasData(new EmployeePunkt
+            //{
+            //    Id=1,
+            //    EmployeeId=1,
+            //    PunktId=1,
+            //    CreateDate=DateTime.Now,
+            //});
         }
     }
 }

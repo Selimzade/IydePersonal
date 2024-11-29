@@ -179,7 +179,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f50f1f43-f10c-4db2-9920-e9222f33cae1",
+                            ConcurrencyStamp = "46299b7a-d3db-4aa2-bbcd-e782ab39342a",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FirstName = "Ehmed",
@@ -187,7 +187,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "EHMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN7KqFVgBdXl03j5uwcwDhnMmCtAL23rcEYbc7eEpR1idTg6lM3ejPOHnyC+gphJqg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENlfS1u1sESx/kXDGPS0Y6ByWein3UMix0WmMv3Y3gO6I5iO5grRiHOK50C0Kg+5nQ==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "1",
@@ -198,7 +198,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bde7097b-5b6e-42bc-bc27-b5a4a5e884a2",
+                            ConcurrencyStamp = "9e0c50c4-45f1-4f1f-9203-36f973c68ce0",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FirstName = "Omer",
@@ -206,7 +206,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "OMER MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDGI5ow/tnMWl0kCluNk8cGaN457UWf8iVfsKC5JHjDTYFZdO5CrWYFzLXycF7y5Zg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEQVQX5t4wuh/+n5207FxqZbvKrRtHL89AK+rm9ZVrBkiZVOm2UJ24J6QNmkkRz1dQ==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "2",
@@ -217,7 +217,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a6dce4e3-bcaf-42c0-a3df-7f5c86d930cb",
+                            ConcurrencyStamp = "7230be0b-79ac-4ba5-babc-559eae1bba23",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FirstName = "Axmed",
@@ -225,7 +225,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "AXMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO3wvVbvPHzdpyU41oFe1TrNPCLeT8JD/61E80vaqCMHXdvYi65oOUKBBo3RfR42Gg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENklCVYF1+eBqSDQqrch8m6g9pyZp/LkJ71aHqV+zNHfi/w8unOVoc0NF64o4E2+bw==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3",
@@ -471,15 +471,6 @@ namespace IydePersonal.Infrastructure.Migrations
                     b.HasIndex("PunktId");
 
                     b.ToTable("EmployeePunkts", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateDate = new DateTime(2024, 11, 28, 11, 20, 22, 883, DateTimeKind.Local).AddTicks(4678),
-                            EmployeeId = 1,
-                            PunktId = 1
-                        });
                 });
 
             modelBuilder.Entity("IydePersonal.Domain.Entities.Punkt", b =>

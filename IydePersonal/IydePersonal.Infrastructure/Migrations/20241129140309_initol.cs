@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace IydePersonal.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initil : Migration
+    public partial class initol : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,7 @@ namespace IydePersonal.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FisrtName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -81,20 +81,6 @@ namespace IydePersonal.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stores", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,10 +201,12 @@ namespace IydePersonal.Infrastructure.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     WorkPosition = table.Column<byte>(type: "tinyint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     FixSalary = table.Column<int>(type: "int", nullable: false),
+                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartWork = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     FinishWork = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     StoreId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -226,15 +214,15 @@ namespace IydePersonal.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employees_Stores_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Stores",
+                        name: "FK_Employees_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Employees_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_Employees_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -333,12 +321,12 @@ namespace IydePersonal.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FisrtName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "147360aa-71ae-4683-81ea-481003f51177", "Prince.1987@mail.ru", false, "Ehmed", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "EHMED MUSTAFA", "AQAAAAIAAYagAAAAENeKqmYXUfm6wZ24krO8u3oxLB29HAaOuGqz1ZV8g2m44qLecwfTYM6C3ZRpD0oqig==", "+994502330644", false, "1", false, "Ehmed Mustafa" },
-                    { 2, 0, "81c6df06-61ae-48bb-90f2-89d34535440a", "Prince.1987@mail.ru", false, "Omer", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "OMER MUSTAFA", "AQAAAAIAAYagAAAAEJ3xRIGSA5JKNJ9hPPiQ24sPCoGQAnkJRDUXT8nA8rEXp1Q96Buslh/AH5e4jVjVKg==", "+994502330644", false, "2", false, "Omer Mustafa" },
-                    { 3, 0, "f7c50372-4735-4a76-94eb-15abe24340d1", "Prince.1987@mail.ru", false, "Axmed", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "AXMED MUSTAFA", "AQAAAAIAAYagAAAAEDWQ4J14I24R28m2XxN3+tyc5FdBGNpt627exlLN1gTdslRhmeZLzZv/Q/u/9UIOGg==", "+994502330644", false, "3", false, "Axmed Mustafa" }
+                    { 1, 0, "46299b7a-d3db-4aa2-bbcd-e782ab39342a", "Prince.1987@mail.ru", false, "Ehmed", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "EHMED MUSTAFA", "AQAAAAIAAYagAAAAENlfS1u1sESx/kXDGPS0Y6ByWein3UMix0WmMv3Y3gO6I5iO5grRiHOK50C0Kg+5nQ==", "+994502330644", false, "1", false, "Ehmed Mustafa" },
+                    { 2, 0, "9e0c50c4-45f1-4f1f-9203-36f973c68ce0", "Prince.1987@mail.ru", false, "Omer", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "OMER MUSTAFA", "AQAAAAIAAYagAAAAEEQVQX5t4wuh/+n5207FxqZbvKrRtHL89AK+rm9ZVrBkiZVOm2UJ24J6QNmkkRz1dQ==", "+994502330644", false, "2", false, "Omer Mustafa" },
+                    { 3, 0, "7230be0b-79ac-4ba5-babc-559eae1bba23", "Prince.1987@mail.ru", false, "Axmed", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "AXMED MUSTAFA", "AQAAAAIAAYagAAAAENklCVYF1+eBqSDQqrch8m6g9pyZp/LkJ71aHqV+zNHfi/w8unOVoc0NF64o4E2+bw==", "+994502330644", false, "3", false, "Axmed Mustafa" }
                 });
 
             migrationBuilder.InsertData(
@@ -352,11 +340,6 @@ namespace IydePersonal.Infrastructure.Migrations
                 values: new object[] { 1, "Azadliq" });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Password", "Username" },
-                values: new object[] { 1, "123456", "Azadliq" });
-
-            migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
@@ -365,16 +348,6 @@ namespace IydePersonal.Infrastructure.Migrations
                     { 2, 2 },
                     { 3, 3 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Employees",
-                columns: new[] { "Id", "DateOfBirth", "FinishWork", "Firstname", "FixSalary", "Gender", "IsActive", "Lastname", "PhoneNumber", "StartWork", "StoreId", "UserId", "WorkPosition" },
-                values: new object[] { 1, new DateTime(1987, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 12, 8, 43, 2, 776, DateTimeKind.Local).AddTicks(1797), "Ehmed", 1000, (byte)1, true, "Mustafa", "502330644", new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, (byte)2 });
-
-            migrationBuilder.InsertData(
-                table: "EmployeePunkts",
-                columns: new[] { "Id", "CreateDate", "EmployeeId", "PunktId" },
-                values: new object[] { 1, new DateTime(2024, 11, 12, 8, 43, 2, 777, DateTimeKind.Local).AddTicks(614), 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -482,19 +455,16 @@ namespace IydePersonal.Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Punkts");
 
             migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Stores");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Stores");
         }
     }
 }
