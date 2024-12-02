@@ -9,7 +9,7 @@ namespace IydePersonal.Domain.Entities.Edentity
 {
     public class AppUser:IdentityUser<int>
     {
-        public string FisrtName { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; } = string.Empty;
     }
 }

@@ -42,7 +42,7 @@ namespace IydePersonal.Application.Services.Concretes
                 DateOfBirth = employeeAddDto.DateOfBirth,
                 PhoneNumber = employeeAddDto.PhoneNumber,
                 WorkPosition = employeeAddDto.WorkPosition,
-              //  IsActive = employeeAddDto.IsActive,
+              // IsActive = employeeAddDto.IsActive,
                 FixSalary = employeeAddDto.FixSalary,
                 Adress = employeeAddDto.Adress,
                 StoreId = employeeAddDto.StoryId,
@@ -69,7 +69,7 @@ namespace IydePersonal.Application.Services.Concretes
         {
 
             var updateemp = await _employeeRepository.GetAsync(x=>x.IsActive && x.Id == employeeUpdateDto.Id);
-            //_mapper.Map<EmployeeUpdateDto>(updateemp);
+          
 
             updateemp.FirstName = employeeUpdateDto.FirstName;
             updateemp.LastName = employeeUpdateDto.LastName;
@@ -79,9 +79,9 @@ namespace IydePersonal.Application.Services.Concretes
             updateemp.WorkPosition = employeeUpdateDto.WorkPosition;
             updateemp.FixSalary = employeeUpdateDto.FixSalary;
             updateemp.Adress = employeeUpdateDto.Adress;
-          //  updateemp.IsActive = employeeUpdateDto.IsActive;
             updateemp.StoreId = employeeUpdateDto.StoryId;
             updateemp.StartWork = employeeUpdateDto.StartWork;
+
             await _employeeRepository.UpdateEmplyee(updateemp);
             await _employeeRepository.SaveAsync();
 

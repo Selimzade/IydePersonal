@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IydePersonal.Application.Dtos.User;
 using IydePersonal.Domain.Entities;
+using IydePersonal.Domain.Entities.Edentity;
 
 namespace IydePersonal.API.Profiles
 {
@@ -8,14 +9,14 @@ namespace IydePersonal.API.Profiles
     {
         public UserProfile()
         {
-            CreateMap<User, UserListDto>().ReverseMap();
+            CreateMap<AppUser, UserListDto>().ReverseMap();
             
-            CreateMap<User, UserCreateDto>().ReverseMap();
+            CreateMap<AppUser, UserCreateDto>().ReverseMap();
 
-            CreateMap<User, UserEditDto>().ReverseMap();
-            CreateMap<User,UserLoginDto>().ReverseMap();
+            CreateMap<AppUser, UserEditDto>().ReverseMap();
+            CreateMap<AppUser,UserLoginDto>().ReverseMap();
 
-            CreateMap<User, UserWithEmployeeDetailDto>().ReverseMap();
+            CreateMap<AppUser, UserWithEmployeeDetailDto>().ReverseMap();
         }
     }
 }
