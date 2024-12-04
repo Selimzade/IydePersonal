@@ -28,6 +28,14 @@ namespace IydePersonal.Application.Services.Concretes
            await  _punktRepository.SaveAsync();
         }
 
+        public async Task DeletePunkt(int PunktId)
+        {
+            var emp= await _punktRepository.GetPunktByIdAsync(PunktId);
+            await _punktRepository.DeletePunkt(emp);
+            await _punktRepository.SaveAsync(); 
+
+        }
+
         public async Task<PunktDetailDto> GetPunktById(int PunktId)
         {
             var punkt = await _punktRepository.GetPunktByIdAsync(PunktId);

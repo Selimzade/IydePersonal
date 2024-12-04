@@ -10,6 +10,7 @@ namespace IydePersonal.Application.Repositories
         public Task CreatePunktAsync(Punkt punkt);
         public Task <Punkt> UpdatePunktAsync (Punkt punkt);
         Task <Punkt> GetPunktByIdAsync(int Id);
+        Task DeletePunkt(Punkt punkt);
         Task<int> SaveAsync();
         int Save();
     }

@@ -35,7 +35,10 @@ namespace IydePersonal.Infrastructure.Repositories
             await Task.Run(() => Table.Update(punkt));
             return punkt;
         }
-      
+        public async Task DeletePunkt(Punkt punkt)
+        {
+              _appDbContext.Punkts.Remove(punkt);
+        }
         public int Save()
         {
             return _appDbContext.SaveChanges();
@@ -57,5 +60,7 @@ namespace IydePersonal.Infrastructure.Repositories
 
             return await query.SingleAsync();
         }
+
+        
     }
 }

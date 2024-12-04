@@ -7,9 +7,9 @@ namespace IydePersonal.Application.Services.Interfaces
     {
         public Task<IEnumerable<PunktDetailDto>> GetPunktListAsync();
         public Task CreatePunkt(PunktAddDto punktAddDto);
-
+        Task<PunktDetailDto> GetPunktById(int PunktId);
         public Task  UptadePunkt(PunktUpdateDto punktUpdateDto );
-
-        Task <PunktDetailDto> GetPunktById (int PunktId);
+        Task DeletePunkt(int PunktId);
+      
     }
 }

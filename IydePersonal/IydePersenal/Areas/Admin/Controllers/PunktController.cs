@@ -51,5 +51,10 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             await _unktService.UptadePunkt(punktUpdateDto);
             return View (punktUpdateDto);
         }
+        public async Task<IActionResult> Delete(int PunktId) 
+        {
+            await _unktService.DeletePunkt(PunktId);
+            return RedirectToAction("Index", "Punkt", new { Area = "Admin" });
+        }
     }
 }
