@@ -38,6 +38,8 @@ namespace IydePersonal.Domain.Entities
         public bool IsActive { get; set; } = true;
         public DateTime? FinishWork { get; set; }
 
+        public DateTime? ModifiedDate { get; set; }
+
         public Store Store { get; set; }
         public int StoreId { get; set; }
 
