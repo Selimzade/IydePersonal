@@ -46,7 +46,7 @@ namespace IydePersonal.Domain.Entities
         public AppUser User { get; set; }
         public int UserId { get; set; }
 
-        public List<EmployeePunkt> EmployeePunkts { get; set; } = new List<EmployeePunkt>();
+       // public List<EmployeePunkt> EmployeePunkts { get; set; } = new List<EmployeePunkt>();
         public List<Salary> Salaries { get; set; }
         public List<EmployeeLog> EmployeeLogs { get; set; }
 

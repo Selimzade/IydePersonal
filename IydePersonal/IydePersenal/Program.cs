@@ -3,6 +3,7 @@ using IydePersonal.Domain.Entities.Edentity;
 using IydePersonal.Infrastructure;
 using IydePersonal.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using System.Reflection;
 
@@ -68,6 +69,12 @@ app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+using var scope = app.Services.CreateScope();
+
+var dbCpntext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+dbCpntext.Database.Migrate();
 
 //app.MapControllerRoute(
 //    name: "default",

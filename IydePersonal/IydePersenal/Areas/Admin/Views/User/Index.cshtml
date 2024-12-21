@@ -1,9 +1,9 @@
-﻿@model List<UserListDto>
+﻿@model  List<UserListDto>
 
 <div class="container-xxl flex-grow-1 container-p-y">
 
     <H4 class=" fw-bold py-3 mb-4">
-        <span class="text-muted fw-light"><b>Users List</b>/ </span> User
+        <span class="text-muted fw-light"><b>User List</b>/ </span> User
     </H4>
 
     <!-- Hoverable Table rows -->
@@ -17,38 +17,39 @@
                               New <i class="bx bx-plus"></i>
                           </a>
 
-                                  <table class="display table table-striped table-hover  table-dark" id="UserTables" width="100%" cellspacing="0">
+                                  <table class="display table table-striped table-hover " id="PunktTables" width="100%" cellspacing="0">
                                   <thead>
                                     <tr>
-                                             <th>FirstName</th>
-                                             <th>LastName</th>
-                                             <th>UserName</th>
-                                             <th>Role</th>
-                                             <th>AccessFailedCount</th>
-                                             <th>Edit&Delete</th>
+                                             <th>Ad</th>
+                                             <th>Soyad</th>
+                                             <th>Istifadəçi Adı</th>
+                                             <th>Istifadəçi rolu</th>
+                                             <th>Daxil olma Xetaları</th>
+                                             <th>Silmə&Yeniləmə</th>
+
                                     </tr>
                                   </thead>
                                   <tfoot>
-                                            <tr>
-                                               <th>FirstName</th>
-                                               <th>LastName</th>
-                                               <th>UserName</th>
-                                               <th>Role</th>
-                                               <th>AccessFailedCount</th>
-                                               <th>Edit&Delete</th>
-                                            </tr>
+                                        <tr>
+                                             <th>Ad</th>
+                                             <th>Soyad</th>
+                                             <th>Istifadəçi Adı</th>
+                                             <th>Istifadəçi rolu</th>
+                                             <th>Daxil olma Xetaları</th>
+                                             <th>Silmə&Yeniləmə</th>
+                                        </tr>
                                   </tfoot>
                                   <tbody class="table-border-bottom-0">
 
                         @foreach (var User in Model)
-                         {
-                                                            <tr name="@User.Id">
+                        {
+                                                             <tr>
                                                                 <td>@User.FirstName</td>
                                                                 <td>@User.LastName</td>
                                                                 <td>@User.UserName</td>
                                                                 <td>@User.Role</td>
                                                                 <td>@User.AccessFailedCount</td>
-                                                               
+
                                                                 <td>
                                                                     <a class="btn btn-primary btn-xs" data-Id="@User.Id" asp-area="Admin" asp-controller="User" asp-action="Update" asp-route-UserId="@User.Id"><i class="bx bxs-edit"></i></a>
                                                                     <a class="btn btn-danger btn-xs" data-Id="@User.Id" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-UserId="@User.Id"><i class="bx bx-minus-circle"></i></a>
@@ -59,17 +60,11 @@
                                 </table>
                       </div>
                 </div>
-   </div>
+    </div>
 
     <!--/ Hoverable Table rows -->
 </div>
 
-
-
-
-@section Scripts {
-    <script src="~/js/JavaScript2.js" type="application/ecmascript"></script>
-}
 
 
 

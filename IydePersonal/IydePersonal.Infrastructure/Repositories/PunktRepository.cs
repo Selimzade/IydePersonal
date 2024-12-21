@@ -1,46 +1,44 @@
-﻿using AutoMapper;
-using IydePersonal.Application.Repositories;
+﻿using IydePersonal.Application.Repositories;
 using IydePersonal.Domain.Entities;
 using IydePersonal.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace IydePersonal.Infrastructure.Repositories
 {
     internal class PunktRepository : IPunktRepository
     {
         private readonly AppDbContext _appDbContext;
-        private readonly IMapper _mapper;
-
-        public PunktRepository(AppDbContext appDbContext,IMapper mapper)
+        private DbSet<Punkt> Table { get => _appDbContext.Set<Punkt>(); }
+        public PunktRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            _mapper = mapper;
+        }
+
+        public async Task CreatePunktAsync(Punkt punkt)
+        {
+            await _appDbContext.Punkts.AddAsync(punkt);
         }
 
         public async Task<IEnumerable<Punkt>> GetPunktsAsync()
         {
             return await _appDbContext.Punkts.ToListAsync();
         }
-
-        public async Task<Punkt> GetPunkByIdAsync(int Id)
+        public  async Task<Punkt> GetPunktByIdAsync(int Id)
         {
             return await _appDbContext.Punkts.FindAsync(Id);
         }
-
-        public async Task CreatePunkt(Punkt punkt)
+        public async Task<Punkt> UpdatePunktAsync(Punkt punkt)
         {
-            await _appDbContext.Punkts.AddAsync(punkt);
+            await Task.Run(() => Table.Update(punkt));
+            return punkt;
         }
-        public async Task <Punkt> UpdatePunktAsync(Punkt punkt)
+        public async Task DeletePunkt(Punkt punkt)
         {
-             var punk=  _appDbContext.Punkts.Update(punkt);
-             return punkt;
+              _appDbContext.Punkts.Remove(punkt);
         }
-        public async Task DeletePunktAsync(Punkt punkt)
-        {
-             _appDbContext.Remove(punkt);
-        }
-
         public int Save()
         {
             return _appDbContext.SaveChanges();
@@ -48,9 +46,21 @@ namespace IydePersonal.Infrastructure.Repositories
 
         public Task<int> SaveAsync()
         {
-           return _appDbContext.SaveChangesAsync();
+            return _appDbContext.SaveChangesAsync();
         }
 
-       
+        public async Task<Punkt> GetAsync(Expression<Func<Punkt, bool>> predicate, params Expression<Func<Punkt, object>>[] includeProperties)
+        {
+            IQueryable<Punkt> query = Table;
+            query = query.Where(predicate);
+
+            if (includeProperties.Any())
+                foreach (var item in includeProperties)
+                    query = query.Include(item);
+
+            return await query.SingleAsync();
+        }
+
+        
     }
 }

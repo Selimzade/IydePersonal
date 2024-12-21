@@ -19,6 +19,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         public IActionResult Login()
         {
             return View();
@@ -64,6 +65,13 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home", new { Area = "" });
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> AccessDenied()
+        {
+            return View();
         }
     }
 }

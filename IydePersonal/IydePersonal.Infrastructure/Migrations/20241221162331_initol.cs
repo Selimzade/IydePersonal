@@ -254,33 +254,6 @@ namespace IydePersonal.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeePunkts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    PunktId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeePunkts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EmployeePunkts_Employees_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EmployeePunkts_Punkts_PunktId",
-                        column: x => x.PunktId,
-                        principalTable: "Punkts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Salaries",
                 columns: table => new
                 {
@@ -324,9 +297,9 @@ namespace IydePersonal.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "46299b7a-d3db-4aa2-bbcd-e782ab39342a", "Prince.1987@mail.ru", false, "Ehmed", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "EHMED MUSTAFA", "AQAAAAIAAYagAAAAENlfS1u1sESx/kXDGPS0Y6ByWein3UMix0WmMv3Y3gO6I5iO5grRiHOK50C0Kg+5nQ==", "+994502330644", false, "1", false, "Ehmed Mustafa" },
-                    { 2, 0, "9e0c50c4-45f1-4f1f-9203-36f973c68ce0", "Prince.1987@mail.ru", false, "Omer", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "OMER MUSTAFA", "AQAAAAIAAYagAAAAEEQVQX5t4wuh/+n5207FxqZbvKrRtHL89AK+rm9ZVrBkiZVOm2UJ24J6QNmkkRz1dQ==", "+994502330644", false, "2", false, "Omer Mustafa" },
-                    { 3, 0, "7230be0b-79ac-4ba5-babc-559eae1bba23", "Prince.1987@mail.ru", false, "Axmed", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "AXMED MUSTAFA", "AQAAAAIAAYagAAAAENklCVYF1+eBqSDQqrch8m6g9pyZp/LkJ71aHqV+zNHfi/w8unOVoc0NF64o4E2+bw==", "+994502330644", false, "3", false, "Axmed Mustafa" }
+                    { 1, 0, "d112979e-2c99-4dd2-89ec-bcec42392619", "Prince.1987@mail.ru", false, "Ehmed", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "EHMED MUSTAFA", "AQAAAAIAAYagAAAAEMCzREqtlNEfgq2Ul7AzbTTO99n+KknPAgJVw4JE/X8rZricfOmzzmzOjGRn7Zry3A==", "+994502330644", false, "1", false, "Ehmed Mustafa" },
+                    { 2, 0, "e23df910-2d3b-47d2-b1d6-cc64aa924cad", "Prince.1987@mail.ru", false, "Omer", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "OMER MUSTAFA", "AQAAAAIAAYagAAAAEJrm1xlWvo7GpGZ5bF9PNmhNeLaoDx5Ls+/LbD7GMKC9Ib/YLI2+m2bHwkNufTr/Fg==", "+994502330644", false, "2", false, "Omer Mustafa" },
+                    { 3, 0, "c063806d-80e3-46af-b3a2-3615f3cba752", "Prince.1987@mail.ru", false, "Axmed", "Mustafa", false, null, "PRINCE.1987@MAIL.RU", "AXMED MUSTAFA", "AQAAAAIAAYagAAAAEAUtwZ1jaTugvmyzovO04/1g/YFFCOLHAtht9ugD+Uh9yvANDnNrnAsqkfEeEJrJOw==", "+994502330644", false, "3", false, "Axmed Mustafa" }
                 });
 
             migrationBuilder.InsertData(
@@ -399,16 +372,6 @@ namespace IydePersonal.Infrastructure.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeePunkts_EmployeeId",
-                table: "EmployeePunkts",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EmployeePunkts_PunktId",
-                table: "EmployeePunkts",
-                column: "PunktId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Employees_StoreId",
                 table: "Employees",
                 column: "StoreId");
@@ -446,16 +409,13 @@ namespace IydePersonal.Infrastructure.Migrations
                 name: "EmployeeLogs");
 
             migrationBuilder.DropTable(
-                name: "EmployeePunkts");
+                name: "Punkts");
 
             migrationBuilder.DropTable(
                 name: "Salaries");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Punkts");
 
             migrationBuilder.DropTable(
                 name: "Employees");

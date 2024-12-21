@@ -9,7 +9,11 @@ namespace IydePersonal.Infrastructure.Data
 {
     public class AppDbContext : IdentityDbContext<AppUser,AppRole,int,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
     {
-        public AppDbContext(DbContextOptions options) : base(options)
+        public AppDbContext()
+        {
+                
+        }
+        public AppDbContext(DbContextOptions <AppDbContext> options) : base(options)
         {
         }
 
@@ -18,8 +22,8 @@ namespace IydePersonal.Infrastructure.Data
         public DbSet<Salary> Salaries { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<EmployeeLog> EmployeeLogs { get; set; }
-       // public DbSet<User> Users { get; set; }
-        public DbSet<EmployeePunkt> EmployeePunkts { get; set; }
+      //  public DbSet<User> Users { get; set; }
+       // public DbSet<EmployeePunkt> EmployeePunkts { get; set; }
 
 
 

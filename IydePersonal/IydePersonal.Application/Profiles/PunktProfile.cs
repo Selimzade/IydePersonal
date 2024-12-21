@@ -14,6 +14,7 @@ namespace IydePersonal.API.Profiles
             CreateMap<Punkt, PunktDetailDto>().ReverseMap();
             CreateMap<Punkt, PunktAddDto>().ReverseMap();
             CreateMap<Punkt, PunktUpdateDto>().ReverseMap();
+            CreateMap<PunktUpdateDto, PunktDetailDto>().ReverseMap();
         }
     }
 }

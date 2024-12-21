@@ -3,6 +3,7 @@ using IydePersonal.Application.Dtos.Employee;
 using IydePersonal.Application.Repositories;
 using IydePersonal.Domain.Entities;
 using IydePersonal.Infrastructure.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
@@ -40,6 +41,10 @@ namespace IydePersonal.Infrastructure.Repositories
             return await _appDbContext.Employees.FindAsync(Id);
           
         }
+        public async Task<List<Employee>> GetEmployeeforUserById(int Id)
+        {
+             return await _appDbContext.Employees.Where(x => x.UserId == Id).ToListAsync();
+        }
         public async Task CreateEmployee(Employee employee)
         {
             await _appDbContext.Employees.AddAsync(employee);
@@ -76,6 +81,13 @@ namespace IydePersonal.Infrastructure.Repositories
                     query = query.Include(item);
 
             return await query.SingleAsync();
+        }
+
+        public async Task<int> CountEmployee(Expression<Func<Employee, bool>> predicate = null)
+        {
+            if (predicate is not null)
+                return await Table.CountAsync(predicate);
+            return await Table.CountAsync();
         }
     }
 }

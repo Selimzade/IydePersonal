@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using IydePersonal.Application.Services.Concretes;
+using IydePersonal.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json;
 
 namespace IydePersonal.WEB.Areas.Admin.Controllers
 {
@@ -8,10 +12,39 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
 
     public class HomeController : Controller
     {
+        private readonly IEmployeeService _employeeService;
+        private readonly IDashboardService _dashboardService;
 
-        public IActionResult Index()
+        public HomeController(IEmployeeService employeeService, IDashboardService dashboardService )
         {
-            return View();
+            _employeeService = employeeService;
+            _dashboardService = dashboardService;
         }
+        public async Task<IActionResult> Index()
+        {
+            var emp = await _employeeService.GetEmployeeList();
+            return View(emp);
+        }
+        [HttpGet]
+        public async Task<IActionResult> YearlyEmployeeCounts() 
+        {
+            var count=await _dashboardService.GetYearEmployeecount();
+            return Json(JsonConvert.SerializeObject(count));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TotalEmployeeCounts()
+        {
+            var count = await _dashboardService.GetTotalEmployeeCounts();
+            return Json(count);
+        }
+        [HttpGet]
+        public async Task<IActionResult> TotalDeleteEmployeeCounts()
+        {
+            var count = await _dashboardService.GetDeleteTotalEmployeeCounts();
+            return Json(count);
+        }
+
     }
+
 }

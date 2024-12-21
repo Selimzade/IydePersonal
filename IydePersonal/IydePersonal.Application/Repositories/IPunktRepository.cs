@@ -1,14 +1,16 @@
 ﻿using IydePersonal.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace IydePersonal.Application.Repositories
 {
     public interface IPunktRepository
     {
         public Task<IEnumerable<Punkt>> GetPunktsAsync();
-        public Task<Punkt> GetPunkByIdAsync( int Id);
-        public Task CreatePunkt( Punkt punkt);
-        public Task <Punkt> UpdatePunktAsync(Punkt punkt);
-        public Task DeletePunktAsync(Punkt punkt);
+        public Task<Punkt> GetAsync(Expression<Func<Punkt, bool>> predicate, params Expression<Func<Punkt, object>>[] includeProperties);
+        public Task CreatePunktAsync(Punkt punkt);
+        public Task <Punkt> UpdatePunktAsync (Punkt punkt);
+        Task <Punkt> GetPunktByIdAsync(int Id);
+        Task DeletePunkt(Punkt punkt);
         Task<int> SaveAsync();
         int Save();
     }

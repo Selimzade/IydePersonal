@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IydePersonal.API.Data.Configurations
 {
-    //public class UserConfiguration : IEntityTypeConfiguration<AppUser>
+    //public class UserConfiguration : IEntityTypeConfiguration<User>
     //{
     //    public void Configure(EntityTypeBuilder<User> builder)
     //    {
@@ -32,5 +32,5 @@ namespace IydePersonal.API.Data.Configurations
     //                Password="123456"
     //            });
     //    }
-    
+    //}
 }

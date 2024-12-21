@@ -1,0 +1,67 @@
+﻿@model IEnumerable<GetAllEmployeeforUserDto>
+
+
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <H4 class=" fw-bold py-3 mb-4">
+        <span class="text-muted fw-light"><b>Employees List</b>/ </span> Employees
+    </H4>
+
+    <!-- Hoverable Table rows -->
+
+    <div class="Card"
+                 <div class="card-body ">
+
+                       <div class="table-responsive text-nowrap m-3">
+
+            
+
+                                  <table class="display table table-striped table-hover " id="employeeTables" width="100%" cellspacing="0">
+                                  <thead>
+                                    <tr>
+                                                  <th>FirstName</th>
+                                                  <th>LastName</th>
+                                                  <th>Gender</th>
+                                                  <th>DateOfBirth</th>
+                                                  <th>WorkPosition</th>
+                                                  <th>StartWork</th>
+                         
+
+
+                                    </tr>
+                                  </thead>
+                                  <tfoot>
+                                                  <tr>
+                                                    <th>FirstName</th>
+                                                    <th>LastName</th>
+                                                    <th>Gender</th>
+                                                    <th>DateOfBirth</th>
+                                                    <th>WorkPosition</th>
+                                                    <th>StartWork</th>
+                        
+
+                                                  </tr>
+                                  </tfoot>
+                                  <tbody class="table-border-bottom-0">
+
+                                                    @foreach (var Employee in Model)
+                                                    {
+                                                         <tr >
+                                                            <td>@Employee.FirstName</td>
+                                                            <td>@Employee.LastName</td>
+                                                            <td>@Employee.Gender</td>
+                                                            <td>@Employee.DateOfBirth.ToShortDateString()</td>
+                                                            <td>@Employee.WorkPosition</td>
+                                                            <td>@Employee.StartWork.ToShortDateString()</td>
+                                                         </tr>
+                                                     }
+                                  </tbody>
+                                </table>
+                      </div>
+                </div>
+       </div>
+
+    <!--/ Hoverable Table rows -->
+</div>

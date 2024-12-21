@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IydePersonal.Application.Dtos.Punkt
 {
-    public class PunktAddDto
+   public class PunktAddDto
     {
-        public string Name  { get; set; }
+        public string Name { get; set; }
         public int Point { get; set; }
     }
 }
