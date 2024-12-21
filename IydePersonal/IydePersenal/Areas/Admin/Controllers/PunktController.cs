@@ -2,6 +2,8 @@
 using IydePersonal.Application.Dtos.Punkt;
 using IydePersonal.Application.Services.Interfaces;
 using IydePersonal.Domain.Entities;
+using IydePersonal.WEB.Conts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IydePersonal.WEB.Areas.Admin.Controllers
@@ -18,18 +20,21 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+        [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> Index()
         {
             var punkt = await _unktService.GetPunktListAsync();
             return View(punkt);
         }
 
+        [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Add()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Add(PunktAddDto punktAddDto)
         {
             var map = _mapper.Map<Punkt>(punktAddDto);
@@ -38,6 +43,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Update(int PunktId)
         {
             var punkts = await _unktService.GetPunktById(PunktId);
@@ -46,11 +52,14 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Update(PunktUpdateDto punktUpdateDto)
         {
             await _unktService.UptadePunkt(punktUpdateDto);
             return View (punktUpdateDto);
         }
+
+        [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Delete(int PunktId) 
         {
             await _unktService.DeletePunkt(PunktId);

@@ -61,8 +61,8 @@
                     <div class="card-body">
                         <!-- Logo -->
                         <div class="app-brand justify-content-center">
-                            <a href="index.html" class="app-brand-link gap-2">
-                                <span class="app-brand-logo demo">
+                            <a >
+                               @*  <span class="app-brand-logo demo">
                                     <svg width="25"
                                          viewBox="0 0 25 42"
                                          version="1.1"
@@ -104,34 +104,41 @@
                                             </g>
                                         </g>
                                     </svg>
-                                </span>
-                                <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                                </span> *@
+                                <span class="app-brand-text demo text-body fw-bolder"><strong>LOGIN</strong></span>
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Welcome to Sneat! 👋</h4>
+                        <h4 class="mb-2"> <a href="https://www.Iyde.az/">Welcome to Iyde 👋</a> </h4>
                         <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
                         <form asp-controller="Auth" asp-action="Login" id="formAuthentication" class="mb-3" method="POST">
-                            <div asp-validation-summary="All"></div>
+                            <div asp-validation-summary="ModelOnly" style="color:red"></div>
                             <div class="mb-3">
                                 <label asp-for="UserName" for="UserName" class="form-label">Username</label>
-                                <input asp-for="UserName" type="UserName"
-                                       class="form-control"
-                                       id="username"
-                                       name="username"
-                                       placeholder="Enter your Username"
-                                       autofocus />
-                                <span asp-validation-for="UserName"> </span>
+                                <input asp-for="UserName" type="UserName" class="form-control" id="username" name="username" placeholder="Enter your Username" autofocus />
+                                <span asp-validation-for="UserName" style="color:red"> </span>
                             </div>
-                            <div class="mb-3 form-password-toggle">
-                                <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
-                                    <a href="auth-forgot-password-basic.html">
-                                        <small>Forgot Password?</small>
-                                    </a>
-                                </div>
-                                <div class="input-group input-group-merge">
+
+                            <div class="mb-3">
+                                <label asp-for="Password" for="PassWord" class="form-label">PassWord</label>
+                                <input asp-for="Password" type="password" class=" form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password"></input>
+                              @*   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span> *@
+                                <span asp-validation-for="Password" style="color:red"> </span>
+                            </div>
+
+
+
+                                @*  <div class="mb-3 form-password-toggle">
+                                    <div class="d-flex justify-content-between">
+                                        <label class="form-label" for="password">Password</label>
+                                        <a href="auth-forgot-password-basic.html">
+                                            <small>Forgot Password?</small>
+                                        </a>
+                                    </div> *@
+ 
+                               @*  <div class="input-group input-group-merge mb-3">
+                                    <label asp-for="Password" for="PassWord" class="form-label">PassWord</label>
                                     <input asp-for="Password" type="password"
                                            id="password"
                                            class="form-control"
@@ -141,7 +148,9 @@
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                     <span asp-validation-for="Password"> </span>
                                 </div>
-                            </div>
+                             *@
+
+
                             <div class="mb-3">
                                 <div class="form-check"> 
                                     <input class="form-check-input" asp-for="Rememberme" type="checkbox" id="remember-me" />
@@ -153,12 +162,12 @@
                             </div>
                         </form>
 
-                        <p class="text-center">
+                      @*   <p class="text-center">
                             <span>New on our platform?</span>
                             <a href="auth-register-basic.html">
                                 <span>Create an account</span>
                             </a>
-                        </p>
+                        </p> *@
                     </div>
                 </div>
                 <!-- /Register -->
@@ -168,11 +177,6 @@
 
     <!-- / Content -->
 
-    <div class="buy-now">
-        <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-           target="_blank"
-           class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
-    </div>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

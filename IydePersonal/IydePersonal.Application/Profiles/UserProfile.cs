@@ -14,7 +14,7 @@ namespace IydePersonal.API.Profiles
             CreateMap<AppUser, UserCreateDto>().ReverseMap();
 
             CreateMap<AppUser, UserEditDto>().ReverseMap();
-            CreateMap<AppUser,UserLoginDto>().ReverseMap();
+            CreateMap<AppUser, UserLoginDto>().ReverseMap();
 
             CreateMap<AppUser, UserWithEmployeeDetailDto>().ReverseMap();
         }

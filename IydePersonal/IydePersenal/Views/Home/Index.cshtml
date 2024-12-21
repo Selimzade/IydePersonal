@@ -1,8 +1,8 @@
-﻿@using IydePersonal.Application.Dtos.Employee
+﻿@* @using IydePersonal.Application.Dtos.Employee
 @using IydePersonal.WEB.Models
 
 @model List<EmployeeDto>
-
+ *@
 
 @{
     ViewData["Title"] = "Home Page";
@@ -15,7 +15,7 @@
 
 
 <!-- Hoverable Table rows -->
-<div class="card">
+@* <div class="card">
     <h5 class="card-header">Hoverable rows</h5>
     <div class="table-responsive text-nowrap" id="articlesTable" width="100%" cellspacing="0">
         <table class="table table-hover">
@@ -86,4 +86,4 @@
 <!--/ Hoverable Table rows -->
 @section Scripts {
     <script src="~/js/articleIndex.js" type="application/ecmascript"></script>
-}
+} *@

@@ -11,5 +11,6 @@ namespace IydePersonal.Domain.Entities.Edentity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; } = string.Empty;
+        public List<Employee> Employees { get; set; }
     }
 }

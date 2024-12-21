@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IydePersonal.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241119100711_change_emptable")]
-    partial class change_emptable
+    [Migration("20241211101609_add_mew")]
+    partial class add_mew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,7 +124,7 @@ namespace IydePersonal.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FisrtName")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -182,15 +182,15 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "53da27da-dcdc-4eaa-83a0-4d883e327a00",
+                            ConcurrencyStamp = "776dae34-0eb8-41d8-966e-f196b8b63945",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
-                            FisrtName = "Ehmed",
+                            FirstName = "Ehmed",
                             LastName = "Mustafa",
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "EHMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAn/3Jd423K/S7U1AEra8CiTRMaEtAZOcbGUI4HYZMO34ti3bGFMpvLsf/Fe1qCO1g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM/F576yxOPWrB48rgnaX+s64injNyOBDyfTYrOXgGwxJnfq6RlCei4F7dQsz6SEZg==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "1",
@@ -201,15 +201,15 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ceecc650-bb21-437d-9c50-2433861707b7",
+                            ConcurrencyStamp = "cdfeabde-d3fb-4607-9af6-642f21706258",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
-                            FisrtName = "Omer",
+                            FirstName = "Omer",
                             LastName = "Mustafa",
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "OMER MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJqSubftrdbvvS/0eG/FCIxNcAEof1AfdUbnDj7HeplLz0xih+im7RuElRvSvsFSZA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIzknL2q1/GL9FIMq/bmeQPdLkEL/P+csy8peSku4fsgeyEofYSGy83Q0kdc0m5rSg==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "2",
@@ -220,15 +220,15 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d849de46-c930-44d9-be13-eb5d97863536",
+                            ConcurrencyStamp = "b0668957-1d0b-401f-a93c-27677017928f",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
-                            FisrtName = "Axmed",
+                            FirstName = "Axmed",
                             LastName = "Mustafa",
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "AXMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOvCjHMnRJrMlYCzfSCaI4EnTm4iikYcAGgI0wS44Q/X1+aHrxX9L3TBaV3IR+36qw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGctIKgbeac/+ah7YWtHFbxvXM7XzwREoFQqnFo0KJYA/BydgB2uD0FG+2ALJkoSAQ==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3",
@@ -443,45 +443,6 @@ namespace IydePersonal.Infrastructure.Migrations
                     b.ToTable("EmployeeLogs", (string)null);
                 });
 
-            modelBuilder.Entity("IydePersonal.Domain.Entities.EmployeePunkt", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreateDate");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int")
-                        .HasColumnName("EmployeeId");
-
-                    b.Property<int>("PunktId")
-                        .HasColumnType("int")
-                        .HasColumnName("PunktId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("PunktId");
-
-                    b.ToTable("EmployeePunkts", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateDate = new DateTime(2024, 11, 19, 13, 7, 10, 782, DateTimeKind.Local).AddTicks(3439),
-                            EmployeeId = 1,
-                            PunktId = 1
-                        });
-                });
-
             modelBuilder.Entity("IydePersonal.Domain.Entities.Punkt", b =>
                 {
                     b.Property<int>("Id")
@@ -603,40 +564,6 @@ namespace IydePersonal.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("IydePersonal.Domain.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("Password");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("Username");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Password = "123456",
-                            UserName = "Azadliq"
-                        });
-                });
-
             modelBuilder.Entity("IydePersonal.Domain.Entities.Edentity.AppRoleClaim", b =>
                 {
                     b.HasOne("IydePersonal.Domain.Entities.Edentity.AppRole", null)
@@ -696,7 +623,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IydePersonal.Domain.Entities.User", "User")
+                    b.HasOne("IydePersonal.Domain.Entities.Edentity.AppUser", "User")
                         .WithMany("Employees")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -726,25 +653,6 @@ namespace IydePersonal.Infrastructure.Migrations
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("IydePersonal.Domain.Entities.EmployeePunkt", b =>
-                {
-                    b.HasOne("IydePersonal.Domain.Entities.Employee", "Employee")
-                        .WithMany("EmployeePunkts")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IydePersonal.Domain.Entities.Punkt", "Punkt")
-                        .WithMany("EmployeePunkts")
-                        .HasForeignKey("PunktId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Punkt");
-                });
-
             modelBuilder.Entity("IydePersonal.Domain.Entities.Salary", b =>
                 {
                     b.HasOne("IydePersonal.Domain.Entities.Employee", "Employee")
@@ -756,26 +664,19 @@ namespace IydePersonal.Infrastructure.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("IydePersonal.Domain.Entities.Employee", b =>
-                {
-                    b.Navigation("EmployeeLogs");
-
-                    b.Navigation("EmployeePunkts");
-
-                    b.Navigation("Salaries");
-                });
-
-            modelBuilder.Entity("IydePersonal.Domain.Entities.Punkt", b =>
-                {
-                    b.Navigation("EmployeePunkts");
-                });
-
-            modelBuilder.Entity("IydePersonal.Domain.Entities.Store", b =>
+            modelBuilder.Entity("IydePersonal.Domain.Entities.Edentity.AppUser", b =>
                 {
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("IydePersonal.Domain.Entities.User", b =>
+            modelBuilder.Entity("IydePersonal.Domain.Entities.Employee", b =>
+                {
+                    b.Navigation("EmployeeLogs");
+
+                    b.Navigation("Salaries");
+                });
+
+            modelBuilder.Entity("IydePersonal.Domain.Entities.Store", b =>
                 {
                     b.Navigation("Employees");
                 });

@@ -1,0 +1,53 @@
+﻿@model UserCreateDto
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><b>User</b> /</span> Add Users</h4>
+    <form asp-controller="User" asp-action="Add" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="row">
+
+            <div class="col-md-10">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="FirstName" style="color:blue" class="form-label">FirstName</label>
+                            <input asp-for="FirstName" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Text" aria-label="default input example" />
+                            <span asp-validation-for="FirstName" class="Text-danger"> </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" style="color:blue" class="form-label">LastName</label>
+                            <input asp-for="LastName" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Text" aria-label="default input example" />
+                            <span asp-validation-for="LastName" class="Text-danger"> </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UserName" style="color:blue" class="form-label">UserName</label>
+                            <input asp-for="UserName" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Text" aria-label="default input example" />
+                            <span asp-validation-for="UserName" class="Text-danger"> </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" style="color:blue" class="form-label">PassWord</label>
+                            <input asp-for="Password" type="password" class="form-control mb-3" id="defaultFormControlInput" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
+                            <span asp-validation-for="Password" class="Text-danger"> </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RoleId" style="color:blue" class="form-label">Role</label>
+                            <select asp-for="RoleId" class="form-control mb-3" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"><option selected></option></select>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+           
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn btn-primary btn-block"> Save</button>
+        </div>
+    </form>
+
+
+
+</div>

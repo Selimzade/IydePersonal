@@ -3,6 +3,8 @@ using IydePersonal.Application.Dtos.Employee;
 using IydePersonal.Application.Repositories;
 using IydePersonal.Application.Services.Interfaces;
 using IydePersonal.Domain.Entities;
+using IydePersonal.Domain.Entities.Edentity;
+using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace IydePersonal.Application.Services.Concretes
@@ -11,13 +13,16 @@ namespace IydePersonal.Application.Services.Concretes
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
+        private readonly UserManager<AppUser> _userManager;
+
         //private readonly AppDbContext _context;
 
 
-        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
+        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper,UserManager<AppUser> userManager)
         {
             _employeeRepository = employeeRepository;
             _mapper = mapper;
+          _userManager = userManager;
         }
         public async Task<IEnumerable<EmployeeDto>> GetEmployeeList()
         {
@@ -25,11 +30,20 @@ namespace IydePersonal.Application.Services.Concretes
             var dto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
             return dto;
         }
+     
+
         public async Task<EmployeeDto> GetEmployeeById(int UpdateId)
         {
-            var emp = await _employeeRepository.GetAsync(x=>x.IsActive&&x.Id==UpdateId);
+            var emp = await _employeeRepository.GetAsync(x=>x.IsActive&&x.Id==UpdateId,x=>x.Store);
             var employees = _mapper.Map<EmployeeDto>(emp);
             return employees;
+        }
+
+        public async Task<List<GetAllEmployeeforUserDto>> GetEmployeeForUser(int Id)
+        {
+            var emp= await _employeeRepository.GetEmployeeforUserById(Id);
+            var map= _mapper.Map<List<GetAllEmployeeforUserDto>>(emp);
+            return map;
         }
         public async Task CreateEmployee(EmployeeAddDto employeeAddDto)
         {
@@ -68,7 +82,7 @@ namespace IydePersonal.Application.Services.Concretes
         public async Task UpdateEmployee(EmployeeUpdateDto employeeUpdateDto)
         {
 
-            var updateemp = await _employeeRepository.GetAsync(x=>x.IsActive && x.Id == employeeUpdateDto.Id);
+            var updateemp = await _employeeRepository.GetAsync(x=>x.IsActive && x.Id == employeeUpdateDto.Id,X=>X.StoreId);
           
 
             updateemp.FirstName = employeeUpdateDto.FirstName;
@@ -86,5 +100,25 @@ namespace IydePersonal.Application.Services.Concretes
             await _employeeRepository.SaveAsync();
 
         }
+
+        public async Task<IEnumerable<EmployeeDto>> GetAllDeleteEmployeeList()
+        {
+            var employees = await _employeeRepository.GetEmployeesAsync(x => !x.IsActive, x => x.Store);
+            var dto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
+            return dto;
+        }
+
+        public async Task UndoDeleteEmployee(int Id)
+        {
+            var emp = await _employeeRepository.GetEmployeeById(Id);
+
+            emp.IsActive = true;
+            emp.FinishWork = null;
+
+            await _employeeRepository.UpdateEmplyee(emp);
+            await _employeeRepository.SaveAsync();
+        }
+
+       
     }
 }

@@ -16,8 +16,11 @@ namespace IydePersonal.Application
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IPunktService, PunktService>();
             services.AddScoped<IStoryService, StoryService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDashboardService, DashboardService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssemblyContaining<EmployeeValidator>();
+            services.AddValidatorsFromAssemblyContaining<UserValidator>();
             return services;
         }
     }

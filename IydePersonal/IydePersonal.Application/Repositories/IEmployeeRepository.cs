@@ -9,9 +9,11 @@ namespace IydePersonal.Application.Repositories
         public Task<IEnumerable<Employee>> GetEmployeesAsync(Expression<Func<Employee, bool>> predicate = null, params Expression<Func<Employee, object>>[] includeProperties);
         public Task<Employee> GetAsync(Expression<Func<Employee, bool>> predicate, params Expression<Func<Employee, object>>[] includeProperties);
         public Task<Employee> GetEmployeeById(int Id);
+        public Task<List<Employee>> GetEmployeeforUserById(int Id);
         public Task  CreateEmployee(Employee employee);
         public Task  DeleteEmployee(Employee employee);
         public Task <Employee> UpdateEmplyee(Employee employee);
+        Task <int> CountEmployee(Expression<Func<Employee,bool>> predicate=null);
         Task<int> SaveAsync();
         int Save();
 
