@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IydePersonal.Infrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IydePersonal.Application", "IydePersonal.Application\IydePersonal.Application.csproj", "{0B7EE4B4-763F-4FCC-BF7B-B3A761057163}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IydePersonal.API", "IydePersonal.API\IydePersonal.API.csproj", "{6AB10B18-1F62-41A2-9353-07455C3C22AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IydePersonal.API", "IydePersonal.API\IydePersonal.API.csproj", "{6AB10B18-1F62-41A2-9353-07455C3C22AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{61BF7002-4244-4DE8-B0D4-34BD324C5FEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6AB10B18-1F62-41A2-9353-07455C3C22AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AB10B18-1F62-41A2-9353-07455C3C22AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AB10B18-1F62-41A2-9353-07455C3C22AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61BF7002-4244-4DE8-B0D4-34BD324C5FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61BF7002-4244-4DE8-B0D4-34BD324C5FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61BF7002-4244-4DE8-B0D4-34BD324C5FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61BF7002-4244-4DE8-B0D4-34BD324C5FEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

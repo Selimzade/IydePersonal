@@ -44,6 +44,22 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="~/sneat-1.0.0/assets/js/config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Nanum+Gothic&family=Playwrite+AU+SA:wght@100..400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body{
+          
+            background-color: #87CEEB;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight:bolder
+        }
+
+    </style>
 </head>
 
 <body>
@@ -56,7 +72,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                
-                <div class="app-brand demo">
+                <div class="app-brand demo" style="background-color:#e2f2f2">
                     <a  class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <svg width="25"
@@ -111,19 +127,19 @@
 
                 <div class="menu-inner-shadow"></div>
 
-                <ul class="menu-inner py-1">
+                <ul class="menu-inner py-1" style="background-color:#e2f2f2">
                     <!-- Dashboard -->
                     <li class="menu-item active">
                         <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">View Panel</div>
+                            <i class="fa-solid fa-house"></i>
+                            <div data-i18n="Analytics" style="margin-left:10px">View Panel</div>
                         </a>
                     </li>
 
                     
 
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Pages</span>
+                    <li class="menu-header small text-uppercase" style="font-size:">
+                        <span class="menu-header-text" style="color:DarkGreen">Pages</span>
                     </li>
 
                     <li class="menu-item">
@@ -174,7 +190,7 @@
 
                             <!-- Users -->
                             <li class="menu-header small text-uppercase">
-                                <span class="menu-header-text">Users</span>
+                                <span class="menu-header-text" style="color:DarkGreen">Users</span>
                             </li>
 
 
@@ -221,7 +237,7 @@
 
                             <!-- Forms & Tables -->
                             <li class="menu-header small text-uppercase">
-                                <span class="menu-header-text">Setting</span>
+                                <span class="menu-header-text" style="color:DarkGreen">Setting</span>
 
                             </li>
 
@@ -235,7 +251,7 @@
 
 
                             <li class="menu-header small text-uppercase">
-                                <span class="menu-header-text">Recycle</span>
+                                <span class="menu-header-text" style="color:DarkGreen">Recycle</span>
                             </li>
                             <li class="menu-item">
                                 <a href="javascript:void(0);" class="menu-link menu-toggle">
