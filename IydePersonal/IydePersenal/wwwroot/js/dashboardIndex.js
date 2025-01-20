@@ -4,6 +4,7 @@ $(document).ready(function () {
     var yearlyEmployeesUrl = app.Urls.yearlyEmployeesUrl;
     var totalArticleCountUrl = app.Urls.totalArticleCountUrl;
     var totaldeleteArticleCountUrl = app.Urls.totalDeleteArticleCountUrl;
+   // var totalstorecountUrl = app.Urls.totalStoreCountUrl;
     var totalCategoryCountUrl = app.Urls.totalCategoryCountUrl;
 
     $.ajax({
@@ -11,7 +12,7 @@ $(document).ready(function () {
         url: totalArticleCountUrl,
         dataType: "json",
         success: function (data) {
-            $("h3#totalEmployeeCount").append(data);
+            $("h3#totalstorecount").append(data);
         },
         error: function () {
             toastr.error("Makale Analizleri yüklenirken hata oluştu", "Hata");
@@ -35,13 +36,14 @@ $(document).ready(function () {
         url: totalCategoryCountUrl,
         dataType: "json",
         success: function (data) {
-            $("h3#totalCategoryCount").append(data);
+            $("h3#totalstoreCount").append(data);
         },
         error: function () {
             toastr.error("Makale Analizleri yüklenirken hata oluştu", "Hata");
         }
 
     });
+
 
     $.ajax({
         type: "GET",
@@ -65,6 +67,7 @@ $(document).ready(function () {
                 totalRevenueChartOptions = {
                     series: [
                         {
+                            name:"2021",
                             data: chartData
                         }
                     ],

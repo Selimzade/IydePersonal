@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IydePersonal.Application.Dtos.Shop;
 using IydePersonal.Application.Dtos.Store;
 using IydePersonal.Application.Repositories;
 using IydePersonal.Application.Services.Interfaces;
@@ -22,11 +23,40 @@ namespace IydePersonal.Application.Services.Concretes
             _mapper = mapper;
         }
 
+        public async Task AddStore(StoreCreateDto storeCreateDto)
+        {
+            var store = new Store
+            {
+                Name = storeCreateDto.Name
+            };
+          await  _storeRepostory.CreateStore(store);
+          await  _storeRepostory.SaveAsync();
+        }
+
         public async Task<List<StoreDto>> AllStoreDtos()
         {
             var story=await _storeRepostory.GetAllStoreDtos();
             var map = _mapper.Map<List<StoreDto>>(story);
             return map;
+        }
+
+        public async Task<StoreDto> GetStoreByIdAsync(int StoreId)
+        {
+           var store= await _storeRepostory.GetStoreById(StoreId);
+           var map=  _mapper.Map<StoreDto>(store);
+           return map;
+        }
+
+        public async Task UpdateStoreAsync(StoreUpdateDto storeUpdateDto)
+        {
+            var map =  _mapper.Map<Store>(storeUpdateDto);
+            var store = await _storeRepostory.UpdateStore(map);
+
+            store.Id = storeUpdateDto.Id;
+            store.Name = storeUpdateDto.Name;
+
+            await _storeRepostory.UpdateStore(store);
+            await _storeRepostory.SaveAsync();
         }
     }
 }

@@ -61,6 +61,11 @@ namespace IydePersonal.Infrastructure.Repositories
             return await query.SingleAsync();
         }
 
-        
+        public async Task<int> CountStore(Expression<Func<Punkt, bool>> predicate = null)
+        {
+            if (predicate is not null)
+                return await Table.CountAsync(predicate);
+            return await Table.CountAsync();
+        }
     }
 }

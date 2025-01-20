@@ -45,6 +45,12 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             return Json(count);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> TotalStoreCounts() 
+        {
+            var count= await _dashboardService.GetTotalStoreCounts();
+            return Json(count);
+        }
     }
 
 }

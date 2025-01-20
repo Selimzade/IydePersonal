@@ -1,4 +1,6 @@
-﻿using IydePersonal.Application.Dtos.Store;
+﻿using IydePersonal.Application.Dtos.Shop;
+using IydePersonal.Application.Dtos.Store;
+using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +12,8 @@ namespace IydePersonal.Application.Services.Interfaces
     public interface IStoryService
     {
         public Task<List<StoreDto>> AllStoreDtos();
+        public Task AddStore(StoreCreateDto storeCreateDto);
+        Task<StoreDto> GetStoreByIdAsync(int StoreId);
+        public Task UpdateStoreAsync(StoreUpdateDto storeUpdateDto);
     }
 }

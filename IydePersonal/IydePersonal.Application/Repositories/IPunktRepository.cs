@@ -11,6 +11,7 @@ namespace IydePersonal.Application.Repositories
         public Task <Punkt> UpdatePunktAsync (Punkt punkt);
         Task <Punkt> GetPunktByIdAsync(int Id);
         Task DeletePunkt(Punkt punkt);
+        Task<int> CountStore(Expression<Func<Punkt, bool>> predicate = null);
         Task<int> SaveAsync();
         int Save();
     }

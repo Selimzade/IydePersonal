@@ -11,19 +11,19 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
     [Area("Admin")]
     public class PunktController : Controller
     {
-        private readonly IPunktService _unktService;
+        private readonly IPunktService _punktService;
         private readonly IMapper _mapper;
 
         public PunktController(IPunktService unktService, IMapper mapper)
         {
-            _unktService = unktService;
+            _punktService = unktService;
             _mapper = mapper;
         }
         [HttpGet]
         [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
         public async Task<IActionResult> Index()
         {
-            var punkt = await _unktService.GetPunktListAsync();
+            var punkt = await _punktService.GetPunktListAsync();
             return View(punkt);
         }
 
@@ -38,7 +38,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         public async Task<IActionResult> Add(PunktAddDto punktAddDto)
         {
             var map = _mapper.Map<Punkt>(punktAddDto);
-            await _unktService.CreatePunkt(punktAddDto);
+            await _punktService.CreatePunkt(punktAddDto);
             return RedirectToAction("Index", "Punkt", new { Area = "Admin" });
         }
 
@@ -46,7 +46,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Update(int PunktId)
         {
-            var punkts = await _unktService.GetPunktById(PunktId);
+            var punkts = await _punktService.GetPunktById(PunktId);
             var map = _mapper.Map<PunktUpdateDto>(punkts);
             return View(map);
         }
@@ -55,14 +55,14 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Update(PunktUpdateDto punktUpdateDto)
         {
-            await _unktService.UptadePunkt(punktUpdateDto);
+            await _punktService.UptadePunkt(punktUpdateDto);
             return View (punktUpdateDto);
         }
 
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Delete(int PunktId) 
         {
-            await _unktService.DeletePunkt(PunktId);
+            await _punktService.DeletePunkt(PunktId);
             return RedirectToAction("Index", "Punkt", new { Area = "Admin" });
         }
     }

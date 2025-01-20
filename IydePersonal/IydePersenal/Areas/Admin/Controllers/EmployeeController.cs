@@ -76,28 +76,26 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             var story = await _storyService.AllStoreDtos();
             return View(new EmployeeAddDto { stores = story });
         }
+    
+        
         [HttpPost]
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
-        public async Task<IActionResult> Add(EmployeeAddDto employeeAddDto)
+        public async Task<IActionResult> Add(EmployeeAddDto employeeAddDto) 
         {
-            var map = _mapper.Map<Employee>(employeeAddDto);
-            var result = await _validator.ValidateAsync(map);
+             var map= _mapper.Map<Employee>(employeeAddDto);
+             var val= await _validator.ValidateAsync(map);
+             var story = await _storyService.AllStoreDtos();
 
-            if (result.IsValid)
-            {
-                await _employeeService.CreateEmployee(employeeAddDto);
+                 await _employeeService.CreateEmployee(employeeAddDto);
                 _toastNotification.AddSuccessToastMessage("Add Sucseccfully");
-                return RedirectToAction("Index", "Employee", new { Area = "Admin" });
-            }
+                //return RedirectToAction("index", "Employee", new { Area = "Admin" });
 
-            result.AddToModelState(this.ModelState);
-
-            var story = await _storyService.AllStoreDtos();
-            return View(new EmployeeAddDto { stores = story });
            
+                return View(new EmployeeAddDto { stores = story });
+
+             //result.AddToModelState(this.ModelState);
+
         }
-           
-            
 
         [HttpGet]
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
@@ -121,8 +119,8 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
 
             var empstory = await _storyService.AllStoreDtos();
             employeeUpdateDto.stores = empstory;
-            
-            return View(employeeUpdateDto);
+            _toastNotification.AddSuccessToastMessage("Uptade Sucseccfully");
+            return RedirectToAction("Index","Employee", new {Area="Admin"});
         }
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Delete(int UpdateId) 

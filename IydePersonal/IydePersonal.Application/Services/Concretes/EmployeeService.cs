@@ -82,7 +82,7 @@ namespace IydePersonal.Application.Services.Concretes
         public async Task UpdateEmployee(EmployeeUpdateDto employeeUpdateDto)
         {
 
-            var updateemp = await _employeeRepository.GetAsync(x=>x.IsActive && x.Id == employeeUpdateDto.Id,X=>X.StoreId);
+            var updateemp = await _employeeRepository.GetAsync(x=>x.IsActive && x.Id == employeeUpdateDto.Id);
           
 
             updateemp.FirstName = employeeUpdateDto.FirstName;
@@ -98,6 +98,7 @@ namespace IydePersonal.Application.Services.Concretes
 
             await _employeeRepository.UpdateEmplyee(updateemp);
             await _employeeRepository.SaveAsync();
+
 
         }
 

@@ -50,7 +50,7 @@ namespace IydePersonal.Application.Services.Concretes
             return dto;
         }
 
-        public async Task  UptadePunkt(PunktUpdateDto punktUpdateDto)
+        public async Task UptadePunkt(PunktUpdateDto punktUpdateDto)
         {
             var punk = _mapper.Map<Punkt>(punktUpdateDto);
             var map = await _punktRepository.UpdatePunktAsync(punk);

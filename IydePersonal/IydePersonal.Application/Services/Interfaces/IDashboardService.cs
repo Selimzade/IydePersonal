@@ -11,5 +11,7 @@ namespace IydePersonal.Application.Services.Interfaces
         Task<List<int>> GetYearEmployeecount();
         Task<int> GetTotalEmployeeCounts();
         Task<int> GetDeleteTotalEmployeeCounts();
+        Task <int> GetTotalStoreCounts();
+        Task<int> GetTotalPunktCounts();
     }
 }

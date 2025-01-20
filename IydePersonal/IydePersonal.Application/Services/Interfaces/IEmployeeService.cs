@@ -1,5 +1,6 @@
 ﻿using IydePersonal.Application.Dtos.Employee;
 using IydePersonal.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace IydePersonal.Application.Services.Interfaces
 {

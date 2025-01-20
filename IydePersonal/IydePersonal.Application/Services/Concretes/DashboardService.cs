@@ -12,17 +12,21 @@ namespace IydePersonal.Application.Services.Concretes
     {
         private readonly IEmployeeService _employeeService;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IStoreRepostory _storeRepostory;
+        private readonly IPunktRepository _punktRepository;
 
-        public DashboardService(IEmployeeService employeeService,IEmployeeRepository employeeRepository)
+        public DashboardService(IEmployeeService employeeService,IEmployeeRepository employeeRepository,IStoreRepostory storeRepostory,IPunktRepository punktRepository)
         {
             _employeeService = employeeService;
             _employeeRepository = employeeRepository;
+            _storeRepostory = storeRepostory;
+            _punktRepository = punktRepository;
         }
 
         public async Task<List<int>> GetYearEmployeecount() 
         {
             var emp= await _employeeRepository.GetEmployeesAsync(x=>x.IsActive);
-            var startdate= DateTime.Now.Date;
+            var startdate= DateTime.Now;
             startdate = new DateTime(startdate.Year, 1, 1);
             List<int> datas = new();
             for (int i = 1; i<=12;i++)
@@ -44,6 +48,18 @@ namespace IydePersonal.Application.Services.Concretes
         {
             var empcount = await _employeeRepository.CountEmployee(x => !x.IsActive);
             return empcount;
+        }
+
+        public async Task<int> GetTotalStoreCounts()
+        {
+            var storecount = await _storeRepostory.CountStore();
+            return storecount;
+        }
+
+        public Task<int> GetTotalPunktCounts()
+        {
+            var storecount = await _punktRepository.CountStore();
+            return storecount;
         }
     }
 }
