@@ -2,8 +2,10 @@
 
 @model IEnumerable<EmployeeDto>
 
+
 <div class="container-xxl flex-grow-1 container-p-y" style="width:100%">
             
+    
        <H4 class=" fw-bold py-3 mb-4">
            <span class="text-muted fw-light"><b>Employees List</b>/ </span> Employees
        </H4>
@@ -28,20 +30,21 @@
                                   <table class="display table table-striped table-hover " id="employeeTables" width="100%" cellspacing="0">
                                   <thead>
                                     <tr>
-                                                  <th>FirstName</th>
-                                                  <th>LastName</th>
-                                                  <th>Gender</th>
-                                                  <th>DateOfBirth</th>
-                                                  <th>PhoneNumber</th>
-                                                  <th>WorkPosition</th>
-                                                  <th>Store</th>
-                                                  <th>Adress</th>
-                                                  <th>FixSalary</th>
-                                                  <th>StarWork</th>
+                                                  <th style="color:#483D8B"> <strong>FullName</strong> </th>
+                                                 @*  <th>LastName</th> *@
+                                                  <th style="color:#483D8B"> <strong>Gender</strong> </th>
+                                                  <th style="color:#483D8B"> <strong>DateOfBirth</strong> </th>
+                                                  <th style="color:#483D8B"> <strong>PhoneNumber</strong> </th>
+                                                  <th style="color:#483D8B"> <strong>WorkPosition</strong> </th>
+                                                  <th style="color:#483D8B;text-align:center"> <strong>Store</strong> </th>
+                                                  <th style="color:#483D8B"> <strong>Adress</strong> </th>
+                                                  <th style="color:#483D8B"> <strong>FixSalary</strong> </th>
+                                                  <th style="color:#483D8B"> <strong>StarWork</strong> </th>
+                                                  
                                                     @{
                                                      @if (User.IsInRole($"{RoleConsts.Superadmin}"))
                                                         {
-                                                         <th>Edit&Delete</th>
+                                                         <th style="color:#483D8B"> <strong>Edit&Delete</strong> </th>
                                                         }
                                                      }
                       
@@ -75,13 +78,13 @@
                                                  @foreach (var Employee in Model)
                                                 {
                                                      <tr name="@Employee.Id">
-                                                        <td>@Employee.FirstName</td>
-                                                        <td>@Employee.LastName</td>
+                                                        <td>@Employee.FullName</td>
+                                                        @* <td>@Employee.LastName</td> *@
                                                         <td>@Employee.Gender</td>
                                                         <td>@Employee.DateOfBirth.ToShortDateString()</td>
                                                         <td>@Employee.PhoneNumber</td>
                                                         <td>@Employee.WorkPosition</td>
-                                                        <td>@Employee.Store.Name</td>
+                                                       @*  <td>@Employee.Store.Name</td> *@
                                                         <td>@Employee.Adress</td>
                                                         <td>@Employee.FixSalary</td>
                                                         <td>@Employee.StartWork.ToShortDateString()</td>

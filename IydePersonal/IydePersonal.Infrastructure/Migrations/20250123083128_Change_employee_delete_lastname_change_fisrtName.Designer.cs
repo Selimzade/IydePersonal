@@ -4,6 +4,7 @@ using IydePersonal.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IydePersonal.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250123083128_Change_employee_delete_lastname_change_fisrtName")]
+    partial class Change_employee_delete_lastname_change_fisrtName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,7 +182,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "614dd64c-44d9-47f2-ab3a-4bcf4094b072",
+                            ConcurrencyStamp = "92c9f27a-3a93-4c44-9d7d-a0feedf4fba9",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FirstName = "Ehmed",
@@ -187,7 +190,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "EHMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOeNvic6+1ccOCJDeUNzuaLy67B8nceNJ9Hb8UIHO5S/RXYemtOOOh8vbFFIi/EHCw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE89ujbLdp79MktiNOWCNw5JWIEQtRdf7ZGi03wc87oguiC5TWcnAceH9ijoPXNYMA==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "1",
@@ -198,7 +201,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc719155-7efc-4a97-b947-e820f216f4bc",
+                            ConcurrencyStamp = "45488243-c7d4-4e32-a788-063f782754f0",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FirstName = "Omer",
@@ -206,7 +209,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "OMER MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKgPjKKODym/uLIE6kFWA+9E5/ARjOU/GAPKewVKYbx+nUYUDZZg8EX0CIEwkzN/Ng==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGA/yn1DioLIjU9ePCLQy/TL7sFm7ZAlkO6pgI+p4coi9XlCcZCPGuS/FyiKeyb14Q==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "2",
@@ -217,7 +220,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3d21c39a-cb40-4454-b7e3-d015c7787e91",
+                            ConcurrencyStamp = "8b657fe6-7915-446e-9bbe-fd0e743d0585",
                             Email = "Prince.1987@mail.ru",
                             EmailConfirmed = false,
                             FirstName = "Axmed",
@@ -225,7 +228,7 @@ namespace IydePersonal.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PRINCE.1987@MAIL.RU",
                             NormalizedUserName = "AXMED MUSTAFA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ/rq1RNq4Nlxib8kUGpa2jRbflSB5FyZ/QynKf6Afdx8ZtO1zTXpen6JiooNnauxA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJIhr8SK7kk9pW0xmv3iHhSb4rktmIklQllnpLr8M8go6Lj6t7rOoHUN6lnvWEyc0w==",
                             PhoneNumber = "+994502330644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3",
@@ -363,7 +366,7 @@ namespace IydePersonal.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("FullName");
+                        .HasColumnName("Firstname");
 
                     b.Property<byte>("Gender")
                         .HasColumnType("tinyint")
@@ -386,6 +389,10 @@ namespace IydePersonal.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("StartWork");
 
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int")
+                        .HasColumnName("StoreId");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("UserId");
@@ -395,6 +402,8 @@ namespace IydePersonal.Infrastructure.Migrations
                         .HasColumnName("WorkPosition");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StoreId");
 
                     b.HasIndex("UserId");
 
@@ -605,11 +614,19 @@ namespace IydePersonal.Infrastructure.Migrations
 
             modelBuilder.Entity("IydePersonal.Domain.Entities.Employee", b =>
                 {
+                    b.HasOne("IydePersonal.Domain.Entities.Store", "Store")
+                        .WithMany("Employees")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("IydePersonal.Domain.Entities.Edentity.AppUser", "User")
                         .WithMany("Employees")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Store");
 
                     b.Navigation("User");
                 });
@@ -654,6 +671,11 @@ namespace IydePersonal.Infrastructure.Migrations
                     b.Navigation("EmployeeLogs");
 
                     b.Navigation("Salaries");
+                });
+
+            modelBuilder.Entity("IydePersonal.Domain.Entities.Store", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

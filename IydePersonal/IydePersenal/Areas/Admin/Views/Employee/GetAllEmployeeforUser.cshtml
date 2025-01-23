@@ -22,7 +22,7 @@
                                   <thead>
                                     <tr>
                                                   <th>FirstName</th>
-                                                  <th>LastName</th>
+                                                 @*  <th>LastName</th> *@
                                                   <th>Gender</th>
                                                   <th>DateOfBirth</th>
                                                   <th>WorkPosition</th>
@@ -32,7 +32,7 @@
 
                                     </tr>
                                   </thead>
-                                  <tfoot>
+                               @*    <tfoot>
                                                   <tr>
                                                     <th>FirstName</th>
                                                     <th>LastName</th>
@@ -43,14 +43,14 @@
                         
 
                                                   </tr>
-                                  </tfoot>
+                                  </tfoot> *@
                                   <tbody class="table-border-bottom-0">
 
                                                     @foreach (var Employee in Model)
                                                     {
                                                          <tr >
-                                                            <td>@Employee.FirstName</td>
-                                                            <td>@Employee.LastName</td>
+                                                            <td>@Employee.FullName</td>
+                                                            @* <td>@Employee.LastName</td> *@
                                                             <td>@Employee.Gender</td>
                                                             <td>@Employee.DateOfBirth.ToShortDateString()</td>
                                                             <td>@Employee.WorkPosition</td>

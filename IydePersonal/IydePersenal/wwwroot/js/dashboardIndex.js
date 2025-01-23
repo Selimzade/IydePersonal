@@ -4,15 +4,15 @@ $(document).ready(function () {
     var yearlyEmployeesUrl = app.Urls.yearlyEmployeesUrl;
     var totalArticleCountUrl = app.Urls.totalArticleCountUrl;
     var totaldeleteArticleCountUrl = app.Urls.totalDeleteArticleCountUrl;
-   // var totalstorecountUrl = app.Urls.totalStoreCountUrl;
     var totalCategoryCountUrl = app.Urls.totalCategoryCountUrl;
+    var totalusercountUrl = app.Urls.totalusercountUrl;
 
     $.ajax({
         type: "GET",
         url: totalArticleCountUrl,
         dataType: "json",
         success: function (data) {
-            $("h3#totalstorecount").append(data);
+            $("h3#totalemployeecount").append(data);
         },
         error: function () {
             toastr.error("Makale Analizleri yüklenirken hata oluştu", "Hata");
@@ -43,6 +43,19 @@ $(document).ready(function () {
         }
 
     });
+    $.ajax({
+        type: "GET",
+        url: totalusercountUrl,
+        dataType: "json",
+        success: function (data) {
+            $("h3#totalusercounts").append(data);
+        },
+        error: function () {
+            toastr.error("Makale Analizleri yüklenirken hata oluştu", "Hata");
+        }
+
+    });
+   
 
 
     $.ajax({

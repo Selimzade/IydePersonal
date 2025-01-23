@@ -36,13 +36,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title d-flex align-items-start justify-content-between">
-                                   
-                                        <i style="height:40px; font-size:2.25rem" class="menu-icon tf-icons bx bx bx-user"></i>
-                                   
+
+                                    <i style="height:40px; font-size:2.25rem;color:#4169E1" class="menu-icon tf-icons bx bx bx-user"></i>
                                   
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Employees</span>
-                                <h3 class="card-title mb-2" style="color:blue" id="totalstorecount"></h3>
+                                <h3 class="card-title mb-2" style="color:blue" id="totalemployeecount"></h3>
                                 <small class="text-success fw-semibold"> </small>
                             </div>
                         </div>
@@ -51,7 +50,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title d-flex align-items-start justify-content-between">
-                                 <i style="height:40px;font-size:2.25rem" class="menu-icon tf-icons bx bx bx-user"></i>
+                                    <i style="height:40px;font-size:2.25rem;color:#4169E1" class="menu-icon tf-icons bx bx bx-user"></i>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">OnActive</span>
                                 <h3 class="card-title text-nowrap mb-2" style="color:red" id="totaldeleteemployee"></h3>
@@ -80,8 +79,7 @@
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
 
-                                <i style="height:40px; font-size:2.25rem" class="menu-icon tf-icons bx bx bx-user"></i>
-
+                                <i style="height:40px; font-size:2.25rem;color:#8A2BE2" class="fa-sharp fa-solid fa-store"></i>
 
                             </div>
                             <span class="fw-semibold d-block mb-1">Store</span>
@@ -95,11 +93,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title d-flex align-items-start justify-content-between">
-                                    <i style="height:40px;font-size:2.25rem" class="menu-icon tf-icons bx bx bx-user-plus"></i>
+                                <i style="height:40px;font-size:2.25rem;color:#000080" class="menu-icon tf-icons bx bx bx-user-plus"></i>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">User</span>
-                                <h3 class="card-title mb-2"id="totalusercount"></h3>
-                               
+                            <h3 class="card-title mb-2" style="color:blue" id="totalusercounts"></h3>
+                            <small class="text-success fw-semibold"> </small>
                             </div>
                         </div>
                     </div>
@@ -109,7 +107,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+       @*  <div class="row">
             <!-- Order Statistics -->
             <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
                 <div class="card h-100">
@@ -384,11 +382,11 @@
                 </div>
             </div>
             <!--/ Transactions -->
-        </div>
+        </div> *@
     </div>
     <!-- / Content -->
     <!-- Footer -->
-    <footer class="content-footer footer bg-footer-theme">
+    @* <footer class="content-footer footer bg-footer-theme">
         <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
             <div class="mb-2 mb-md-0">
                 ©
@@ -411,7 +409,7 @@
                    class="footer-link me-4">Support</a>
             </div>
         </div>
-    </footer>
+    </footer> *@
     <!-- / Footer -->
 
     <div class="content-backdrop fade"></div>
@@ -424,10 +422,10 @@
         app.Urls = app.Urls || {}
 
         app.Urls.yearlyEmployeesUrl = "@(Url.Action("YearlyEmployeeCounts", "Home"))";
-        app.Urls.totalArticleCountUrl = "@(Url.Action("TotalStoreCounts", "Home"))";
+        app.Urls.totalArticleCountUrl = "@(Url.Action("TotalEmployeeCounts", "Home"))";
         app.Urls.totalDeleteArticleCountUrl = "@(Url.Action("TotalDeleteEmployeeCounts", "Home"))";
-       // app.Urls.totalCategoryCountUrl = "@(Url.Action("TotalStoreCounts", "Home"))";
-
         app.Urls.totalCategoryCountUrl = "@(Url.Action("TotalStoreCounts", "Home"))";
+        app.Urls.totalusercountUrl = "@(Url.Action("TotalUserCounts", "Home"))";
+       // app.Urls.totalusercountUrl = "@(Url.Action("TotalUserCounts", "Home"))";
     </script>
 }

@@ -18,5 +18,6 @@ namespace IydePersonal.Application.Services.Interfaces
        Task <AppUser> GetAppUserById(int UserId);
        Task<string> GetUserRole(AppUser user);
        Task<IdentityResult> DeleteUserAsync(int UserId);
+      
     }
 }

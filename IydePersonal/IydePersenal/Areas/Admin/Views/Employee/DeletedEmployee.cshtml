@@ -16,8 +16,8 @@
                                   <table class="display table table-striped table-hover " id="employeeTables" width="100%" cellspacing="0">
                                   <thead>
                                     <tr>
-                                                  <th>FirstName</th>
-                                                  <th>LastName</th>
+                                                  <th>FullName</th>
+                                                 @*  <th>LastName</th> *@
                                                   <th>Gender</th>
                                                   <th>DateOfBirth</th>
                                                   <th>PhoneNumber</th>
@@ -31,7 +31,7 @@
 
                                     </tr>
                                   </thead>
-                                  <tfoot>
+                                 @*  <tfoot>
                                                   <tr>
                                                     <th>FirstName</th>
                                                     <th>LastName</th>
@@ -46,19 +46,19 @@
 
                                                     <th>Edit&Delete</th>
                                                   </tr>
-                                  </tfoot>
+                                  </tfoot> *@
                                   <tbody class="table-border-bottom-0">
 
                         @foreach (var Employee in Model)
                         {
                                                          <tr name="@Employee.Id">
-                                                            <td>@Employee.FirstName</td>
-                                                            <td>@Employee.LastName</td>
+                                                            <td>@Employee.FullName</td>
+                                                            @* <td>@Employee.LastName</td> *@
                                                             <td>@Employee.Gender</td>
                                                             <td>@Employee.DateOfBirth.ToShortDateString()</td>
                                                             <td>@Employee.PhoneNumber</td>
                                                             <td>@Employee.WorkPosition</td>
-                                                            <td>@Employee.Store.Name</td>
+                                                         @*    <td>@Employee.Store.Name</td> *@
                                                             <td>@Employee.Adress</td>
                                                             <td>@Employee.FixSalary</td>
                                                             <td>@Employee.FinishWork.ToShortDateString()</td>

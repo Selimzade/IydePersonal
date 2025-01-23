@@ -8,25 +8,25 @@ namespace IydePersonal.Domain.Entities
         {
                 
         }
-        public Employee(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string phoneNumber, WorkPosition workPosition, int fixSalary, string adress,int srotyId, DateTime startWork,int userId)
+        public Employee(string fulname, Gender gender, DateTime dateOfBirth, string phoneNumber, WorkPosition workPosition, int fixSalary, string adress, DateTime startWork,int userId)
         {
          
-            FirstName = firstName;
-            LastName = lastName;
+            FullName = fulname;
+            //LastName = lastName;
             Gender = gender;
             DateOfBirth = dateOfBirth;
             PhoneNumber = phoneNumber;
             WorkPosition = workPosition;
             FixSalary = fixSalary;
-            StoreId = srotyId;
+           // StoreId = srotyId;
             Adress = adress;
             StartWork = startWork;
             UserId = userId;
         }
 
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FullName { get; set; }
+       //public string LastName { get; set; }
         public Gender Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
@@ -40,8 +40,8 @@ namespace IydePersonal.Domain.Entities
 
         public DateTime? ModifiedDate { get; set; }
 
-        public Store Store { get; set; }
-        public int StoreId { get; set; }
+        //public Store Store { get; set; }
+        //public int StoreId { get; set; }
 
         public AppUser User { get; set; }
         public int UserId { get; set; }

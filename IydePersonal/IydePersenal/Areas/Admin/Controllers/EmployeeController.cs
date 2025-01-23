@@ -73,8 +73,9 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Add()
         {
-            var story = await _storyService.AllStoreDtos();
-            return View(new EmployeeAddDto { stores = story });
+            //var story = await _storyService.AllStoreDtos();
+            //return View(new EmployeeAddDto { stores = story });
+            return View();
         }
     
         
@@ -91,8 +92,8 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
                 //return RedirectToAction("index", "Employee", new { Area = "Admin" });
 
            
-                return View(new EmployeeAddDto { stores = story });
-
+                //return View(new EmployeeAddDto { stores = story });
+                return View();
              //result.AddToModelState(this.ModelState);
 
         }
@@ -105,7 +106,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             var empUpdatedto = _mapper.Map<EmployeeUpdateDto>(empupdate);
 
             var empstory = await _storyService.AllStoreDtos();
-            empUpdatedto.stores = empstory;
+            //empUpdatedto.stores = empstory;
             return View(empUpdatedto);
         }
 
@@ -118,7 +119,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             await  _employeeService.UpdateEmployee(employeeUpdateDto);
 
             var empstory = await _storyService.AllStoreDtos();
-            employeeUpdateDto.stores = empstory;
+           // employeeUpdateDto.stores = empstory;
             _toastNotification.AddSuccessToastMessage("Uptade Sucseccfully");
             return RedirectToAction("Index","Employee", new {Area="Admin"});
         }

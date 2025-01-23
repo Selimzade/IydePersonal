@@ -15,15 +15,15 @@ namespace IydePersonal.API.Data.Configurations
             builder.Property(x => x.Id)
                .HasColumnName("Id");
 
-            builder.Property(x => x.FirstName)
+            builder.Property(x => x.FullName)
                .IsRequired()
                .HasMaxLength(100)
-               .HasColumnName("Firstname");
+               .HasColumnName("FullName");
 
-            builder.Property(x => x.LastName)
-               .IsRequired()
-               .HasMaxLength(100)
-               .HasColumnName("Lastname");
+            //builder.Property(x => x.LastName)
+            //   .IsRequired()
+            //   .HasMaxLength(100)
+            //   .HasColumnName("Lastname");
 
             builder.Property(x => x.Gender)
                .IsRequired()
@@ -61,9 +61,9 @@ namespace IydePersonal.API.Data.Configurations
                 .IsRequired()
                 .HasColumnName("UserId");
                 
-            builder.Property(x=>x.StoreId)
-                .IsRequired()
-                .HasColumnName ("StoreId");
+            //builder.Property(x=>x.StoreId)
+            //    .IsRequired()
+            //    .HasColumnName ("StoreId");
 
             //builder.HasData(new Employee
             //{
