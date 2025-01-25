@@ -38,10 +38,10 @@ namespace IydePersonal.Application.Services.Concretes
         }
 
       
-        public  async Task<IEnumerable<UserListDto>> GetAllUserList()
+        public  async Task<List<UserListDto>> GetAllUserList()
         {
             var users =  _userManager.Users.ToList();  //burda Tolistasync qebule elemedi
-            var map = _mapper.Map<IEnumerable<UserListDto>>(users);
+            var map = _mapper.Map<List<UserListDto>>(users);
 
             foreach (var item in map)
             {

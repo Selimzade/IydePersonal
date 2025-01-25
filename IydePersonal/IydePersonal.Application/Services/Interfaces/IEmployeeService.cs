@@ -6,7 +6,7 @@ namespace IydePersonal.Application.Services.Interfaces
 {
     public interface IEmployeeService
     {
-        public Task<IEnumerable<EmployeeDto>> GetEmployeeList();
+        public Task<List<EmployeeDto>> GetEmployeeList();
         Task<IEnumerable<EmployeeDto>> GetAllDeleteEmployeeList();
         public Task <EmployeeDto> GetEmployeeById(int UpdateId);
         public Task<List<GetAllEmployeeforUserDto>> GetEmployeeForUser(int Id);

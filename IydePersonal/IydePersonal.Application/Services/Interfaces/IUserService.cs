@@ -11,7 +11,7 @@ namespace IydePersonal.Application.Services.Interfaces
 {
     public interface IUserService
     {
-       Task<IEnumerable<UserListDto>> GetAllUserList();
+       Task<List<UserListDto>> GetAllUserList();
        Task<List<AppRole>> GetAllUserRoles();
        Task<IdentityResult> CreateUserAsync(UserCreateDto userCreateDto);
        Task<IdentityResult> UpdateUserAsync(UserEditDto userEditDto);

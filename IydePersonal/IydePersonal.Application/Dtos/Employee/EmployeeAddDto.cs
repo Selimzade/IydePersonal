@@ -1,4 +1,5 @@
 ﻿using IydePersonal.Application.Dtos.Store;
+using IydePersonal.Application.Dtos.User;
 using IydePersonal.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,10 @@ namespace IydePersonal.Application.Dtos.Employee
         public WorkPosition WorkPosition { get; set; }
         public int FixSalary { get; set; }
         public string Adress { get; set; }
-        //public int StoryId { get; set; }
+        public int UserId { get; set; }
        // public bool IsActive { get; set; } = true;
         public DateTime StartWork { get; set; } = DateTime.Now;
-        //public IList<StoreDto> stores { get; set; }
+        public List<UserListDto> userListDtos { get; set; }
 
       
 

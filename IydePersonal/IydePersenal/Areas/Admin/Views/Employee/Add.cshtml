@@ -69,11 +69,11 @@
                             <span asp-validation-for="Adress" class="text-danger"></span>
                         </div>
                       
-                        @* <div class="form-group">
-                            <label asp-for="StoryId"  class="form-label">Story</label>
-                            <select id="Storylist" class="form-select mb-3" asp-for="StoryId" asp-items="@(new SelectList(Model.stores,"Id","Name"))"> <option selected> Select</option> </select>
-                            <span asp-validation-for="StoryId" class="text-danger"></span>
-                        </div> *@
+                        <div class="form-group">
+                            <label asp-for="UserId"  class="form-label">Users</label>
+                            <select id="Userslist" class="form-select mb-3" asp-for="UserId" asp-items="@(new SelectList(Model.userListDtos,"Id","UserName"))"> <option selected> Select</option> </select>
+                            <span asp-validation-for="UserId" class="text-danger"></span>
+                        </div>
                       @*   <div class="form-group">
                             <label asp-for="IsActive" class="form-label">IsActive</label>
                             <input asp-for="IsActive" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder=" " aria-describedby="defaultFormControlHelp" />

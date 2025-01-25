@@ -13,6 +13,8 @@ namespace IydePersonal.Application.Dtos.Employee
         public string FullName { get; set; }
         //public string LastName { get; set; }
         public Gender Gender { get; set; }
+
+        public bool IsActive { get; set; }
         public DateTime DateOfBirth { get; set; }
         public WorkPosition WorkPosition { get; set; }
         public DateTime StartWork { get; set; }

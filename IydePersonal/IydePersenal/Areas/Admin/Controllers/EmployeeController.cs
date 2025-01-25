@@ -24,10 +24,11 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         private readonly IStoryService _storyService;
         private readonly IMapper _mapper;
         private readonly IValidator<Employee> _validator;
+        private readonly IUserService _userService;
         private readonly IToastNotification _toastNotification;
         private readonly UserManager<AppUser> _userManager;
 
-        public EmployeeController(IEmployeeService employeeService,IEmployeeRepository employeeRepository, AppDbContext appDbContext,IStoryService storyService, IMapper mapper, IToastNotification toastNotification, UserManager<AppUser> userManager,IValidator<Employee> validator)
+        public EmployeeController(IEmployeeService employeeService,IEmployeeRepository employeeRepository, AppDbContext appDbContext,IStoryService storyService, IMapper mapper, IToastNotification toastNotification, UserManager<AppUser> userManager,IValidator<Employee> validator,IUserService userService)
         {
             _employeeService = employeeService;
             _employeeRepository = employeeRepository;
@@ -37,6 +38,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             _toastNotification = toastNotification;
             _userManager = userManager;
             _validator = validator;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -73,9 +75,9 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         public async Task<IActionResult> Add()
         {
-            //var story = await _storyService.AllStoreDtos();
-            //return View(new EmployeeAddDto { stores = story });
-            return View();
+            var  user = await _userService.GetAllUserList(); //_storyService.AllStoreDtos();
+            return View(new EmployeeAddDto { userListDtos = user });
+            //return View();
         }
     
         
@@ -85,15 +87,15 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         {
              var map= _mapper.Map<Employee>(employeeAddDto);
              var val= await _validator.ValidateAsync(map);
-             var story = await _storyService.AllStoreDtos();
+             var user = await _userService.GetAllUserList();   //story = await _storyService.AllStoreDtos();
 
-                 await _employeeService.CreateEmployee(employeeAddDto);
-                _toastNotification.AddSuccessToastMessage("Add Sucseccfully");
-                //return RedirectToAction("index", "Employee", new { Area = "Admin" });
-
+             await _employeeService.CreateEmployee(employeeAddDto);
+             _toastNotification.AddSuccessToastMessage("Add Sucseccfully");
+             return RedirectToAction("index", "Employee", new { Area = "Admin" });
+            
            
-                //return View(new EmployeeAddDto { stores = story });
-                return View();
+              //return View(new EmployeeAddDto { stores = story });
+              //  return View();
              //result.AddToModelState(this.ModelState);
 
         }

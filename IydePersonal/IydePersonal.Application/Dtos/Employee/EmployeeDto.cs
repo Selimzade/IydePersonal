@@ -1,5 +1,7 @@
 ﻿using IydePersonal.Application.Dtos.Store;
+using IydePersonal.Application.Dtos.User;
 using IydePersonal.Domain.Entities;
+using IydePersonal.Domain.Entities.Edentity;
 
 namespace IydePersonal.Application.Dtos.Employee
 {
@@ -17,7 +19,8 @@ namespace IydePersonal.Application.Dtos.Employee
         public string Adress { get; set; }
         public DateTime StartWork { get; set; }
         public DateTime FinishWork { get; set; }
-        //public StoreDto Store { get; set; }
+        public int UserId { get; set; }
+        public AppUser appUser  { get; set; }
 
     }
 }
