@@ -16,11 +16,16 @@ namespace IydePersonal.Application.Dtos.Employee
         public WorkPosition WorkPosition { get; set; }
         public bool IsActive { get; set; }
         public int FixSalary { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public DateTime StartWork { get; set; }
         public DateTime FinishWork { get; set; }
-        public int UserId { get; set; }
-        public AppUser appUser  { get; set; }
+       // public int UserId { get; set; }
+        public UserListDto User { get; set; }
+
+        //public int StoreId { get; set; }
+        //public StoreDto storeDto { get; set; }
+
+
 
     }
 }

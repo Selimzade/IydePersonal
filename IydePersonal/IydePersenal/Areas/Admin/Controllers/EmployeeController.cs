@@ -107,8 +107,8 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             var empupdate = await _employeeService.GetEmployeeById(UpdateId);
             var empUpdatedto = _mapper.Map<EmployeeUpdateDto>(empupdate);
 
-            var empstory = await _storyService.AllStoreDtos();
-            //empUpdatedto.stores = empstory;
+            var empstory = await _userService.GetAllUserList();
+            empUpdatedto.userListDtos = empstory;
             return View(empUpdatedto);
         }
 
@@ -126,9 +126,11 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             return RedirectToAction("Index","Employee", new {Area="Admin"});
         }
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
-        public async Task<IActionResult> Delete(int UpdateId) 
+        [HttpPost]
+        [Route("Admin/Employee/Delete/{UpdateId}")]
+        public async Task<IActionResult> Delete(int UpdateId,Employee employee) 
         {
-            await  _employeeService.SoftDeleteEmployee(UpdateId);
+            await  _employeeService.SoftDeleteEmployee(UpdateId,employee.FinishWork);
             return  RedirectToAction("Index", "Employee", new { Area = "Admin" });
         }
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]

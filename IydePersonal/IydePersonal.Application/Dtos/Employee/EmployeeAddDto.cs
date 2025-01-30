@@ -20,12 +20,14 @@ namespace IydePersonal.Application.Dtos.Employee
         public string PhoneNumber { get; set; }
         public WorkPosition WorkPosition { get; set; }
         public int FixSalary { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public int UserId { get; set; }
+       // public int StoreId { get; set; }
        // public bool IsActive { get; set; } = true;
         public DateTime StartWork { get; set; } = DateTime.Now;
         public List<UserListDto> userListDtos { get; set; }
 
+        //public List<StoreDto> storeDtos { get; set; }
       
 
     }

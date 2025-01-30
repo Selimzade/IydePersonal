@@ -1,13 +1,13 @@
 ﻿@using IydePersonal.WEB.Conts
 
-@model List<EmployeeDto>
+@model IEnumerable<EmployeeDto>
 
 
 <div class="container-xxl flex-grow-1 container-p-y" style="width:100%">
             
     
        <H4 class=" fw-bold py-3 mb-4">
-           <span class="text-muted fw-light"><b>Employees List</b>/ </span> Employees
+           <span class="text-muted fw-light"><b>Employees</b>/ </span> List Employees
        </H4>
 
 <!-- Hoverable Table rows -->
@@ -36,7 +36,7 @@
                                                   <th style="color:#483D8B"> <strong>DateOfBirth</strong> </th>
                                                   <th style="color:#483D8B"> <strong>PhoneNumber</strong> </th>
                                                   <th style="color:#483D8B"> <strong>WorkPosition</strong> </th>
-                                                 @*  <th style="color:#483D8B;text-align:center"> <strong>Store</strong> </th> *@
+                                                  <th style="color:#483D8B;text-align:center"> <strong>Store</strong> </th>
                                                   <th style="color:#483D8B"> <strong>Adress</strong> </th>
                                                   <th style="color:#483D8B"> <strong>FixSalary</strong> </th>
                                                   <th style="color:#483D8B"> <strong>StarWork</strong> </th>
@@ -84,8 +84,8 @@
                                                         <td>@Employee.DateOfBirth.ToShortDateString()</td>
                                                         <td>@Employee.PhoneNumber</td>
                                                         <td>@Employee.WorkPosition</td>
-                                                       @*  <td>@Employee.appUser.UserName</td>  *@
-                                                        <td>@Employee.Adress</td>
+                                                        <td>@Employee.User.UserName</td> 
+                                                        <td>@Employee.Address</td>
                                                         <td>@Employee.FixSalary</td>
                                                         <td>@Employee.StartWork.ToShortDateString()</td>
                                                         @* <td>@(Employee.IsActive? "Active":"OnActive") *@
@@ -95,8 +95,10 @@
                                                             {
                                                                      <td>
                                                                         <a class="btn btn-primary btn-xs" data-Id="@Employee.Id" asp-area="Admin" asp-controller="Employee" asp-action="Update" asp-route-UpdateId="@Employee.Id"><i class="bx bxs-edit"></i></a>
-                                                                        <a class="btn btn-danger btn-xs" data-Id="@Employee.Id" asp-area="Admin" asp-controller="Employee" asp-action="Delete" asp-route-UpdateId="@Employee.Id"><i class="bx bx-minus-circle"></i></a>
-                                                                     </td>
+                                                                                                           <button class="btn btn-danger btn-xs" onclick="confirmDelete(@Employee.Id)"><i class="bx bx-minus-circle"></i></button>
+                                                                                 
+                                                                              @*  <a class="btn btn-danger btn-xs" data-Id="@Employee.Id" asp-area="Admin" asp-controller="Employee" asp-action="Delete" asp-route-UpdateId="@Employee.Id"><i class="bx bx-minus-circle"></i></a>*@
+                                                                      </td>
                                                                         
                                                             }
                                                         }
@@ -113,8 +115,59 @@
     <!--/ Hoverable Table rows -->
  </div>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Silmə əməliyyatı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bu elementi silmək istədiyinizə əminsiniz?</p>
+                <!-- Tarix Seçimi -->
+                <div class="mb-3">
+                    <label for="deleteDate" class="form-label">Tarixi seçin:</label>
+                    <input type="date" id="deleteDate" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ləğv et</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+function confirmDelete(updateId) {
+    var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    deleteModal.show();
 
+    document.getElementById('confirmDeleteButton').onclick = function () {
+        const deleteDate = document.getElementById('deleteDate').value; // Tarix dəyərini alırıq
+        if (!deleteDate) {
+            alert('Lütfən tarixi seçin!');
+            return;
+        }
+
+        fetch(`/Admin/Employee/Delete/${updateId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ date: deleteDate }) // Tarixi JSON olaraq göndəririk
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload(); // Səhifəni yeniləyin
+            } else {
+                alert('Xəta baş verdi!');
+            }
+        })
+        .catch(error => console.error('Xəta:', error));
+    };
+}
+</script>
 
 @section Scripts {
     <script src="~/js/JavaScript.js" type="application/ecmascript"></script>

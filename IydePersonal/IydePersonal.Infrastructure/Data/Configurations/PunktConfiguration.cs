@@ -24,12 +24,12 @@ namespace IydePersonal.API.Data.Configurations
                .IsRequired()
                .HasColumnName("Point");
 
-            builder.HasData(new Punkt 
-            {
-                Id=1,
-                Name="Nizami intizam pozmaq",
-                Point=20
-            });
+            //builder.HasData(new Punkt 
+            //{
+            //    Id=1,
+            //    Name="Nizami intizam pozmaq",
+            //    Point=
+            //});
         }
     }
 }

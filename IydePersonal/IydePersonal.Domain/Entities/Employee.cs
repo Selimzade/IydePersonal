@@ -8,7 +8,7 @@ namespace IydePersonal.Domain.Entities
         {
                 
         }
-        public Employee(string fulname, Gender gender, DateTime dateOfBirth, string phoneNumber, WorkPosition workPosition, int fixSalary, string adress, DateTime startWork,int userId)
+        public Employee(string fulname, Gender gender, DateTime dateOfBirth, string phoneNumber, WorkPosition workPosition, int fixSalary, string address, DateTime startWork,int userId)
         {
          
             FullName = fulname;
@@ -18,8 +18,8 @@ namespace IydePersonal.Domain.Entities
             PhoneNumber = phoneNumber;
             WorkPosition = workPosition;
             FixSalary = fixSalary;
-           // StoreId = srotyId;
-            Adress = adress;
+           // StoreId = storeId;
+            Address = address;
             StartWork = startWork;
             UserId = userId;
         }
@@ -32,11 +32,11 @@ namespace IydePersonal.Domain.Entities
         public string PhoneNumber { get; set; }
         public WorkPosition WorkPosition { get; set; }
         public int FixSalary { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public DateTime StartWork { get; set; }=DateTime.Now;
 
         public bool IsActive { get; set; } = true;
-        public DateTime? FinishWork { get; set; }
+        public string? FinishWork { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
 

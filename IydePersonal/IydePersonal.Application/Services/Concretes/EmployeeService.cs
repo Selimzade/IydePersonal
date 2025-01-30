@@ -6,6 +6,7 @@ using IydePersonal.Domain.Entities;
 using IydePersonal.Domain.Entities.Edentity;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Data;
 
 namespace IydePersonal.Application.Services.Concretes
 {
@@ -24,10 +25,10 @@ namespace IydePersonal.Application.Services.Concretes
             _mapper = mapper;
           _userManager = userManager;
         }
-        public async Task<List<EmployeeDto>> GetEmployeeList()
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeeList()
         {
             var employees = await _employeeRepository.GetEmployeesAsync(x=>x.IsActive,x=>x.User);
-            var dto = _mapper.Map<List<EmployeeDto>>(employees);
+            var dto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
             return dto;
         }
      
@@ -58,7 +59,7 @@ namespace IydePersonal.Application.Services.Concretes
                 WorkPosition = employeeAddDto.WorkPosition,
               // IsActive = employeeAddDto.IsActive,
                 FixSalary = employeeAddDto.FixSalary,
-                Adress = employeeAddDto.Adress,
+                Address = employeeAddDto.Address,
                 UserId = employeeAddDto.UserId,
                 StartWork = employeeAddDto.StartWork,
                  //= userId,
@@ -68,11 +69,11 @@ namespace IydePersonal.Application.Services.Concretes
             await _employeeRepository.SaveAsync();
         }
 
-        public async Task SoftDeleteEmployee(int UpdateId)
+        public async Task SoftDeleteEmployee(int UpdateId,string deleteDate)
         {
             var emp = await _employeeRepository.GetEmployeeById(UpdateId);
             emp.IsActive = false;
-            emp.FinishWork=DateTime.Now;
+          //  emp.FinishWork=DateTime.Parse(deleteDate);
             await _employeeRepository.UpdateEmplyee(emp);
             await _employeeRepository.SaveAsync();
          }
@@ -92,8 +93,8 @@ namespace IydePersonal.Application.Services.Concretes
             updateemp.PhoneNumber = employeeUpdateDto.PhoneNumber;
             updateemp.WorkPosition = employeeUpdateDto.WorkPosition;
             updateemp.FixSalary = employeeUpdateDto.FixSalary;
-            updateemp.Adress = employeeUpdateDto.Adress;
-           // updateemp.StoreId = employeeUpdateDto.StoryId;
+            updateemp.Address = employeeUpdateDto.Address;
+            updateemp.UserId = employeeUpdateDto.UserId;
             updateemp.StartWork = employeeUpdateDto.StartWork;
 
             await _employeeRepository.UpdateEmplyee(updateemp);

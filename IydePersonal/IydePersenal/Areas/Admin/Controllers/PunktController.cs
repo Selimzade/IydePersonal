@@ -56,7 +56,7 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         public async Task<IActionResult> Update(PunktUpdateDto punktUpdateDto)
         {
             await _punktService.UptadePunkt(punktUpdateDto);
-            return View (punktUpdateDto);
+            return RedirectToAction("Index","Punkt",new { Area="Admin"});
         }
 
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
