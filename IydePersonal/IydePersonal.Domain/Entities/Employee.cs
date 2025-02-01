@@ -36,7 +36,7 @@ namespace IydePersonal.Domain.Entities
         public DateTime StartWork { get; set; }=DateTime.Now;
 
         public bool IsActive { get; set; } = true;
-        public string? FinishWork { get; set; }
+        public DateTime? FinishWork { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
 

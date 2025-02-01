@@ -73,7 +73,7 @@ namespace IydePersonal.Application.Services.Concretes
         {
             var emp = await _employeeRepository.GetEmployeeById(UpdateId);
             emp.IsActive = false;
-          //  emp.FinishWork=DateTime.Parse(deleteDate);
+            emp.FinishWork=DateTime.Parse(deleteDate);//Secilmis tarixi saxlayiriq
             await _employeeRepository.UpdateEmplyee(emp);
             await _employeeRepository.SaveAsync();
          }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace IydePersonal.WEB.Areas.Admin.Controllers
 {
@@ -27,10 +28,10 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             return View(emp);
         }
         [HttpGet]
-        public async Task<IActionResult> YearlyEmployeeCounts() 
+        public async Task<JsonResult> YearlyEmployeeCounts() 
         {
-            var count=await _dashboardService.GetYearEmployeecount();
-            return Json(JsonConvert.SerializeObject(count));
+            var count=await _dashboardService.GetAllYearsEmployeeCount();
+            return Json(count);
         }
 
         [HttpGet]

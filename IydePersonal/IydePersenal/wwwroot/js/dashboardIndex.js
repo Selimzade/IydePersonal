@@ -80,7 +80,8 @@ $(document).ready(function () {
                 totalRevenueChartOptions = {
                     series: [
                         {
-                            name:"2021",
+                            
+
                             data: chartData
                         }
                     ],

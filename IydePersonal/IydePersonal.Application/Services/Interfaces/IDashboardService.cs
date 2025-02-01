@@ -8,7 +8,7 @@ namespace IydePersonal.Application.Services.Interfaces
 {
     public interface IDashboardService
     {
-        Task<List<int>> GetYearEmployeecount();
+        Task<Dictionary<int, List<int>>> GetAllYearsEmployeeCount();
         Task<int> GetTotalEmployeeCounts();
         Task<int> GetDeleteTotalEmployeeCounts();
         Task <int> GetTotalStoreCounts();

@@ -22,6 +22,7 @@ namespace IydePersonal.Infrastructure.Data
         public DbSet<Salary> Salaries { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<EmployeeLog> EmployeeLogs { get; set; }
+        public DbSet<DeleteDate> deleteDates { get; set; }
       //  public DbSet<User> Users { get; set; }
        // public DbSet<EmployeePunkt> EmployeePunkts { get; set; }
 

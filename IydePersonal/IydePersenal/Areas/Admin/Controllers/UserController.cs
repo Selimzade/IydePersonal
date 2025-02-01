@@ -127,6 +127,8 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         }
 
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
+        [HttpPost]
+        [Route("Admin/User/Delete/{UserId}")]
         public async Task<IActionResult> Delete(int UserId)
         {
             var result = await _userService.DeleteUserAsync(UserId);            

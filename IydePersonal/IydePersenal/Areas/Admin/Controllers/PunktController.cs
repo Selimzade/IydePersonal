@@ -60,6 +60,8 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         }
 
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
+        [HttpPost]
+        [Route("Admin/Punkt/Delete/{PunktId}")]
         public async Task<IActionResult> Delete(int PunktId) 
         {
             await _punktService.DeletePunkt(PunktId);
