@@ -20,7 +20,7 @@ namespace IydePersenal.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "Auth", new { area = "Admin" });
         }
 
         public IActionResult Privacy()

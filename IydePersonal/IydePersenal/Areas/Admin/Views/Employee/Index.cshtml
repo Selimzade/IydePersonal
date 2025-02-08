@@ -74,20 +74,27 @@
                                                    
                                                   </tr>
                                   </tfoot> *@
-                                  <tbody class="table-border-bottom-0">
+                                  <tbody class="table-border-bottom-0"style=" width: 150%;
+                                                                    border-collapse: collapse; padding: 8px;">
         
                                                  @foreach (var Employee in Model)
                                                 {
                                                      <tr name="@Employee.Id">
-                                                        <td>@Employee.FullName</td>
+                                                        <td style="white-space:nowrap;padding: 10px;text-align: left; max-width: 150px; ">@Employee.FullName</td>
                                                         @* <td>@Employee.LastName</td> *@
                                                         <td>@Employee.Gender</td>
                                                         <td>@Employee.DateOfBirth.ToShortDateString()</td>
                                                         <td>@Employee.PhoneNumber</td>
                                                         <td>@Employee.WorkPosition</td>
-                                                        <td>@Employee.User.UserName</td> 
-                                                        <td>@Employee.Address</td>
-                                                        <td>@Employee.FixSalary</td>
+                                                        <td style="white-space:nowrap;padding: 8px;text-align: left; max-width: 150px;">@Employee.User.UserName</td>
+                                                        <td style="
+                                                        padding: 8px;
+                                                        text-align: left;
+                                                        max-width: 150px; /* Maksimum genişlik */
+                                                        white-space: nowrap; /* Sətir sonu daxil etmədən mətnin bir sətirdə qalmasını təmin edir */
+                                                        overflow:hidden; /* Overflow olan məzmunu gizlədər */
+                                                        text-overflow: ellipsis;">@Employee.Address</td>
+                                                        <td style="color:red;text-align:center">@Employee.FixSalary</td>
                                                         <td>@Employee.StartWork.ToShortDateString()</td>
                                                         @* <td>@(Employee.IsActive? "Active":"OnActive") *@
 

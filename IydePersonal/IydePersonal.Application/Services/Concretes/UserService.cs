@@ -74,6 +74,14 @@ namespace IydePersonal.Application.Services.Concretes
             var result=await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
+
+                if (!string.IsNullOrEmpty(userEditDto.NewPassword)) 
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var passwordchange = await _userManager.ResetPasswordAsync(user, token, userEditDto.NewPassword);
+                    if (!passwordchange.Succeeded)
+                        return passwordchange;
+                } 
                 await _userManager.RemoveFromRoleAsync(user,role);
                 var findrole = await _roleManager.FindByIdAsync(userEditDto.RoleId.ToString());
                 await _userManager.AddToRoleAsync(user, findrole.Name);

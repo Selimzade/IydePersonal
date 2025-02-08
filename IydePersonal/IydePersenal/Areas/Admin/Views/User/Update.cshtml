@@ -24,7 +24,10 @@
                             <label asp-for="UserName" style="color:blue" class="form-label">UserName</label>
                             <input asp-for="UserName" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Text" aria-label="default input example" />
                         </div>
-                        
+                        <div class="form-group">
+                            <label asp-for="NewPassword" style="color:blue" class="form-label">New PassWord</label>
+                            <input asp-for="NewPassword" type="password" class="form-control mb-3" id="defaultFormControlInput" placeholder="" aria-label="default input example" />
+                        </div>
                         <div class="form-group">
                             <label asp-for="RoleId" style="color:blue" class="form-label">Role</label>
                             <select asp-for="RoleId" class="form-control mb-3" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"><option></option></select>

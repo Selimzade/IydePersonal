@@ -1,186 +1,100 @@
-﻿
-@* <div class="content-wrapper"> *@
-    <!-- Content -->
+﻿@model IEnumerable<EmployeeDto>
 
-    <div class="container-xxl flex-grow-1 container-p-y">
-   
-         
-            <!-- Total Revenue -->
-         @*    <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+
+@* <div class="content-wrapper"> *@
+<!-- Content -->
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+
+    <!-- Total Revenue -->
+    @*    <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
                 <div class="card">
                     <div class="row row-bordered g-0">
                         <div class="col-md-12">
                             <h5 class="card-header m-0 me-2 pb-3"> @DateTime.Now.Year Total Revenue</h5>
                             <div id="customTotalRevenueChart" class="px-2"></div>
                         </div>
-               
+
                     </div>
                 </div>
             </div> *@
-            <!--/ Total Revenue -->
-          @*   <div class="Row">
-               
-                
-    
-     
-                       
+    <!--/ Total Revenue -->
+    @*   <div class="Row">
+
+
+
+
+
 
 
                @*  <div class="col-lg-4 col-md-4 order-1"> *@
-                    <div class="row">
-                        <div class="col-lg-3 col-md-12 col-6 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
+    <div class="row">
+        <div class="col-lg-3 col-md-12 col-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title d-flex align-items-start justify-content-between">
 
-                                        <i style="height:40px; font-size:2.25rem;color:#4169E1" class="menu-icon tf-icons bx bx bx-user"></i>
+                        <i style="height:40px; font-size:2.25rem;color:#4169E1" class="menu-icon tf-icons bx bx bx-user"></i>
 
-                                    </div>
-                                    <span class="fw-semibold d-block mb-1">Employees</span>
-                                    <h3 class="card-title mb-2" style="color:blue" id="totalemployeecount"></h3>
-                                    <small class="text-success fw-semibold"> </small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-12 col-6 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <i style="height:40px;font-size:2.25rem;color:#4169E1" class="menu-icon tf-icons bx bx bx-user"></i>
-                                    </div>
-                                    <span class="fw-semibold d-block mb-1">OnActive</span>
-                                    <h3 class="card-title text-nowrap mb-2" style="color:red" id="totaldeleteemployee"></h3>
-                                    <small class="text-success fw-semibold"> </small>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-3 col-md-12 col-6 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-
-                                        <i style="height:40px; font-size:2.25rem;color:#8A2BE2" class="fa-sharp fa-solid fa-store"></i>
-
-                                    </div>
-                                    <span class="fw-semibold d-block mb-1">Store</span>
-                                    <h3 class="card-title mb-2" style="color:blue" id="totalstoreCount"></h3>
-                                    <small class="text-success fw-semibold"> </small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-12 col-6 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <i style="height:40px;font-size:2.25rem;color:#000080" class="menu-icon tf-icons bx bx bx-user-plus"></i>
-                                    </div>
-                                    <span class="fw-semibold d-block mb-1">User</span>
-                                    <h3 class="card-title mb-2" style="color:blue" id="totalusercounts"></h3>
-                                    <small class="text-success fw-semibold"> </small>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                    <span class="fw-semibold d-block mb-1">Employees</span>
+                    <h3 class="card-title mb-2" style="color:blue" id="totalemployeecount"></h3>
+                    <small class="text-success fw-semibold"> </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title d-flex align-items-start justify-content-between">
+                        <i style="height:40px;font-size:2.25rem;color:#4169E1" class="menu-icon tf-icons bx bx bx-user"></i>
+                    </div>
+                    <span class="fw-semibold d-block mb-1">OnActive</span>
+                    <h3 class="card-title text-nowrap mb-2" style="color:red" id="totaldeleteemployee"></h3>
+                    <small class="text-success fw-semibold"> </small>
+                </div>
+            </div>
         </div>
 
 
+        <div class="col-lg-3 col-md-12 col-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title d-flex align-items-start justify-content-between">
 
-<!DOCTYPE html>
- <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Start Year Chart</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
+                        <i style="height:40px; font-size:2.25rem;color:#8A2BE2" class="fa-sharp fa-solid fa-store"></i>
 
-        #startYearChart{
-            width:10px; /* Diaqramın eni */
-            height: 300px; /* Diaqramın hündürlüyü */
-            margin-left:40px;
-            margin-top:-600px;
-         
-        }
-    </style>
-</head>
-<body>
-   
-   
-    <div>
-        <canvas id="startYearChart"></canvas>
+                    </div>
+                    <span class="fw-semibold d-block mb-1">Store</span>
+                    <h3 class="card-title mb-2" style="color:blue" id="totalstoreCount"></h3>
+                    <small class="text-success fw-semibold"> </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title d-flex align-items-start justify-content-between">
+                        <i style="height:40px;font-size:2.25rem;color:#000080" class="menu-icon tf-icons bx bx bx-user-plus"></i>
+                    </div>
+                    <span class="fw-semibold d-block mb-1">User</span>
+                    <h3 class="card-title mb-2" style="color:blue" id="totalusercounts"></h3>
+                    <small class="text-success fw-semibold"> </small>
+                </div>
+            </div>
+        </div>
     </div>
-  
-   
-
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: "Admin/Home/YearlyEmployeeCounts", // Backend URL
-                method: "GET",
-                success: function (response) {
-                    var ctx = document.getElementById("startYearChart").getContext("2d");
-                    var datasets = [];
-
-                    // Rəng palitrası
-                    var colors = [
-                        "rgba(255, 99, 132, 0.6)",
-                        "rgba(54, 162, 235, 0.6)",
-                        "rgba(255, 206, 86, 0.6)",
-                        "rgba(75, 192, 192, 0.6)",
-                        "rgba(153, 102, 255, 0.6)",
-                        "rgba(255, 159, 64, 0.6)"
-                    ];
-
-                    var borderColors = [
-                        "rgba(255, 99, 132, 1)",
-                        "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)",
-                        "rgba(75, 192, 192, 1)",
-                        "rgba(153, 102, 255, 1)",
-                        "rgba(255, 159, 64, 1)"
-                    ];
-
-                    Object.keys(response).forEach((year, index) => {
-                        datasets.push({
-                            label: year + " Employees",
-                            data: response[year],
-                            backgroundColor: colors[index % colors.length],
-                            borderColor: borderColors[index % borderColors.length],
-                            borderWidth: 1
-                        });
-                    });
+</div>
 
 
-                    new Chart(ctx, {
-                        type: "bar",
-                        data: {
-                            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                            datasets: datasets
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false, // Ölçünü məhdudlaşdırır
-                            scales: {
-                                y: { beginAtZero: true }
-                            }
-                        }
-                    });
-                },
-                error: function (error) {
-                    console.log("Error fetching data:", error);
-                }
-            });
-        });
-    </script>
-</body>
-</html> 
+
+
 
 @section Scripts {
     <script src="~/js/dashboardIndex.js"></script>
+    @*   <script src="~/js/admindashboard.js"></script> *@
     <script>
         var app = app || {}
         app.Urls = app.Urls || {}
@@ -190,6 +104,266 @@
         app.Urls.totalDeleteArticleCountUrl = "@(Url.Action("TotalDeleteEmployeeCounts", "Home"))";
         app.Urls.totalCategoryCountUrl = "@(Url.Action("TotalStoreCounts", "Home"))";
         app.Urls.totalusercountUrl = "@(Url.Action("TotalUserCounts", "Home"))";
-       // app.Urls.totalusercountUrl = "@(Url.Action("TotalUserCounts", "Home"))";
+        app.Urls.totalusercountUrlss = "@(Url.Action("YearlyEmployeeCounts", "Home"))";
     </script>
 }
+
+  @*   <div style="padding:100px;font-size:larger;margin-block-end:100px">
+            <div class="col-md-2" style="margin-left:300px;font-size:smaller">
+
+                <p><strong>Total:</strong> @Model.Count();
+                <p>
+                    <strong>Male:</strong> @Model.Count(e => ((byte)e.Gender == 1))
+                </p>
+                <p>
+                    <strong>Female:</strong> @Model.Count(e => ((byte)e.Gender == 2))    
+                </p>
+            </div> 
+  
+            <div class="col-md-2" style="margin-top:-200px;padding-top:-100px">
+                <canvas id="genderChart"></canvas>
+            </div>
+        
+   
+
+            <div class="col-md-2">
+                <canvas id="departmentChart"></canvas>
+            </div>
+
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var genderCtx = document.getElementById("genderChart").getContext("2d");
+    var departmentCtx = document.getElementById("departmentChart").getContext("2d");
+
+    var genderChart = new Chart(genderCtx, {
+    type: "pie",
+    data: {
+    labels: ["Male", "Female"],
+    datasets: [{
+    data: [@Model.Count(e => ((byte)e.Gender == 1)),@Model.Count(e => ((byte)e.Gender == 2))],
+    backgroundColor: ["#3498db", "#e74c3c"],
+    borderWidth: 2
+    }]
+    },
+    options: {
+    responsive: true,
+    plugins: {
+    tooltip: {
+    backgroundColor: '#333',
+    titleColor: '#fff',
+    bodyColor: '#fff',
+    borderColor: '#fff',
+    borderWidth: 1
+    },
+    legend: {
+    labels: {
+    fontColor: '#333',
+    boxWidth: 20
+    }
+    }
+    },
+    animation: {
+    duration: 1000
+    }
+    }
+    });
+
+  
+    });
+</script> *@
+@* 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Start Year Chart</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+
+        #startYearChart {
+            width: 10px; /* Diaqramın eni */
+            height: 300px; /* Diaqramın hündürlüyü */
+            margin-left: 40px;
+            margin-top: -350px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div>
+        <canvas id="startYearChart"></canvas>
+    </div>
+
+
+
+    <script>
+
+    </script>
+</body> *@
+</html>
+
+
+@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Profile Dashboard</h1>
+    <h3>Total Employees: <span id="totalEmployees"></span></h3>
+
+    <div class="container">
+        <div class="card">
+            <h3>By Gender</h3>
+            <canvas id="genderStats"></canvas>
+        </div>
+        <div class="card">
+            <h3>By Age</h3>
+            <canvas id="ageStats"></canvas>
+        </div>
+        <div class="card">
+            <h3>By Work Position</h3>
+            <canvas id="positionStats"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('Admin/Employee/GetEmployeeStatistics')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("totalEmployees").innerText = data.totalEmployees;
+
+                    new Chart(document.getElementById("genderStats"), {
+                        type: "pie",
+                        data: {
+                            labels: ["Male", "Female"],
+                            datasets: [{
+                                data: [data.gender.male, data.gender.female],
+                                backgroundColor: ["#3498db", "#e74c3c"]
+                            }]
+                        }
+                    });
+
+                    new Chart(document.getElementById("ageStats"), {
+                        type: "bar",
+                        data: {
+                            labels: data.age.labels,
+                            datasets: [{
+                                label: "Age Distribution",
+                                data: data.age.counts,
+                                backgroundColor: "#2ecc71"
+                            }]
+                        }
+                    });
+
+                    new Chart(document.getElementById("positionStats"), {
+                        type: "pie",
+                        data: {
+                            labels: data.position.labels,
+                            datasets: [{
+                                data: data.position.counts,
+                                backgroundColor: ["#f1c40f", "#e67e22", "#9b59b6", "#16a085", "#d35400"]
+                            }]
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
+ *@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div>
+    <canvas id="genderChart" style="max-width: 300px; max-height: 300px;"></canvas>
+    <canvas id="ageChart" style="max-width: 400px; max-height: 300px;"></canvas>
+    <canvas id="positionChart" style="max-width: 400px; max-height: 300px;"></canvas>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('/Admin/Employee/GetEmployeeStatistics') // Controller adı ilə URL-i dəyişin
+
+            .then(response => response.json())
+            .then(data => {
+                // Gender Chart
+                 new Chart(document.getElementById("genderChart"), {
+                        type: "pie",
+                        data: {
+                            labels: ["Male", "Female"],
+                            datasets: [{
+                                data: [data.gender.male, data.gender.female],
+                                backgroundColor: ["#3498db", "#e74c3c"]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                     });
+
+                // Age Chart
+                new Chart(document.getElementById("ageChart"), {
+                    type: "bar",
+                    data: {
+                        labels: data.age.labels,
+                        datasets: [{
+                            label: "Employee Count by Age Group",
+                            data: data.age.counts,
+                            backgroundColor: "#2ecc71"
+                        }]
+                    }
+                });
+
+                // Position Chart
+                new Chart(document.getElementById("positionChart"), {
+                    type: "doughnut",
+                    data: {
+                        labels: data.position.labels,
+                        datasets: [{
+                            data: data.position.counts,
+                            backgroundColor: ["#9b59b6", "#f1c40f", "#e67e22", "#1abc9c"]
+                        }]
+                    }
+                });
+            })
+            .catch(error => console.error("Error loading data:", error));
+    });
+</script>

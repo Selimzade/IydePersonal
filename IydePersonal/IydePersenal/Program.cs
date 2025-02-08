@@ -1,7 +1,9 @@
 using IydePersonal.Application;
+using IydePersonal.Application.FluentValidations;
 using IydePersonal.Domain.Entities.Edentity;
 using IydePersonal.Infrastructure;
 using IydePersonal.Infrastructure.Data;
+using IydePersonal.WEB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
@@ -35,6 +37,14 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
     .AddRoleManager<RoleManager<AppRole>>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+//builder.Services.AddIdentity<AppUser, IdentityRole>()
+//    .AddEntityFrameworkStores<AppDbContext>()
+//    .AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(opt => opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .");
+
+builder.Services.AddSingleton<IUserValidator<AppUser>, CustomUserValidator>();
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
@@ -84,9 +94,21 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(
         name: "Admin",
         areaName: "Admin",
-         pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+         pattern: "Admin/{controller=Auth}/{action=Login}/{id?}"
         );
     endpoints.MapDefaultControllerRoute();
 });
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapAreaControllerRoute(
+//        name: "admin",
+//        areaName: "Admin",
+//        pattern: "Admin/{controller=Auth}/{action=Login}/{id?}"
+//    );
+
+//    endpoints.MapControllerRoute(
+//        name: "default",
+//        pattern: "{controller=Home}/{action=Index}/{id?}");
+//});
 
 app.Run();

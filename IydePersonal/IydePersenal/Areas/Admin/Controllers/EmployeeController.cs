@@ -43,10 +43,67 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
 
         [HttpGet]
         [Authorize(Roles = $"{RoleConsts.Superadmin},{RoleConsts.Admin}")]
+       
         public async Task<IActionResult> Index()
         {
             var emp = await _employeeService.GetEmployeeList();
+
             return View(emp);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEmployeeStatistics()
+        {
+            var employees = await _employeeService.GetEmployeeList();
+
+           
+
+            if (!employees.Any())
+            {
+                return Json(new
+                {
+                    totalEmployees = 0,
+                    gender = new { male = 0, female = 0 },
+                    age = new { labels = new List<string>(), counts = new List<int>() },
+                    position = new { labels = new List<string>(), counts = new List<int>() }
+                });
+            }
+
+            var genderStats = new
+            {
+                male = employees.Count(e => ((byte)e.Gender==1)),
+                female = employees.Count(e => ((byte)e.Gender==2))
+            };
+
+            var currentYear = DateTime.Now.Year;
+            var ageStats = employees
+                .Where(e => e.DateOfBirth != null)
+                .Select(e => new { Age = currentYear - e.DateOfBirth.Year })
+                .GroupBy(e => e.Age / 10 * 10)
+                .Select(g => new { AgeGroup = $"{g.Key}-{g.Key + 9}", Count = g.Count() })
+                .OrderBy(g => g.AgeGroup)
+                .ToList();
+
+            var positionStats = employees
+                .GroupBy(e => e.WorkPosition)
+                .Select(g => new { Position = g.Key.ToString(), Count = g.Count() })
+                .ToList();
+
+            return Json(new
+            {
+                totalEmployees = employees.Count(),  // ✅ Burada Count() deyil, Count istifadə olunur
+                gender = genderStats,
+                age = new
+                {
+                    labels = ageStats.Select(a => a.AgeGroup),
+                    counts = ageStats.Select(a => a.Count)
+                },
+                position = new
+                {
+                    labels = positionStats.Select(p => p.Position), // ✅ p.Position() deyil, p.Position istifadə olunmalıdır
+                    counts = positionStats.Select(p => p.Count)
+                }
+            });
         }
 
         [HttpGet]
