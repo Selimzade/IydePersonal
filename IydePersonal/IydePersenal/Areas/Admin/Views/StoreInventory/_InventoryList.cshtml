@@ -1,0 +1,39 @@
+﻿@using IydePersonal.Domain.Entities
+@model List<Inventory>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Sayı</th>
+            <th>Qiymət</th>
+            <th>Təchizatçı</th>
+            <th>Əlavə edilmə tarixi</th>
+            <th>Son yenilənmə</th>
+            <th>Açıqlama</th>
+            <th>Əməliyyatlar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Count</td>
+                <td>@item.Price ₼</td>
+                <td>@item.Supplier</td>
+                <td>@item.AddedDate.ToShortDateString()</td>
+                <td>@item.LastUpdated.ToShortDateString()</td>
+                <td>@item.Description</td>
+                <td>
+                    <button class="btn btn-warning btn-sm">Redaktə et</button>
+                    <button class="btn btn-danger btn-sm">Sil</button>
+                   @*  <button class="btn btn-primary btn-sm">Add</button> *@
+                </td>
+            </tr>
+        }
+       
+    </tbody>
+</table>

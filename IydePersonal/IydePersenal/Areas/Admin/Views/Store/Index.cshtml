@@ -1,5 +1,6 @@
 ﻿@using IydePersonal.Application.Dtos.Store
-@model List<StoreDto>
+@using IydePersonal.Domain.Entities
+@model List<Store>
 
 <div class="container-xxl flex-grow-1 container-p-y">
 
@@ -22,28 +23,27 @@
                                <table class="display table table-striped table-hover  table-dark" id="StoreTables" width="100%" cellspacing="0">
                                   <thead>
                                     <tr>
-                                             <th>Full Name</th>
-                                             <th style="padding-left:1000px">Edit&Delete</th>
+                                               <th>FullName</th>
+                                              <th style="padding-left:900px">Details</th>
+                                              <th>Edit&Delete</th>
                                     </tr>
                                   </thead>
-                    @*   <tfoot>
-
-                                           <tr>
-                                             <th>Ad</th>
-                                             <th>Bal</th>
-                                             <th>Edit&Delete</th>
-                                           </tr>
-                                  </tfoot> *@
+                   
                                   <tbody class="table-border-bottom-0">
 
                                                           @foreach (var Store in Model)
                                                                               {
                                                              <tr>
+                                                                    
                                                                 <td>@Store.Name</td>
-                                                                @* <td>@Punkt.Point</td> *@
-
-
-                                                                <td style="padding-left:1000px">
+                                                                    <td style="padding-left:890px">
+                                                                                 <button class="btn btn-primary btn-sm" onclick="openInventoryModal(@Store.Id)"style="text-align:center">İnventarı Aç</button>
+                                                                    </td>
+@* 
+                                                              @*---------------------------------------------------------------------------------------------------------*@
+                                                                    
+                                                              @*----------------------------------------------------------------------------------------------------------*@
+                                                                <td>
                                                                     <a class="btn btn-primary btn-xs" data-Id="@Store.Id" asp-area="Admin" asp-controller="Store" asp-action="Update" asp-route-StoreId="@Store.Id"><i class="bx bxs-edit"></i></a>
                                                                                <button class="btn btn-danger btn-xs" onclick="confirmDelete(@Store.Id)"><i class="bx bx-minus-circle"></i></button>
                                                                 </td>
@@ -57,6 +57,11 @@
 
     <!--/ Hoverable Table rows -->
 </div>
+
+
+
+
+
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -75,32 +80,132 @@
         </div>
     </div>
 </div>
+@*-------------------------------------------------------------------------------------------*@
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="modal fade" id="inventoryModal" tabindex="-1" aria-labelledby="inventoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <!-- Burada `modal-xl` və `modal-dialog-centered` əlavə olundu -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="inventoryModalLabel">Mağaza İnventarları</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Store ID: @ViewBag.StoreId</p>
+                <button class="btn btn-success mb-3" data-store-id="@ViewBag.StoreId" onclick="openAddInventoryModal(this)">+ Əlavə Et</button>
+                <div id="inventoryContainer"></div>
+            </div>
+            <div class="modal-body" id="inventoryContainer">
+                <!-- İnventar siyahısı AJAX ilə bura yüklənəcək -->
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------------------------------------>
+
+<div class="modal fade" id="addInventoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni İnventar Əlavə Et</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addInventoryForm">
+                    <input type="hidden" id="storeId" name="storeId">
+                    <div class="mb-3">
+                        <label>Ad</label>
+                        <input type="text" class="form-control" id="inventoryName" name="Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Sayı</label>
+                        <input type="number" class="form-control" id="inventoryCount" name="Count" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Qiymət</label>
+                        <input type="number" class="form-control" id="inventoryPrice" name="Price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Təchizatçı</label>
+                        <input type="text" class="form-control" id="inventorySupplier" name="Supplier" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Açıqlama</label>
+                        <textarea class="form-control" id="inventoryDescription" name="Description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------------------------------------>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    function confirmDelete(punktId) {
-        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        deleteModal.show();
-
-        document.getElementById('confirmDeleteButton').onclick = function () {
-            fetch(`/Admin/Store/Delete/${punktId}`, {
-                method: 'POST'
-            })
-                .then(response => {
-                    if (response.ok) {
-                        location.reload(); // Səhifəni yeniləyin
-                    } else {
-                        alert('An error occurred!');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        };
+         function openAddInventoryModal(button) {
+        var storeId = $(button).data("store-id"); // Düymədən mağaza ID-ni al
+        console.log("Store ID:", storeId); // Debug üçün Console-da yoxla
+        $("#storeId").val(storeId); // Modal formuna ID-ni yaz
+        $("#addInventoryModal").modal("show");
     }
 
+      $("#addInventoryForm").submit(function (e) {
+        e.preventDefault();
+
+         var storeId = $("#storeId").val();
+        if (!storeId) {
+        alert("Xəta: Mağaza seçilməyib!");
+        return;
+    }
+
+       var formData = {
+        StoreId: parseInt($("#storeId").val()) || 0,
+        Name: $("#inventoryName").val(),
+        Count: parseInt($("#inventoryCount").val()) || 0,
+        Price: parseFloat($("#inventoryPrice").val()) || 0.0,
+        Supplier: $("#inventorySupplier").val(),
+        Description: $("#inventoryDescription").val()
+    };
+    console.log("Göndərilən Data:", formData); // Debug üçün
+        
+        $.ajax({
+            url: '/Admin/StoreInventory/AddInventory', // Admin sahəsindədirsə bunu yoxla
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function () {
+                alert("İnventar əlavə olundu!");
+                $("#addInventoryModal").modal("hide");
+                openInventoryModal(formData.StoreId); // Siyahını yenilə
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+                alert("Xəta baş verdi: " + xhr.responseText);
+            }
+        });
+    });
 </script>
+
+<script>
+    function openInventoryModal(storeId) {
+        $.get('/Admin/StoreInventory/GetInventories?storeId=' + storeId, function(data) {
+            $("#inventoryContainer").html(data);
+            $("#inventoryModal").modal("show");
+        }).fail(function() {
+            alert("Xəta baş verdi: Server sorğunu tapa bilmir! (404)");
+        });
+    }
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 
 @section Scripts {
     <script src="~/js/JavaScript2.js" type="application/ecmascript"></script>
+    <script src="~/js/empployee_delete_.js"></script>
 }

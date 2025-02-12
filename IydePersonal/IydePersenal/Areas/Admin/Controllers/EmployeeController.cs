@@ -75,14 +75,19 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
                 female = employees.Count(e => ((byte)e.Gender==2))
             };
 
-            var currentYear = DateTime.Now.Year;
+            var currentDate = DateTime.Today; // İndiki tarix
             var ageStats = employees
-                .Where(e => e.DateOfBirth != null)
-                .Select(e => new { Age = currentYear - e.DateOfBirth.Year })
-                .GroupBy(e => e.Age / 10 * 10)
-                .Select(g => new { AgeGroup = $"{g.Key}-{g.Key + 9}", Count = g.Count() })
-                .OrderBy(g => g.AgeGroup)
-                .ToList();
+                 .Where(e => e.DateOfBirth != null)
+                 .Select(e => new
+                 {
+                     Age = currentDate.Year - e.DateOfBirth.Year -
+                           (e.DateOfBirth.Date > currentDate.AddYears(-(currentDate.Year - e.DateOfBirth.Year)) ? 1 : 0)
+                 })
+                 .Where(e => e.Age >= 18) // 🔥 Yaşı 18-dən aşağı olanları çıxarırıq!
+                 .GroupBy(e => e.Age / 10 * 10)
+                 .Select(g => new { AgeGroup = $"{g.Key}-{g.Key + 9}", Count = g.Count() })
+                 .OrderBy(g => g.AgeGroup)
+                 .ToList();
 
             var positionStats = employees
                 .GroupBy(e => e.WorkPosition)

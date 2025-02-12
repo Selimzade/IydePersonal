@@ -47,33 +47,10 @@
                                                         {
                                                          <th style="color:#483D8B"> <strong>Edit&Delete</strong> </th>
                                                         }
-                                                     }
-                      
-                                                  
-    
+                                                     }     
                                     </tr>
                                   </thead>
-                               @*    <tfoot>
-                                                  <tr>
-                                                    <th>FirstName</th>
-                                                    <th>LastName</th>
-                                                    <th>Gender</th>
-                                                    <th>DateOfBirth</th>
-                                                    <th>PhoneNumber</th>
-                                                    <th>WorkPosition</th>
-                                                    <th>Store</th>
-                                                    <th>Adress</th>
-                                                    <th>FixSalary</th>
-                                                    <th>StarWork</th>
-                                                    @{
-                                                      @if (User.IsInRole($"{RoleConsts.Superadmin}"))
-                                                        {
-                                                          <th>Edit&Delete</th>
-                                                        }
-                                                    }
-                                                   
-                                                  </tr>
-                                  </tfoot> *@
+                         
                                   <tbody class="table-border-bottom-0"style=" width: 150%;
                                                                     border-collapse: collapse; padding: 8px;">
         
@@ -81,12 +58,11 @@
                                                 {
                                                      <tr name="@Employee.Id">
                                                         <td style="white-space:nowrap;padding: 10px;text-align: left; max-width: 150px; ">@Employee.FullName</td>
-                                                        @* <td>@Employee.LastName</td> *@
                                                         <td>@Employee.Gender</td>
                                                         <td>@Employee.DateOfBirth.ToShortDateString()</td>
                                                         <td>@Employee.PhoneNumber</td>
-                                                        <td>@Employee.WorkPosition</td>
-                                                        <td style="white-space:nowrap;padding: 8px;text-align: left; max-width: 150px;">@Employee.User.UserName</td>
+                                                        <td style="text-align:center">@Employee.WorkPosition</td>
+                                                        <td style="white-space:nowrap;padding: 8px;text-align: center; max-width: 150px;">@Employee.User.UserName</td>
                                                         <td style="
                                                         padding: 8px;
                                                         text-align: left;
@@ -96,7 +72,7 @@
                                                         text-overflow: ellipsis;">@Employee.Address</td>
                                                         <td style="color:red;text-align:center">@Employee.FixSalary</td>
                                                         <td>@Employee.StartWork.ToShortDateString()</td>
-                                                        @* <td>@(Employee.IsActive? "Active":"OnActive") *@
+                                                       
 
                                                         @{
                                                          @if (User.IsInRole($"{RoleConsts.Superadmin}"))
@@ -110,8 +86,6 @@
                                                                         
                                                             }
                                                         }
-
-                                                       
                                                      </tr>
                                                 }
                                   </tbody>

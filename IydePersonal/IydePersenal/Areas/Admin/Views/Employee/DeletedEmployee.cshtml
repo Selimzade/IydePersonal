@@ -31,38 +31,21 @@
 
                                     </tr>
                                   </thead>
-                                 @*  <tfoot>
-                                                  <tr>
-                                                    <th>FirstName</th>
-                                                    <th>LastName</th>
-                                                    <th>Gender</th>
-                                                    <th>DateOfBirth</th>
-                                                    <th>PhoneNumber</th>
-                                                    <th>WorkPosition</th>
-                                                    <th>Store</th>
-                                                    <th>Adress</th>
-                                                    <th>FixSalary</th>
-                                                    <th>FinishWork</th>
-
-                                                    <th>Edit&Delete</th>
-                                                  </tr>
-                                  </tfoot> *@
+                             
                                   <tbody class="table-border-bottom-0">
 
                         @foreach (var Employee in Model)
                         {
                                                          <tr name="@Employee.Id">
                                                             <td>@Employee.FullName</td>
-                                                            @* <td>@Employee.LastName</td> *@
                                                             <td>@Employee.Gender</td>
                                                             <td>@Employee.DateOfBirth.ToShortDateString()</td>
                                                             <td>@Employee.PhoneNumber</td>
                                                             <td>@Employee.WorkPosition</td>
-                                                         @*    <td>@Employee.Store.Name</td> *@
+                                                            <td>@Employee.User.UserName</td>
                                                             <td>@Employee.Address</td>
                                                             <td>@Employee.FixSalary</td>
                                                             <td>@Employee.FinishWork.ToShortDateString()</td>
-                                                             @* <td>@(Employee.IsActive? "Active":"OnActive") *@
                                                             <td>
                                                                     <a class="btn btn-warning btn-xs" data-Id="@Employee.Id" asp-area="Admin" asp-controller="Employee" asp-action="UndoDelete" asp-route-UpdateId="@Employee.Id"><i class="bx bx-undo"></i></a>
                                                                     @* <a class="btn btn-danger btn-xs" data-Id="@Employee.Id" asp-area="Admin" asp-controller="Employee" asp-action="Delete" asp-route-UpdateId="@Employee.Id"><i class="bx bx-minus-circle"></i></a> *@

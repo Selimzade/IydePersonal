@@ -33,18 +33,18 @@ namespace IydePersonal.Application.Services.Concretes
           await  _storeRepostory.SaveAsync();
         }
 
-        public async Task<List<StoreDto>> AllStoreDtos()
+        public async Task<List<Store>> AllStoreDtos()
         {
             var story=await _storeRepostory.GetAllStoreDtos();
-            var map = _mapper.Map<List<StoreDto>>(story);
-            return map;
+           // var map = _mapper.Map<List<StoreDto>>(story);
+            return story;
         }
 
-        public async Task<StoreDto> GetStoreByIdAsync(int StoreId)
+        public async Task<Store> GetStoreByIdAsync(int StoreId)
         {
            var store= await _storeRepostory.GetStoreById(StoreId);
-           var map=  _mapper.Map<StoreDto>(store);
-           return map;
+           //var map=  _mapper.Map<StoreDto>(store);
+           return store;
         }
 
         public async Task UpdateStoreAsync(StoreUpdateDto storeUpdateDto)
