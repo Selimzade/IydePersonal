@@ -19,6 +19,7 @@
                           <a class="btn btn-success btn-md mb-3" asp-area="Admin" asp-controller="Store" asp-action="Add">
                               New <i class="bx bx-plus"></i>
                           </a>
+                           
 
                                <table class="display table table-striped table-hover  table-dark" id="StoreTables" width="100%" cellspacing="0">
                                   <thead>
@@ -37,7 +38,10 @@
                                                                     
                                                                 <td>@Store.Name</td>
                                                                     <td style="padding-left:890px">
-                                                                                 <button class="btn btn-primary btn-sm" onclick="openInventoryModal(@Store.Id)"style="text-align:center">İnventarı Aç</button>
+                                                                                 
+                                                                                              <button class="btn btn-primary btn-sm" onclick="openInventoryModal(@Store.Id)"style="text-align:center">İnventarı Aç</button>
+                                                                                              
+
                                                                     </td>
 @* 
                                                               @*---------------------------------------------------------------------------------------------------------*@
@@ -92,8 +96,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Store ID: @ViewBag.StoreId</p>
-                <button class="btn btn-success mb-3" data-store-id="@ViewBag.StoreId" onclick="openAddInventoryModal(this)">+ Əlavə Et</button>
+                <button class="btn btn-primary btn-sm float-end" onclick="openAddInventoryModal()"> <i class="bx bx-plus-circle"></i></button>
+
                 <div id="inventoryContainer"></div>
             </div>
             <div class="modal-body" id="inventoryContainer">
@@ -103,89 +107,101 @@
     </div>
 </div>
 <!------------------------------------------------------------------------------------------------>
-
-<div class="modal fade" id="addInventoryModal" tabindex="-1">
+<div id="AddinventoryModal" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Yeni İnventar Əlavə Et</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <h5 class="modal-title">İnventar Əlavə Et</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addInventoryForm">
-                    <input type="hidden" id="storeId" name="storeId">
-                    <div class="mb-3">
-                        <label>Ad</label>
-                        <input type="text" class="form-control" id="inventoryName" name="Name" required>
+                <form id="inventoryForm">
+
+                    <div class="form-group">
+                        <label for="storeId">Mağaza</label>
+                        <select id="storeId" class="form-control" required>
+                            <option value="">Mağaza seçin...</option>
+                            @foreach (var store in Model)
+                            {
+                                <option value="@store.Id">@store.Name</option>
+                            }
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label>Sayı</label>
-                        <input type="number" class="form-control" id="inventoryCount" name="Count" required>
+
+                    <div class="form-group">
+                        <label for="name">İnventar Adı</label>
+                        <input type="text" id="name" class="form-control" required>
                     </div>
-                    <div class="mb-3">
-                        <label>Qiymət</label>
-                        <input type="number" class="form-control" id="inventoryPrice" name="Price" required>
+
+                    <div class="form-group">
+                        <label for="count">Say</label>
+                        <input type="number" id="count" class="form-control" required>
                     </div>
-                    <div class="mb-3">
-                        <label>Təchizatçı</label>
-                        <input type="text" class="form-control" id="inventorySupplier" name="Supplier" required>
+
+                    <div class="form-group">
+                        <label for="price">Qiymət</label>
+                        <input type="number" id="price" class="form-control" required>
                     </div>
-                    <div class="mb-3">
-                        <label>Açıqlama</label>
-                        <textarea class="form-control" id="inventoryDescription" name="Description"></textarea>
+
+                    <div class="form-group">
+                        <label for="supplier">Təchizatçı</label>
+                        <input type="text" id="supplier" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Yadda saxla</button>
+
+                    <div class="form-group">
+                        <label for="description">Təsvir</label>
+                        <textarea id="description" class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Əlavə Et</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <!------------------------------------------------------------------------------------------------>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-         function openAddInventoryModal(button) {
-        var storeId = $(button).data("store-id"); // Düymədən mağaza ID-ni al
-        console.log("Store ID:", storeId); // Debug üçün Console-da yoxla
-        $("#storeId").val(storeId); // Modal formuna ID-ni yaz
-        $("#addInventoryModal").modal("show");
+           function openAddInventoryModal() {
+        $("#AddinventoryModal").modal("show");
     }
 
-      $("#addInventoryForm").submit(function (e) {
-        e.preventDefault();
+    // Formu AJAX ilə göndər
+    $("#inventoryForm").submit(function (event) {
+        event.preventDefault();
 
-         var storeId = $("#storeId").val();
-        if (!storeId) {
-        alert("Xəta: Mağaza seçilməyib!");
-        return;
-    }
+        var inventoryData = {
+            StoreId: $("#storeId").val(),
+            Name: $("#name").val(),
+            Count: $("#count").val(),
+            Price: $("#price").val(),
+            Supplier: $("#supplier").val(),
+            Description: $("#description").val()
+        };
 
-       var formData = {
-        StoreId: parseInt($("#storeId").val()) || 0,
-        Name: $("#inventoryName").val(),
-        Count: parseInt($("#inventoryCount").val()) || 0,
-        Price: parseFloat($("#inventoryPrice").val()) || 0.0,
-        Supplier: $("#inventorySupplier").val(),
-        Description: $("#inventoryDescription").val()
-    };
-    console.log("Göndərilən Data:", formData); // Debug üçün
-        
+        if (!inventoryData.StoreId) {
+            alert("Xəta: Mağaza seçilməyib!");
+            return;
+        }
+
         $.ajax({
-            url: '/Admin/StoreInventory/AddInventory', // Admin sahəsindədirsə bunu yoxla
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(formData),
-            success: function () {
-                alert("İnventar əlavə olundu!");
-                $("#addInventoryModal").modal("hide");
-                openInventoryModal(formData.StoreId); // Siyahını yenilə
+            url: "/Admin/StoreInventory/AddInventory",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(inventoryData),
+            success: function (response) {
+                alert("İnventar uğurla əlavə edildi!");
+                $("#inventoryModal").modal("hide");
+                location.reload();
             },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
-                alert("Xəta baş verdi: " + xhr.responseText);
+            error: function (xhr) {
+                alert("Xəta: " + xhr.responseText);
             }
         });
     });
+
 </script>
 
 <script>

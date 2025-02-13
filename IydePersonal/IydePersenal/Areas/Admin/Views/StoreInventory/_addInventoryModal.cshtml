@@ -1,0 +1,43 @@
+﻿@using IydePersonal.Domain.Entities
+@model Store
+
+    <div class="modal fade" id="addInventoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni İnventar Əlavə Et</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Store" asp-action="Add" method="post" enctype="multipart/form-data id="addInventoryForm">
+                    <input type="hidden" id="storeId" name="storeId"> 
+                    <div class="mb-3">
+                        <label>Ad</label>
+                        <input asp-for="Name" type="number" class="form-control" id="srotyId" name="Id" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Ad</label>
+                        <input type="text" class="form-control" id="inventoryName" name="Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Sayı</label>
+                        <input type="number" class="form-control" id="inventoryCount" name="Count" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Qiymət</label>
+                        <input type="number" class="form-control" id="inventoryPrice" name="Price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Təchizatçı</label>
+                        <input type="text" class="form-control" id="inventorySupplier" name="Supplier" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Açıqlama</label>
+                        <textarea class="form-control" id="inventoryDescription" name="Description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

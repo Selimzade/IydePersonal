@@ -19,55 +19,46 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             _appDbContext = appDbContext;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var stores = await _appDbContext.Stores.ToListAsync();
+            return View(stores);
+        }
+
         [HttpGet("GetInventories")]
         public async Task<IActionResult> GetInventories(int storeId)
         {
             var inventories = await _inventoryRepository.GetInventoriesByStoreIdAsync(storeId);
             return PartialView("_InventoryList", inventories);
         }
-
-        public async Task <IActionResult> Index(int? storeId)
+       
+        public async Task<IActionResult> Index(int? storeId)
         {
             if (!storeId.HasValue)
             {
                 return BadRequest("İnventar üçün mağaza seçilməyib!");
             }
 
-            ViewBag.StoreId = storeId;
+            ViewBag.StoreId = storeId.Value;
             var inventories = await _inventoryRepository.GetInventoriesByStoreIdAsync(storeId.Value);
             return View(inventories);
         }
 
+       
         [HttpPost("AddInventory")]
-        public async Task<IActionResult> AddInventory([FromBody] Inventory inventory,int? storeId)
+        public async Task<IActionResult> AddInventory([FromBody] Inventory inventory)
         {
-            if (!storeId.HasValue)
-            {
-                return BadRequest("İnventar üçün mağaza seçilməyib!");
-            }
-
-            ViewBag.StoreId = storeId;
-            var inventories = await _inventoryRepository.GetInventoriesByStoreIdAsync(storeId.Value);
-            
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Düzgün məlumat daxil edilməyib!");
-            }
-
             if (inventory.StoreId == 0)
             {
-                return BadRequest("İnventar üçün mağaza seçilməyib!");
+                return BadRequest("Xəta: Mağaza seçilməyib!");
             }
 
             inventory.AddedDate = DateTime.Now;
             inventory.LastUpdated = DateTime.Now;
 
             await _inventoryRepository.AddInventoryAsync(inventory);
-            return RedirectToAction("GetInventories", new { storeId = inventory.StoreId });
+            return Ok("İnventar uğurla əlavə edildi!");
         }
 
         [HttpPost]
