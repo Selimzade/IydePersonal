@@ -1,4 +1,4 @@
-﻿function confirmDelete(employeeId) {
+﻿function confirmDelete(updateId) {
     var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
     deleteModal.show();
 
@@ -9,7 +9,7 @@
             return;
         }
 
-        fetch(`/Admin/Employee/Delete/${employeeId}`, {
+        fetch(`/Admin/Employee/Delete/${updateId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,5 +24,5 @@
                 }
             })
             .catch(error => console.error('Error:', error));
-    }
-};
+    };
+}
