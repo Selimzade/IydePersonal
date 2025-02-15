@@ -52,5 +52,13 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             return RedirectToAction("Index", "Store", new { Area = "Admin" });
         }
 
+        [HttpPost]
+        [Route("Admin/Store/Delete/{PunktId}")]
+        public async Task <IActionResult> Delete (int PunktId) 
+        {
+            await _storyService.DeleteStoreAsync(PunktId);
+            return RedirectToAction("Index", "Store", new { Area = "Admin" });
+        }
+
     }
 }

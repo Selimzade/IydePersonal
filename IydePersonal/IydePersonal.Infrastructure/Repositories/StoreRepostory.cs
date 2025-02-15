@@ -61,5 +61,10 @@ namespace IydePersonal.Infrastructure.Repositories
                 return await Table.CountAsync(predicate);
             return await Table.CountAsync();
         }
+
+        public async Task DeleteStore(Store store)
+        {
+                _context.Stores.Remove(store);
+        }
     }
 }

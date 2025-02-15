@@ -120,41 +120,12 @@
     </div>
 </div>
 
-<script>
-function confirmDelete(updateId) {
-    var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    deleteModal.show();
-
-    document.getElementById('confirmDeleteButton').onclick = function () {
-        const deleteDate = document.getElementById('deleteDate').value; // Tarix dəyərini alırıq
-        if (!deleteDate) {
-                alert(' Please select a date!');
-            return;
-        }
-
-        fetch(`/Admin/Employee/Delete/${updateId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ date: deleteDate }) // Tarixi JSON olaraq göndəririk
-        })
-        .then(response => {
-            if (response.ok) {
-                location.reload(); // Səhifəni yeniləyin
-            } else {
-                        alert('An error occurred!');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    };
-}
-</script>
 
 
 @section Scripts {
     <script src="~/js/JavaScript.js" type="application/ecmascript"></script>
+    
 }
 
-
+<script src="~/js/empployee_delete_.js"></script>
 

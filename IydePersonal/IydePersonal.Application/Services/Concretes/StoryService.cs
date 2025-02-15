@@ -4,6 +4,7 @@ using IydePersonal.Application.Dtos.Store;
 using IydePersonal.Application.Repositories;
 using IydePersonal.Application.Services.Interfaces;
 using IydePersonal.Domain.Entities;
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,13 @@ namespace IydePersonal.Application.Services.Concretes
             var story=await _storeRepostory.GetAllStoreDtos();
            // var map = _mapper.Map<List<StoreDto>>(story);
             return story;
+        }
+
+        public async Task DeleteStoreAsync(int Id)
+        {
+            var store = await _storeRepostory.GetStoreById(Id);
+            await _storeRepostory.DeleteStore(store);
+            await _storeRepostory.SaveAsync();
         }
 
         public async Task<Store> GetStoreByIdAsync(int StoreId)

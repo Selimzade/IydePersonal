@@ -15,6 +15,8 @@ namespace IydePersonal.Application.Repositories
         public Task CreateStore(Store store);
         Task <Store> GetStoreById(int Id);
         public Task <Store> UpdateStore (Store store);
+
+        Task DeleteStore(Store store);
         Task<int> CountStore(Expression<Func<Store, bool>> predicate = null);
         Task<int> SaveAsync();
         int Save();

@@ -69,9 +69,9 @@ namespace IydePersonal.Application.Services.Concretes
             await _employeeRepository.SaveAsync();
         }
 
-        public async Task SoftDeleteEmployee(int UpdateId,string deleteDate)
+        public async Task SoftDeleteEmployee(int employeeId,string deleteDate)
         {
-            var emp = await _employeeRepository.GetEmployeeById(UpdateId);
+            var emp = await _employeeRepository.GetEmployeeById(employeeId);
             emp.IsActive = false;
             emp.FinishWork=DateTime.Parse(deleteDate);//Secilmis tarixi saxlayiriq
             await _employeeRepository.UpdateEmplyee(emp);

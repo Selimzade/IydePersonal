@@ -16,5 +16,6 @@ namespace IydePersonal.Application.Services.Interfaces
         public Task AddStore(StoreCreateDto storeCreateDto);
         Task<Store> GetStoreByIdAsync(int StoreId);
         public Task UpdateStoreAsync(StoreUpdateDto storeUpdateDto);
+        public Task DeleteStoreAsync(int Id);
     }
 }

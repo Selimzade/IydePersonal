@@ -189,10 +189,10 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
         }
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
         [HttpPost]
-        [Route("Admin/Employee/Delete/{UpdateId}")]
-        public async Task<IActionResult> Delete(int UpdateId,[FromBody] DeleteDate deleteDate)
+        [Route("Admin/Employee/Delete/{employeeId}")]
+        public async Task<IActionResult> Delete(int employeeId, [FromBody] DeleteDate deleteDate)
         {
-            await _employeeService.SoftDeleteEmployee(UpdateId,deleteDate.Date );// deleteDate.Date  ile secilmis tarixi alariq
+            await _employeeService.SoftDeleteEmployee(employeeId, deleteDate.Date );// deleteDate.Date  ile secilmis tarixi alariq
             return RedirectToAction("Index", "Employee", new { Area = "Admin" });
         }
         [Authorize(Roles = $"{RoleConsts.Superadmin}")]
