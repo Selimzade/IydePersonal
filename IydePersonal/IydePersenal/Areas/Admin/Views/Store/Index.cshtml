@@ -87,7 +87,7 @@
 @*-------------------------------------------------------------------------------------------*@
 
 
-<div class="modal fade" id="inventoryModal" tabindex="-1" aria-labelledby="inventoryModalLabel" aria-hidden="true">
+@* <div class="modal fade" id="inventoryModal" tabindex="-1" aria-labelledby="inventoryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <!-- Burada `modal-xl` və `modal-dialog-centered` əlavə olundu -->
         <div class="modal-content">
@@ -159,13 +159,65 @@
         </div>
     </div>
 </div>
-
+ *@
+<div id="inventoryModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">İnventarlar</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Ad</th>
+                            <th>Say</th>
+                            <th>Qiymət</th>
+                            <th>Qiymət</th>
+                            <th>Qiymət</th>
+                            <th>Əməliyyatlar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody">
+                        <!-- İnventarlar buraya AJAX ilə yüklənəcək -->
+                    </tbody>
+                </table>
+                <button class="btn btn-success" onclick="openAddInventoryForm()">Yeni İnventar Əlavə Et</button>
+                <div  id="addEditInventoryForm" style="display:none;">
+                    <input type="hidden" id="inventoryId">
+                    <input type="hidden" id="storeId">
+                    <div class="form-group">
+                        <label>Ad:</label>
+                        <input type="text" id="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Say:</label>
+                        <input type="number" id="count" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Qiymət:</label>
+                        <input type="number" id="price" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Supplier:</label>
+                        <input type="number" id="supplier" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="description" name="description" class="form-control"></textarea>
+                     </div>
+                    <button class="btn btn-primary" onclick="saveInventory()">Yadda Saxla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!------------------------------------------------------------------------------------------------>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-           function openAddInventoryModal() {
-        $("#AddinventoryModal").modal("show");
+@* <script>
+           function openAddInventoryForm() {
+        $("#AddinventoryForm").modal("show");
     }
 
     // Formu AJAX ilə göndər
@@ -213,35 +265,109 @@
             alert("Xəta baş verdi: Server sorğunu tapa bilmir! (404)");
         });
     }
-</script>
-
-<script>
-function confirmDelete(punktId) {
-    var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    deleteModal.show();
-
-    document.getElementById('confirmDeleteButton').onclick = function () {
-        fetch(`/Admin/Store/Delete/${punktId}`, {
-            method: 'POST'
-        })
-            .then(response => {
-                if (response.ok) {
-                    location.reload(); // Səhifəni yeniləyin
-                } else {
-                    alert('An error occurred!');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    };
-}
-
-</script>
+</script> *@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+        function openInventoryModal(storeId) {
+        $("#inventoryModal").modal("show");
+        $("#storeId").val(storeId);
+
+          $.ajax({
+        url: `/Admin/StoreInventory/GetInventories?storeId=${storeId}`,
+        type: "GET",
+        success: function (data) {
+            $("#inventoryTableBody").html("");
+            data.forEach(inventory => {
+                $("#inventoryTableBody").append(`
+                    <tr>
+                        <td>${inventory.name}</td>
+                        <td>${inventory.count}</td>
+                        <td>${inventory.price}</td>
+                        <td>${inventory.supplier}</td>
+                        <td>${inventory.description}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editInventory(${inventory.id}, '${inventory.name.replace(/'/g, "\\'")}', ${inventory.count}, ${inventory.price}, ${inventory.supplier}, '${inventory.description.replace(/'/g, "\\'")}')">Redaktə Et</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteInventory(${inventory.id}, ${storeId})">Sil</button>
+                        </td>
+                    </tr>
+                `);
+            });
+        }
+    });
+    }
+
+    function openAddInventoryForm() {
+        $("#addEditInventoryForm").show();
+        $("#inventoryId").val("");
+        $("#name").val("");
+        $("#count").val("");
+        $("#price").val("");
+        $("#supplier").val("");
+        $("#description").val("");
+    }
+
+    function editInventory(id, name, count, price,supplier,description) {
+        $("#addEditInventoryForm").show();
+        $("#inventoryId").val(id);
+        $("#name").val(name);
+        $("#count").val(count);
+        $("#price").val(price);
+        $("#supplier").val(supplier);
+        $("#description").val(description);
+    }
+
+    function saveInventory() {
+        var inventory = {
+            Id: $("#inventoryId").val() || 0,
+            StoreId: $("#storeId").val(),
+            Name: $("#name").val(),
+            Count: $("#count").val(),
+            Price: $("#price").val(),
+            Supplier: $("#supplier").val(),
+            Description: $("#description").val()
+        };
+
+        var url = inventory.Id == 0 ? "/Admin/StoreInventory/AddInventory" : "/Admin/StoreInventory/UpdateInventory";
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(inventory),
+            success: function () {
+                alert("Əməliyyat uğurla tamamlandı!");
+                $("#inventoryModal").modal("hide");
+                location.reload();
+            },
+            error: function (xhr) {
+                alert("Xəta: " + xhr.responseText);
+            }
+        });
+    }
+
+    function deleteInventory(id, storeId) {
+        if (!confirm("Bu inventarı silmək istədiyinizə əminsiniz?")) return;
+
+        $.ajax({
+            url: `/Admin/StoreInventory/DeleteInventory?id=${id}&storeId=${storeId}`,
+            type: "POST",
+            success: function () {
+                alert("İnventar silindi!");
+                openInventoryModal(storeId);
+            },
+            error: function (xhr) {
+                alert("Xəta: " + xhr.responseText);
+            }
+        });
+    }
+
+</script>
+
+@* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> *@
 
 
 
 @section Scripts {
     <script src="~/js/JavaScript2.js" type="application/ecmascript"></script>
-    <script src="~/js/empployee_delete_.js"></script>
+    <script src="~/js/store-delete.js"></script>
 }
