@@ -71,7 +71,10 @@
                                                         white-space: nowrap; /* Sətir sonu daxil etmədən mətnin bir sətirdə qalmasını təmin edir */
                                                         overflow:hidden; /* Overflow olan məzmunu gizlədər */
                                                         text-overflow: ellipsis;">@Employee.Address</td>
-                                                        <td style="color:red;text-align:center">@Employee.FixSalary</td>
+
+                                                        <td style="color:red; text-align:center; cursor:pointer;" onclick="openSalaryModal('@Employee.FixSalary')">
+                                                            @Employee.FixSalary
+                                                        </td>
                                                         <td>@Employee.StartWork.ToShortDateString()</td>
                                                        
 
@@ -121,11 +124,38 @@
     </div>
 </div>
 
+<div class="modal fade" id="salaryModal" tabindex="-1" aria-labelledby="salaryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="salaryModalLabel">Əmək Haqqı Detalları</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Əmək haqqı: <span id="modalSalaryAmount"></span> AZN</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> *@
+
+<script>
+    function openSalaryModal(salary) {
+        // Modal içində əmək haqqı məlumatını yenilə
+        document.getElementById("modalSalaryAmount").innerText = salary;
+
+        // Bootstrap modalını aç
+        var salaryModal = new bootstrap.Modal(document.getElementById('salaryModal'));
+        salaryModal.show();
+    }
+</script>
 <script src="~/js/delete-confirmation.js"></script>
 @section Scripts {
     <script src="~/js/JavaScript.js" type="application/ecmascript"></script>
