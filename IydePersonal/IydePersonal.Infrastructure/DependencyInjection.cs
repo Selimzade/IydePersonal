@@ -16,6 +16,7 @@ namespace IydePersonal.Infrastructure
             services.AddScoped<IStoreRepostory, StoreRepostory>();
             services.AddScoped<IUserRepository, UserRepostory>();
             services.AddScoped<IInventoryRepository, InventoryRepository>();
+            services.AddScoped<ISalaryRepository, SalaryRepository>();
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             return services;
         }
