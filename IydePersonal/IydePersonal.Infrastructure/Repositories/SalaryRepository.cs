@@ -28,9 +28,9 @@ namespace IydePersonal.Infrastructure.Repositories
             await _appDbContext.Salaries.AddAsync(salary);
             await _appDbContext.SaveChangesAsync();
         }
-        public async Task<IEnumerable<Salary>> GetAllAsync()
+        public async Task<IEnumerable<Salary>> GetAllAsync(int employeeId)
         {
-            return await _appDbContext.Salaries.ToListAsync();
+            return await _appDbContext.Salaries.Where(x => x.EmployeeId == employeeId).ToListAsync();
         }
 
         public async Task UpdateAsync(Salary salary)

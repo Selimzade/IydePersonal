@@ -19,7 +19,7 @@
                         <td>${inventory.codebar}</td>
                         <td>${inventory.description}</td>
                         <td>
-                                <button class="btn btn-warning btn-sm" onclick="editInventory(${inventory.id}, '${inventory.name.replace(/'/g, "\\'")}', ${inventory.count}, ${inventory.price}, ${inventory.supplier},${inventory.codebar}, '${inventory.description.replace(/'/g, "\\'")}')">Edit</button>
+                            <button class="btn btn-warning btn-sm" onclick="editInventory(${inventory.id}, '${inventory.name.replace(/'/g, "\\'")}', ${inventory.count}, ${inventory.price}, ${inventory.supplier},${inventory.codebar}, '${inventory.description.replace(/'/g, "\\'")}')">Edit</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteInventory(${inventory.id}, ${storeId})">Delete</button>
                         </td>
                     </tr>

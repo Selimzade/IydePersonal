@@ -23,9 +23,9 @@ namespace IydePersonal.Application.Services.Concretes
             return await _salaryRepository.GetByEmployeeIdAsync(employeeId);
         }
 
-        public async Task<IEnumerable<Salary>> GetAllSalariesAsync()
+        public async Task<IEnumerable<Salary>> GetAllSalariesAsync(int employeeId)
         {
-            return await _salaryRepository.GetAllAsync();
+            return await _salaryRepository.GetAllAsync(employeeId);
         }
 
         public async Task AddSalaryAsync(Salary salary)
@@ -41,6 +41,11 @@ namespace IydePersonal.Application.Services.Concretes
         public async Task DeleteSalaryAsync(int id)
         {
             await _salaryRepository.DeleteAsync(id);
+        }
+
+        public Task<IEnumerable<Salary>> GetAllSalariesAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

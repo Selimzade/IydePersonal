@@ -72,12 +72,12 @@
                                                         overflow:hidden; /* Overflow olan məzmunu gizlədər */
                                                         text-overflow: ellipsis;">@Employee.Address</td>
 
-                                                        <td style="color:red; text-align:center; cursor:pointer;" onclick="loadSalaryDetails('@Employee.Id')">
+                                                        <td style="color:red; text-align:center; cursor:pointer;" onclick="loadSalaryDetails(@Employee.Id)">
                                                             @Employee.FixSalary
                                                         </td>
-                                                         <td>@Employee.StartWork.ToShortDateString()</td>
-                                                       
+                                                        <td>@Employee.StartWork.ToShortDateString()</td>
 
+                             
                                                         @{
                                                          @if (User.IsInRole($"{RoleConsts.Superadmin}"))
                                                             {
@@ -124,13 +124,13 @@
     </div>
 </div>
 <!-------------------------------------------------------------------------------------------------------->
-<div class="modal fade" id="salaryModal" tabindex="-1" aria-labelledby="salaryModalLabel" aria-hidden="true">
+ @* <div class="modal fade" id="salaryModal" tabindex="-1" aria-labelledby="salaryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="salaryModalLabel">Maaş Məlumatları</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="salaryModalLabel">Maaş Məlumatları</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             <div class="modal-body">
                 <table class="table table-bordered text-center">
                     <thead>
@@ -162,29 +162,150 @@
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn btn-success" onclick="openAddInventoryForm()"><i class="bx bx-Plus"></i></button>
+                <div class="modal-body">
+                    <form id="salaryForm">
+                        <div class="row">
+                             <input type="hidden" id="salaryId">
+                            <input type="hidden" id="employeeId"> 
+                            <div class="col-md-4">
+                                <label for="inputFixSalary" class="form-label">Fix Salary</label>
+                                <input type="number" class="form-control form-control-sm" id="inputFixSalary">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputPayment" class="form-label">Payment</label>
+                                <input type="number" class="form-control form-control-sm" id="inputPayment">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputSales" class="form-label">Sales</label>
+                                <input type="number" class="form-control form-control-sm" id="inputSales">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <label for="inputTotalCheck" class="form-label">Total Check</label>
+                                <input type="number" class="form-control form-control-sm" id="inputTotalCheck">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputAward" class="form-label">Award</label>
+                                <input type="number" class="form-control form-control-sm" id="inputAward">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputPenalty" class="form-label">Penalty</label>
+                                <input type="number" class="form-control form-control-sm" id="inputPenalty">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <label for="inputCountingdown" class="form-label">Countingdown</label>
+                                <input type="number" class="form-control form-control-sm" id="inputCountingdown">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputAdditionalBonus" class="form-label">Additional Bonus</label>
+                                <input type="number" class="form-control form-control-sm" id="inputAdditionalBonus">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputConclusion" class="form-label">Conclusion</label>
+                                <input type="text" class="form-control form-control-sm" id="inputConclusion">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <label for="inputCreateDate" class="form-label">Tarix</label>
+                                <input type="date" class="form-control form-control-sm" id="inputCreateDate">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="addSalary()">Əlavə Et</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
+                </div>
+           
+        </div>
+
+        </div>
+    </div>
+</div> *@
+
+<div id="inventoryModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inventars</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Fix Salary</th>
+                            <th>Payment</th>
+                            <th>Sales</th>
+                            <th>Total Check</th>
+                            <th>Award</th>
+                            <th>Penalty</th>
+                            <th>Countingdown</th>
+                            <th>Additional Bonus</th>
+                            <th>Conclusion</th>
+                            <th>Tarix</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody">
+                        <!-- İnventarlar buraya AJAX ilə yüklənəcək -->
+                    </tbody>
+                </table>
+                <button class="btn btn-success" onclick="loadaddSalaryDetails()"><i class="bx bx-Plus"></i></button>
                 <div id="addEditInventoryForm" style="display:none;">
                     <input type="hidden" id="salaryId">
                     <input type="hidden" id="employeeId">
                     <div class="form-group">
-                        <label>Ad:</label>
-                        <input type="text" id="name" class="form-control">
+                        <label>FikSalary:</label>
+                        <input type="text" id="fixsalary" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Say:</label>
-                        <input type="number" id="count" class="form-control">
+                        <label>Payment:</label>
+                        <input type="number" id="payment" class="form-control">
                     </div>
+                    <div class="form-group">
+                        <label>Sales:</label>
+                        <input type="number" id="sales" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>TotalCheck:</label>
+                        <input type="number" id="totalcheck" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Award:</label>
+                        <input type="number" id="award" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Penalty:</label>
+                        <input type="number" id="penalty" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Countingdown:</label>
+                        <input type="number" id="countingdown" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Additionalbonus:</label>
+                        <input type="number" id="additionalbonus" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Conclusion:</label>
+                        <input type="number" id="conclusion" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Tarix:</label>
+                        <input type="date" id="tarix" class="form-control">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="saveInventory()" style="margin-top:10px">Save</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="addSalary()">Əlavə Et</button>
-                <button type="button" class="btn btn-primary" onclick="updateSalary()">Redaktə Et</button>
-                <button type="button" class="btn btn-danger" onclick="deleteSalary()">Sil</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
             </div>
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
@@ -192,12 +313,14 @@
 @* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> *@
 
 
-<script>
+@* <script>
        function loadSalaryDetails(employeeId) {
+                console.log("Employee ID:", employeeId); // Konsolda yoxla
         $.ajax({
             url: `/Admin/Salary/GetSalaryByEmployee/${employeeId}`,  // URL dəyişdirilməlidir
             type: "GET",
             success: function(data) {
+                     console.log("Gelen data:", data); // Gələn məlumatı yoxla
                 if (data) {
                     // Modalın məlumatlarını doldur
                     $("#modalFixSalary").text(data.fixSalary);
@@ -220,39 +343,39 @@
             }
         });
     }
+            function addSalary() {
+            let employeeId = $("#salaryModal").data("employeeId");
+            console.log("Əlavə üçün Employee ID:", employeeId); // Konsolda yoxla
 
-        function openAddInventoryForm() {
-        $("#addEditInventoryForm").show();
-        $("#inventoryId").val("");
-        $("#name").val("");
-        $("#count").val("");
-        $("#price").val("");
-        $("#supplier").val("");
-        $("#codebar").val("");
-        $("#description").val("");
+            let salaryData = {
+                employeeId: employeeId,
+                fixSalary: $("#inputFixSalary").val(),
+                payment: $("#inputPayment").val(),
+                sales: $("#inputSales").val(),
+                totalCheck: $("#inputTotalCheck").val(),
+                award: $("#inputAward").val(),
+                penalty: $("#inputPenalty").val(),
+                countingdown: $("#inputCountingdown").val(),
+                additionalBonus: $("#inputAdditionalBonus").val(),
+                conclusion: $("#inputConclusion").val(),
+                createDate: $("#inputCreateDate").val()
+            };
 
-    }
-        function addSalary() {
-        let employeeId = $("#salaryModal").data("employeeId");
-        let salaryData = {
-            employeeId: employeeId,
-            fixSalary: prompt("Yeni fiks maaş daxil edin:")
-        };
-
-        $.ajax({
-            url: `/Admin/Salary/AddSalary`,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(salaryData),
-            success: function (response) {
-                alert(response.message);
-                loadSalaryDetails(employeeId);
-            },
-            error: function () {
-                alert("Xəta baş verdi!");
-            }
-        });
-    }
+            $.ajax({
+                url: "/Admin/Salary/AddSalary",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(salaryData),
+                success: function (response) {
+                    alert(response.message);
+                    loadSalaryDetails(employeeId);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Xəta:", xhr.responseText);
+                    alert("Xəta baş verdi!");
+                }
+            });
+        }
 
     // 🔵 MAAŞI REDAKTƏ ET
     function updateSalary() {
@@ -299,10 +422,14 @@
             });
         }
     }
-</script>
+</script> *@
 
-<script src="~/js/delete-confirmation.js"></script>
+
+
+
 @section Scripts {
     <script src="~/js/JavaScript.js" type="application/ecmascript"></script>
+    <script src="~/js/employee-salary.js"></script>
+    <script src="~/js/delete-confirmation.js"></script>
 }
 
