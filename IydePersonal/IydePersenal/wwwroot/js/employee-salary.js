@@ -33,15 +33,15 @@
                             <td>${salary.countingdown}</td>
                             <td>${salary.additionalBonus}</td>
                             <td>${salary.conclusion}</td>
-                            <td>${new Date(salary.createDate).toISOString().split('T')[0]}</td>
+                            <td>${new Date(salary.createDate).toLocaleDateString('az-AZ')}</td>
                             <td>
-                            
+                             <button class="btn btn-warning btn-sm" onclick="editInventory(${salary.id},${salary.fixSalary},${salary.payment},${salary.sales},${salary.totalCheck},${salary.award},${salary.penalty},${salary.countingdown},${salary.additionalBonus},${salary.conclusion}, '${new Date(salary.createDate).toLocaleDateString('az-AZ')}')">Edit</button>                                                  
                              <button class="btn btn-danger btn-sm" onclick="deleteInventory(${salary.id}, ${employeeId})">Delete</button>
                             </td>
                         </tr>
                     `);
                 });
-            },
+        },
             // error: function (xhr, status, error) {
         //     console.log("Xəta:", xhr.responseText);
         //     alert("Xəta baş verdi!");
@@ -59,13 +59,14 @@
     $("#award").val("");
     $("#penalty").val("");
     $("#countingdown").val("");
-    $("#additionalbonus").val("");
+    $("#additionalBonus").val("");
     $("#conclusion").val("");
-    $("#tarix").val("");
+    $("#createDate").val("");
 
 }
 
-    function editInventory(id, fixsalary, payment,sales,totalcheck,award,penalty,countingdown,additionalBonus,conclusion,tarix) {
+function editInventory(id, fixsalary, payment, sales, totalcheck, award, penalty, countingdown, additionalBonus, conclusion, createDate) {
+    
         $("#addEditInventoryForm").show();
         $("#salaryId").val(id);
         $("#fixsalary").val(fixsalary);
@@ -75,9 +76,10 @@
         $("#award").val(award);
         $("#penalty").val(penalty);
         $("#countingdown").val(countingdown);
-        $("#additionalbonus").val(additionalBonus);
+        $("#additionalBonus").val(additionalBonus);
         $("#conclusion").val(conclusion);
-        $("#tarix").val(tarix);
+        $("#createDate").val(createDate);
+     
 
 }
 
@@ -92,9 +94,9 @@
     Award: $("#award").val(),
     Penalty: $("#penalty").val(),
     Countingdown: $("#countingdown").val(),
-    Additionalbonus: $("#additionalbonus").val(),
-    Conclusion: $("#conclusion").val(),
-    Tarix: $("#tarix").val()
+    AdditionalBonus: $("#additionalBonus").val() || "",
+    Conclusion: $("#conclusion").val() || "",
+    CreateDate: $("#createDate").val() ? new Date($("#createDate").val()).toISOString() : null
     };
 
     var url = inventory.Id == 0 ? "/Admin/Salary/AddSalary" : "/Admin/Salary/UpdateSalary";

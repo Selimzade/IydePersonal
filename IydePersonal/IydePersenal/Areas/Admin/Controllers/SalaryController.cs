@@ -50,12 +50,12 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
                 return BadRequest();
             }
 
-            var existingSalary = await _salaryService.GetSalaryByEmployeeIdAsync(salary.EmployeeId);
-            if (existingSalary == null)
-            {
-                return NotFound();
-            }
-
+            //var existingSalary = await _salaryService.GetSalaryByEmployeeIdAsync(salary.EmployeeId);
+            //if (existingSalary == null)
+            //{
+            //    return NotFound();
+            //}
+            
             await _salaryService.UpdateSalaryAsync(salary);
             return Json(new { success = true, message = "Maaş yeniləndi." });
         }
@@ -66,10 +66,11 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             //var existingSalary = await _salaryService.GetSalaryByEmployeeIdAsync(id);
             if (id == 0)
             {
-                return NotFound();
+                return BadRequest("Xəta: Maash tapılmadı!");
             }
 
             await _salaryService.DeleteSalaryAsync(id);
+            return RedirectToAction("GetSalaryByEmployee", new { employeeId });
         }
     }
 }

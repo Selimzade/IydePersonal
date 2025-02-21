@@ -12,7 +12,7 @@
         public int Countingdown { get; set; }
         public int AdditionalBonus { get; set; }
         public int Conclusion { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
