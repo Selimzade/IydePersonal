@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using IydePersonal.Application.Repositories;
 using IydePersonal.Domain.Entities;
 using IydePersonal.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace IydePersonal.Infrastructure.Repositories
 {
@@ -17,7 +19,7 @@ namespace IydePersonal.Infrastructure.Repositories
         {
             _appDbContext = appDbContext;
         }
-
+        private DbSet<Salary> Table { get => _appDbContext.Set<Salary>(); }
         public async Task<Salary> GetByEmployeeIdAsync(int employeeId)
         {
             return await _appDbContext.Salaries
@@ -49,8 +51,23 @@ namespace IydePersonal.Infrastructure.Repositories
 
         }
 
-      
+        public async Task<IEnumerable<Salary>> GetAllAsync()
+        {
+            return await _appDbContext.Salaries.ToListAsync();
+        }
 
-       
+        public async Task<IEnumerable<Salary>> GetEmployeesAsync(Expression<Func<Salary, bool>> predicate = null, params Expression<Func<Salary, object>>[] includeProperties)
+        {
+            IQueryable<Salary> query = Table;
+            if (predicate != null)
+                query = query.Where(predicate);
+
+            if (includeProperties.Any())
+                foreach (var item in includeProperties)
+                    query = query.Include(item);
+
+            return await query.ToListAsync();
+            // return await _appDbContext.Employees.ToListAsync();
+        }
     }
 }

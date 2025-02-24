@@ -1,0 +1,64 @@
+﻿@using IydePersonal.Application.Dtos.SalaryDto
+@model List<SalaryListDto>
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <H4 class=" fw-bold py-3 mb-4">
+        <span class="text-muted fw-light"><b>Salary</b>/ </span> List Salaries
+    </H4>
+
+    <!-- Hoverable Table rows -->
+
+    <div class="Card"
+                <div class="card-body ">
+
+                       <div class="table-responsive text-nowrap m-3">
+
+                        
+
+                                  <table class="display table table-striped table-hover " id="UserTables" width="100%" cellspacing="0">
+                                  <thead>
+                                    <tr>
+                                            <th>FullName</th>
+                                            <th>Fix Salary</th>
+                                            <th>Payment</th>
+                                            <th>Sales</th>
+                                            <th>Total Check</th>
+                                            <th>Award</th>
+                                            <th>Penalty</th>
+                                            <th>Countingdown</th>
+                                            <th>Additional Bonus</th>
+                                            <th>Conclusion</th>
+                                            <th>CreateDate</th>
+                                            
+                                    </tr>
+                                  </thead>
+                  
+                                  <tbody class="table-border-bottom-0">
+
+                                                @foreach (var Salary in Model)
+                                                {
+                                                                 <tr>
+                                                                        <td>@Salary.employee.FullName</td>
+                                                                        <td>@Salary.FixSalary</td>
+                                                                        <td>@Salary.Payment</td>
+                                                                        <td>@Salary.Sales</td>
+                                                                        <td>@Salary.TotalCheck</td>
+                                                                        <td>@Salary.Award</td>
+                                                                        <td>@Salary.Penalty</td>
+                                                                        <td>@Salary.Countingdown</td>
+                                                                        <td>@Salary.AdditionalBonus</td>
+                                                                        <td>@Salary.Conclusion</td>
+                                                                        <td>@Salary.CreateDate.ToShortDateString()</td>
+                                                                        
+                                                                </tr>
+                                                  }
+                                  </tbody>
+                                </table>
+                      </div>
+                </div>
+    </div>
+
+    <!--/ Hoverable Table rows -->
+</div>

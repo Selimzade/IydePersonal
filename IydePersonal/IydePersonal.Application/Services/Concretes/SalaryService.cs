@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using IydePersonal.Application.Dtos.SalaryDto;
 using IydePersonal.Application.Repositories;
 using IydePersonal.Application.Services.Interfaces;
 using IydePersonal.Domain.Entities;
@@ -12,10 +14,12 @@ namespace IydePersonal.Application.Services.Concretes
     public class SalaryService : ISalaryService
     {
         private readonly ISalaryRepository _salaryRepository;
+        private readonly IMapper _mapper;
 
-        public SalaryService(ISalaryRepository salaryRepository)
+        public SalaryService(ISalaryRepository salaryRepository,IMapper mapper)
         {
             _salaryRepository = salaryRepository;
+            _mapper = mapper;
         }
 
         public async Task<Salary> GetSalaryByEmployeeIdAsync(int employeeId)
@@ -43,9 +47,11 @@ namespace IydePersonal.Application.Services.Concretes
             await _salaryRepository.DeleteAsync(id);
         }
 
-        public Task<IEnumerable<Salary>> GetAllSalariesAsync()
+        public async Task<IEnumerable<SalaryListDto>> GetAllSalariesAsync()
         {
-            throw new NotImplementedException();
+            var salary= await _salaryRepository.GetEmployeesAsync(null, x=>x.Employee);
+            var map = _mapper.Map<IEnumerable<SalaryListDto>>(salary);
+            return map;
         }
     }
 }

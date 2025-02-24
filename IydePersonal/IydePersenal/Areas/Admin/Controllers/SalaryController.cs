@@ -18,6 +18,12 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             _salaryRepository = salaryRepository;
         }
 
+        public async Task <IActionResult> Index() 
+        {
+            var salary= await _salaryService.GetAllSalariesAsync();
+            return View(salary);
+        }
+
         [HttpGet("GetSalaryByEmployee")]
         public async Task<IActionResult> GetSalaryByEmployee(int employeeId)
         {
