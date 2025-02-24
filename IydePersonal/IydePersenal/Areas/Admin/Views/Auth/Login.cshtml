@@ -2,7 +2,9 @@
 @{
     Layout = null;
 }
+
 @model UserLoginDto
+
 <!-- beautify ignore:start -->
 <html lang="en"
       class="light-style customizer-hide"
@@ -110,24 +112,29 @@
                         </div>
 
                         <!-- /Logo -->
-                        <h4 class="mb-2"> <a href="https://www.Iyde.az/">Welcome to Iyde 👋</a> </h4>
+                        <h4 class="mb-2"> <a href="https://www.Iyde.az/"target="_blank">Welcome to Iyde 👋</a> </h4>
                         <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
                         <form asp-controller="Auth" asp-action="Login" id="formAuthentication" class="mb-3" method="POST">
                             <div asp-validation-summary="ModelOnly" style="color:red"></div>
                             <div class="mb-3">
                                 <label asp-for="UserName" for="UserName" class="form-label">Username</label>
-                                <input asp-for="UserName" type="UserName" class="form-control" id="username" name="username" placeholder="Enter your Username" autofocus />
+                                <input asp-for="UserName" type="text" class="form-control" id="username" name="username" placeholder="Enter your Username" autofocus />
                                 <span asp-validation-for="UserName" style="color:red"> </span>
                             </div>
 
-                            <div class="mb-3">
-                                <label asp-for="Password" for="PassWord" class="form-label">PassWord</label>
-                                <input asp-for="Password" type="password" class=" form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password"></input>
-                              @*   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span> *@
-                                <span asp-validation-for="Password" style="color:red"> </span>
+                            <div class="mb-3 form-password-toggle">
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-label" for="password">Parola</label>
+                                    
+                                </div>
+                                <div class="input-group input-group-merge">
+                                   
+                                    <input asp-for="Password" type="password"  class="form-control"  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                    <span asp-validation-for="Password" style="color:red"></span>
+                                </div>
                             </div>
-
 
 
                                 @*  <div class="mb-3 form-password-toggle">
@@ -154,8 +161,10 @@
 
                             <div class="mb-3">
                                 <div class="form-check"> 
-                                    <input class="form-check-input" asp-for="Rememberme" type="checkbox" id="remember-me" />
-                                    <label class="form-check-label" asp-for="Rememberme" for="remember-me"> Remember Me </label>
+                                    <input class="form-check-input" asp-for="Rememberme" type="checkbox" id="remember-me">
+                                    <label class="form-check-label" asp-for="Rememberme" for="remember-me"> Remember Me 
+
+                                    </label>
                                 </div>
                             </div>
                             <div class="mb-3">
