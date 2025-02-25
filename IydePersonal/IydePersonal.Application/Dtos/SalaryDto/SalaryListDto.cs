@@ -12,7 +12,7 @@ namespace IydePersonal.Application.Dtos.SalaryDto
         public int Id { get; set; }
         public int FixSalary { get; set; }
         public int Payment { get; set; }
-        public decimal Sales { get; set; }
+        public string Sales { get; set; }
         public decimal TotalCheck { get; set; }
         public int Award { get; set; }
         public int Penalty { get; set; }
