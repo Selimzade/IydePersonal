@@ -11,7 +11,9 @@ using IydePersonal.WEB.Conts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NToastNotify;
+using OfficeOpenXml;
 
 namespace IydePersonal.WEB.Areas.Admin.Controllers
 {
@@ -202,7 +204,56 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
             return RedirectToAction("Index", "Employee", new { Area = "Admin" });
         }
 
-       
 
+        public async Task <IActionResult> ExportToExcel()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Lisenziya ayarı
+            var employees = await _employeeService.GetEmployeeList();
+
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Employees");
+
+                // Sütun başlıqlarını əlavə edirik
+                //worksheet.Cells[1, 1].Value = "ID";
+                worksheet.Cells[1, 1].Value = "FullName";
+                worksheet.Cells[1, 2].Value = "Gender";
+                worksheet.Cells[1, 3].Value = "DateOfBirth";
+                worksheet.Cells[1, 4].Value = "PhoneNumber";
+                worksheet.Cells[1, 5].Value = "WorkPosition";
+                worksheet.Cells[1, 6].Value = "User.UserName";
+                worksheet.Cells[1, 7].Value = "Address";
+                worksheet.Cells[1, 8].Value = "FixSalary";
+                worksheet.Cells[1, 9].Value = "StartWork";
+
+
+                // Məlumatları doldururuq
+                int row = 2;
+                foreach (var emp in employees)
+                {
+                    //worksheet.Cells[row, 1].Value = emp.Id;
+                    worksheet.Cells[row, 1].Value = emp.FullName;
+                    worksheet.Cells[row, 2].Value = emp.Gender;
+                    worksheet.Cells[row, 3].Value = emp.DateOfBirth;
+                    worksheet.Cells[row, 3].Style.Numberformat.Format = "dd.mm.yyyy";
+                    worksheet.Cells[row, 4].Value = emp.PhoneNumber;
+                    worksheet.Cells[row, 5].Value = emp.WorkPosition;
+                    worksheet.Cells[row, 6].Value = emp.User.UserName;
+                    worksheet.Cells[row, 7].Value = emp.Address;
+                    worksheet.Cells[row, 8].Value = emp.FixSalary;
+                    worksheet.Cells[row, 9].Value = emp.StartWork;
+                    worksheet.Cells[row, 9].Style.Numberformat.Format = "dd.mm.yyyy";
+                    row++;
+                }
+
+                // Faylı yadda saxlamaq üçün byte massivinə çeviririk
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                string excelName = "Employees.xlsx";
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@
 @model IEnumerable<EmployeeDto>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <div class="container-xxl flex-grow-1 container-p-y mb-5" style="width:100%; border-collapse: collapse ">
    
@@ -11,6 +12,7 @@
        <H4 class=" fw-bold mt-2">
            <span class="text-muted fw-light" ><b>Employees</b>/ </span> List Employees
        </H4>
+    
 
 <!-- Hoverable Table rows -->
 
@@ -25,7 +27,8 @@
                                                             <a class="btn btn-success btn-md mb-3" asp-area="Admin" asp-controller="Employee" asp-action="Add">
                                                              New <i class="bx bx-plus"></i>
                                                             </a>
-                                                }
+                                                            <a asp-controller="Employee" asp-action="ExportToExcel" class="btn btn-success"style="margin-bottom:15px;margin-left:1200px"><i class="fa-solid fa-file-export"></i></a>
+                                                        }
                                             }
 
                         
