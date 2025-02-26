@@ -22,10 +22,12 @@ namespace IydePersonal.Infrastructure.Repositories
 
         public async Task AddInventoryAsync(Inventory inventory)
         {
+           
             _appDbContext.Inventories.Add(inventory);
             await _appDbContext.SaveChangesAsync();
         }
 
+      
         public async Task DeleteInventoryAsync(int id)
         {
             var invertar = await _appDbContext.Inventories.FindAsync(id);

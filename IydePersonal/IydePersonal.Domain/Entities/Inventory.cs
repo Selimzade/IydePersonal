@@ -17,7 +17,7 @@ namespace IydePersonal.Domain.Entities
         public DateTime AddedDate { get; set; } = DateTime.Now; // Əlavə edilmə tarixi
         public DateTime LastUpdated { get; set; } = DateTime.Now; // Son yenilənmə tarixi
         public string? Description { get; set; } // Təsvir
-        public int Codebar { get; set; }
+        public string Codebar { get; set; }
         public int StoreId { get; set; }
         public Store Store { get; set; }
        

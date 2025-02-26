@@ -56,11 +56,15 @@ namespace IydePersonal.WEB.Areas.Admin.Controllers
 
             inventory.AddedDate = DateTime.Now;
             inventory.LastUpdated = DateTime.Now;
-
+            inventory.Codebar = GenerateRandomCode();
             await _inventoryRepository.AddInventoryAsync(inventory);
             return Ok("İnventar uğurla əlavə edildi!");
         }
-
+        private string GenerateRandomCode()
+        {
+            Random rnd = new Random();
+            return rnd.Next(10000,999999).ToString();
+        }
         [HttpPost("UpdateInventory")]
         public async Task<IActionResult> UpdateInventory([FromBody] Inventory inventory)
         {

@@ -61,7 +61,7 @@ function saveInventory() {
         Count: $("#count").val(),
         Price: $("#price").val(),
         Supplier: $("#supplier").val(),
-        Codebar: $("#codebar").val(),
+       /* Codebar: $("#codebar").val(),*/
         Description: $("#description").val()
 
     };
